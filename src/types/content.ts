@@ -90,6 +90,40 @@ export type ExternalCitationData = {
   edges: ExternalEdge[]
 }
 
+export type CoauthorAuthor = {
+  id: string
+  name: string
+  paperCount: number
+  themeId: string
+}
+
+export type CoauthorPaper = {
+  id: string
+  year: number | null
+  yearLabel: string
+  title: string
+  themeId: string
+  authorIds: string[]
+}
+
+export type CoauthorEdge = {
+  sourceId: string
+  targetId: string
+  weight: number
+  papers: string[]
+}
+
+export type CoauthorNetwork = {
+  generatedAt: string
+  centralAuthorId: string
+  authorCount: number
+  paperCount: number
+  edgeCount: number
+  authors: CoauthorAuthor[]
+  papers: CoauthorPaper[]
+  edges: CoauthorEdge[]
+}
+
 export type BrainRegion = {
   id: string
   label: string

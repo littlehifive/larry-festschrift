@@ -1,20 +1,14 @@
 import { useEffect, useState } from 'react'
-import {
-  brainRegions,
-  citationLinks,
-  collaborators,
-  highlightedWorks,
-  themes,
-} from './content'
+import { brainRegions, themes } from './content'
 import { NetworkSection } from './components/NetworkSection'
 import { useReducedMotion } from './hooks/useReducedMotion'
 import { useWebGLSupport } from './hooks/useWebGLSupport'
-import type { GraphSceneConfig, GraphSelection } from './types/content'
+import type { GraphSceneConfig } from './types/content'
 
 const graphSceneConfig: GraphSceneConfig = {
-  autoRotateSpeed: 0.42,
-  nodeScaleRange: [0.12, 0.24],
-  edgeOpacity: 0.22,
+  autoRotateSpeed: 0.36,
+  nodeScaleRange: [0.04, 0.085],
+  edgeOpacity: 0.18,
   brainShellOpacity: 0.16,
   effectsLevel: 'minimal',
 }
@@ -24,86 +18,36 @@ export default function App() {
   const rendererCapability = useWebGLSupport()
 
   const [activeThemeId, setActiveThemeId] = useState(themes[0]?.id ?? '')
-  const [selection, setSelection] = useState<GraphSelection>({
-    selectedWorkId: highlightedWorks[0]?.id,
-    selectedCollaboratorId: undefined,
-    isAutoRotating: true,
-  })
+  const [activeAuthorId, setActiveAuthorId] = useState<string | null>(null)
+  const [isAutoRotating, setAutoRotating] = useState(true)
   const [resetNonce, setResetNonce] = useState(0)
 
   useEffect(() => {
     if (!reducedMotion) return
-
-    setSelection((current) =>
-      current.isAutoRotating ? { ...current, isAutoRotating: false } : current,
-    )
+    setAutoRotating((value) => (value ? false : value))
   }, [reducedMotion])
-
-  const handleThemeSelect = (themeId: string) => {
-    setActiveThemeId(themeId)
-
-    const nextWork =
-      highlightedWorks.find((work) => work.themeIds.includes(themeId)) ??
-      highlightedWorks[0]
-
-    setSelection((current) => ({
-      ...current,
-      selectedWorkId: nextWork?.id,
-      selectedCollaboratorId: undefined,
-    }))
-  }
-
-  const handleWorkSelect = (workId: string) => {
-    const work = highlightedWorks.find((candidate) => candidate.id === workId)
-
-    setSelection((current) => ({
-      ...current,
-      selectedWorkId: workId,
-      selectedCollaboratorId: undefined,
-    }))
-
-    if (work) setActiveThemeId(work.themeIds[0])
-  }
-
-  const handleCollaboratorSelect = (collaboratorId: string) => {
-    const collaborator = collaborators.find(
-      (candidate) => candidate.id === collaboratorId,
-    )
-
-    setSelection((current) => ({
-      ...current,
-      selectedWorkId: undefined,
-      selectedCollaboratorId: collaboratorId,
-    }))
-
-    if (collaborator) setActiveThemeId(collaborator.themeIds[0])
-  }
 
   return (
     <NetworkSection
-      works={highlightedWorks}
-      collaborators={collaborators}
-      citationLinks={citationLinks}
       brainRegions={brainRegions}
       themes={themes}
       rendererCapability={rendererCapability}
       sceneConfig={graphSceneConfig}
       activeThemeId={activeThemeId}
-      activeWorkId={selection.selectedWorkId ?? null}
-      activeCollaboratorId={selection.selectedCollaboratorId ?? null}
-      isAutoRotating={selection.isAutoRotating && !reducedMotion}
+      activeAuthorId={activeAuthorId}
+      isAutoRotating={isAutoRotating && !reducedMotion}
       reducedMotion={reducedMotion}
       resetNonce={resetNonce}
-      onThemeSelect={handleThemeSelect}
-      onWorkSelect={handleWorkSelect}
-      onCollaboratorSelect={handleCollaboratorSelect}
-      onToggleAutoRotate={() =>
-        setSelection((current) => ({
-          ...current,
-          isAutoRotating: !current.isAutoRotating,
-        }))
-      }
-      onResetView={() => setResetNonce((value) => value + 1)}
+      onThemeSelect={(themeId) => {
+        setActiveThemeId(themeId)
+        setActiveAuthorId(null)
+      }}
+      onAuthorSelect={(authorId) => setActiveAuthorId(authorId)}
+      onToggleAutoRotate={() => setAutoRotating((value) => !value)}
+      onResetView={() => {
+        setActiveAuthorId(null)
+        setResetNonce((value) => value + 1)
+      }}
     />
   )
 }

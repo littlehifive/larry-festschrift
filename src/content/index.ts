@@ -7,10 +7,12 @@ import brainRegionsJson from './brain-regions.json'
 import bustAssetManifestJson from './bust-asset-manifest.json'
 import sceneContentJson from './scene-content.json'
 import externalCitationsJson from './external-citations.json'
+import coauthorNetworkJson from './coauthor-network.json'
 import type {
   BrainRegion,
   BustAssetManifest,
   CitationLink,
+  CoauthorNetwork,
   Collaborator,
   ExternalCitationData,
   Milestone,
@@ -37,6 +39,7 @@ export const brainRegions = brainRegionsJson as BrainRegion[]
 export const bustAssetManifest = bustAssetManifestJson as BustAssetManifest
 export const sceneContent = sceneContentJson as SceneContent
 export const externalCitations = externalCitationsJson as ExternalCitationData
+export const coauthorNetwork = coauthorNetworkJson as CoauthorNetwork
 
 export const themeMap = new Map(themes.map((theme) => [theme.id, theme]))
 export const workMap = new Map(works.map((work) => [work.id, work]))

@@ -125,6 +125,74 @@ button {
   height: 100%;
 }
 
+.brain-graph-stage__labels,
+.brain-graph-stage__tooltip-host {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+
+.brain-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.86);
+  background: rgba(4, 14, 20, 0.62);
+  border: 1px solid color-mix(in srgb, var(--theme-color, #7feeff), transparent 70%);
+  padding: 3px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+  pointer-events: none;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+  transition: opacity 140ms ease;
+  will-change: transform, opacity;
+}
+
+.brain-label--central {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff5d6;
+  background: rgba(38, 22, 4, 0.78);
+  border-color: rgba(255, 209, 102, 0.7);
+  padding: 4px 11px;
+}
+
+.brain-tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #f0f8ff;
+  background: rgba(4, 14, 20, 0.92);
+  border: 1px solid rgba(127, 238, 255, 0.32);
+  padding: 8px 12px;
+  border-radius: 12px;
+  pointer-events: none;
+  display: grid;
+  gap: 2px;
+  max-width: 240px;
+  transition: opacity 120ms ease;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+.brain-tooltip strong {
+  font-size: 13px;
+  letter-spacing: -0.01em;
+}
+
+.brain-tooltip span {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .panel {
   border: 1px solid var(--line);
   background: var(--bg-card);
@@ -132,28 +200,16 @@ button {
   box-shadow: var(--shadow);
 }
 
-.brain-graph-stage__intro,
 .brain-graph-stage__controls {
   position: absolute;
   z-index: 2;
   border-radius: 22px;
-}
-
-.brain-graph-stage__intro {
-  top: 18px;
-  left: 18px;
-  width: min(440px, calc(100% - 36px));
-  padding: 20px 22px 18px;
-}
-
-.brain-graph-stage__controls {
   top: 18px;
   right: 18px;
-  width: min(360px, calc(100% - 36px));
-  padding: 18px;
+  width: min(320px, calc(100% - 36px));
+  padding: 16px 18px;
 }
 
-.brain-graph-stage__eyebrow,
 .brain-graph-sidebar__label,
 .brain-graph-sidebar__subhead {
   margin: 0 0 12px;
@@ -163,59 +219,61 @@ button {
   color: var(--accent);
 }
 
-.brain-graph-stage__intro h1,
+.brain-graph-sidebar__intro h1,
 .brain-graph-sidebar__selection h2 {
   margin: 0;
-  line-height: 1;
-  letter-spacing: -0.04em;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
 }
 
-.brain-graph-stage__intro h1 {
-  font-size: clamp(2.6rem, 5vw, 4.4rem);
-  max-width: 10ch;
+.brain-graph-sidebar__intro h1 {
+  font-size: clamp(1.9rem, 2.6vw, 2.6rem);
+  max-width: 12ch;
 }
 
-.brain-graph-stage__lede,
+.brain-graph-sidebar__lede,
 .brain-graph-stage__mode p,
 .brain-graph-sidebar__selection p,
 .brain-graph-sidebar__themes p {
   color: var(--muted);
-  line-height: 1.66;
+  line-height: 1.62;
 }
 
-.brain-graph-stage__lede {
-  margin: 14px 0 0;
-  max-width: 54ch;
+.brain-graph-sidebar__lede {
+  margin: 12px 0 0;
+  font-size: 0.92rem;
 }
 
-.brain-graph-stage__metrics {
+.brain-graph-sidebar__metrics {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 18px;
+  gap: 8px;
+  margin-top: 16px;
 }
 
-.brain-graph-stage__metrics div,
+.brain-graph-sidebar__metrics div,
 .brain-graph-sidebar__theme-badge {
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: 14px;
   background: rgba(4, 15, 22, 0.56);
 }
 
-.brain-graph-stage__metrics div {
-  padding: 12px 14px;
+.brain-graph-sidebar__metrics div {
+  padding: 10px 12px;
 }
 
-.brain-graph-stage__metrics span {
+.brain-graph-sidebar__metrics span {
   display: block;
-  font-size: 0.82rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   color: var(--muted);
 }
 
-.brain-graph-stage__metrics strong {
+.brain-graph-sidebar__metrics strong {
   display: block;
   margin-top: 4px;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .brain-graph-stage__mode {
@@ -300,10 +358,15 @@ button {
   min-height: calc(100vh - 32px);
 }
 
+.brain-graph-sidebar__intro,
 .brain-graph-sidebar__themes,
 .brain-graph-sidebar__selection {
   border-radius: 28px;
   padding: 20px;
+}
+
+.brain-graph-sidebar__intro {
+  flex: 0 0 auto;
 }
 
 .brain-graph-sidebar__themes {
@@ -537,6 +600,47 @@ button {
   font-size: 0.9rem;
 }
 
+.theme-chip__count {
+  margin-left: auto;
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.brain-graph-sidebar__paper {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(4, 15, 22, 0.4);
+  color: var(--text);
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.brain-graph-sidebar__paper strong {
+  font-size: 0.82rem;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.brain-graph-sidebar__paper span {
+  display: block;
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 0.86rem;
+}
+
+.brain-fallback__node.is-central {
+  background: radial-gradient(circle, #fff5d6, #ffd166);
+  box-shadow:
+    0 0 0 2px rgba(255, 209, 102, 0.6),
+    0 0 28px rgba(255, 209, 102, 0.7);
+}
+
 @media (max-width: 1180px) {
   .brain-graph-stage {
     grid-template-columns: 1fr;
@@ -559,38 +663,29 @@ button {
     border-radius: 22px;
   }
 
-  .brain-graph-stage__intro,
   .brain-graph-stage__controls,
+  .brain-graph-sidebar__intro,
   .brain-graph-sidebar__themes,
   .brain-graph-sidebar__selection {
     border-radius: 20px;
   }
 
-  .brain-graph-stage__intro,
   .brain-graph-stage__controls {
     position: absolute;
-    width: calc(100% - 24px);
-    left: 12px;
-    right: 12px;
-  }
-
-  .brain-graph-stage__intro {
-    top: 12px;
-    padding: 16px;
-  }
-
-  .brain-graph-stage__controls {
     top: auto;
     bottom: 12px;
-    padding: 16px;
+    left: 12px;
+    right: 12px;
+    width: calc(100% - 24px);
+    padding: 14px;
   }
 
-  .brain-graph-stage__intro h1 {
-    font-size: clamp(2.2rem, 10vw, 3rem);
+  .brain-graph-sidebar__intro h1 {
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
   }
 
-  .brain-graph-stage__metrics {
-    grid-template-columns: 1fr;
+  .brain-graph-sidebar__metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .brain-graph-sidebar {

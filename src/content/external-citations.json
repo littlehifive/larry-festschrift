@@ -1,0 +1,2724 @@
+{
+  "generatedAt": "2026-05-01T18:01:04.976Z",
+  "externalNodes": [
+    {
+      "id": "W2026080021",
+      "title": "Risk factors in child maltreatment: A meta-analytic review of the literature",
+      "year": 2008,
+      "venue": "Aggression and Violent Behavior",
+      "citationCount": 1201,
+      "doi": "https://doi.org/10.1016/j.avb.2006.03.006",
+      "authors": [
+        "Sandra M. Stith",
+        "Ting Liu",
+        "Liz Davies",
+        "Esther L. Boykin"
+      ]
+    },
+    {
+      "id": "W1906073690",
+      "title": "Toward an Ecological/Transactional Model of Community Violence and Child Maltreatment: Consequences for Children’s Development",
+      "year": 1993,
+      "venue": "Psychiatry",
+      "citationCount": 1138,
+      "doi": "https://doi.org/10.1080/00332747.1993.11024624",
+      "authors": [
+        "Dante Cicchetti",
+        "Michael Lynch"
+      ]
+    },
+    {
+      "id": "W2057299305",
+      "title": "A Developmental Psychopathology Perspective on Child Abuse and Neglect",
+      "year": 1995,
+      "venue": "Journal of the American Academy of Child & Adolescent Psychiatry",
+      "citationCount": 1013,
+      "doi": "https://doi.org/10.1097/00004583-199505000-00008",
+      "authors": [
+        "Dante Cicchetti",
+        "Sheree L. Toth"
+      ]
+    },
+    {
+      "id": "W2145452721",
+      "title": "Socioeconomic Status and Chronic Stress: Does Stress Account for SES Effects on Health?",
+      "year": 1999,
+      "venue": "Annals of the New York Academy of Sciences",
+      "citationCount": 870,
+      "doi": "https://doi.org/10.1111/j.1749-6632.1999.tb08111.x",
+      "authors": [
+        "Andrew Baum",
+        "John P. Garofalo",
+        "Ann Marie Yali"
+      ]
+    },
+    {
+      "id": "W2001488351",
+      "title": "School performance and disciplinary problems among abused and neglected children.",
+      "year": 1993,
+      "venue": "Developmental Psychology",
+      "citationCount": 580,
+      "doi": "https://doi.org/10.1037/0012-1649.29.1.53",
+      "authors": [
+        "John Eckenrode",
+        "Molly Laird",
+        "John M. Doris"
+      ]
+    },
+    {
+      "id": "W2111401141",
+      "title": "An Ecological‐Transactional Perspective on Child Maltreatment: Failure of the Average Expectable Environment and Its Influence on Child Development",
+      "year": 2015,
+      "venue": null,
+      "citationCount": 466,
+      "doi": "https://doi.org/10.1002/9780470939406.ch4",
+      "authors": [
+        "Dante Cicchetti",
+        "Kristin Valentino"
+      ]
+    },
+    {
+      "id": "W3217490374",
+      "title": "Four Factor Index of Social Status",
+      "year": 1975,
+      "venue": null,
+      "citationCount": 7015,
+      "doi": null,
+      "authors": [
+        "Roi Paschou"
+      ]
+    },
+    {
+      "id": "W1552694256",
+      "title": "Socialization In The Context Of The Family: Parent-Child Interaction",
+      "year": 1983,
+      "venue": null,
+      "citationCount": 5203,
+      "doi": null,
+      "authors": [
+        "Eleanor E. Maccoby",
+        "John A. Martin"
+      ]
+    },
+    {
+      "id": "W1965456513",
+      "title": "Current patterns of parental authority.",
+      "year": 1971,
+      "venue": "Developmental Psychology",
+      "citationCount": 5069,
+      "doi": "https://doi.org/10.1037/h0030372",
+      "authors": [
+        "Diana Baumrind"
+      ]
+    },
+    {
+      "id": "W1483112721",
+      "title": "Manual for the Child: Behavior Checklist and Revised Child Behavior Profile",
+      "year": 1983,
+      "venue": "Medical Entomology and Zoology",
+      "citationCount": 4309,
+      "doi": null,
+      "authors": [
+        "Thomas M. Achenbach",
+        "Craig Edelbrock"
+      ]
+    },
+    {
+      "id": "W2156331665",
+      "title": "Stress and Health: Psychological, Behavioral, and Biological Determinants",
+      "year": 2004,
+      "venue": "Annual Review of Clinical Psychology",
+      "citationCount": 2186,
+      "doi": "https://doi.org/10.1146/annurev.clinpsy.1.102803.144141",
+      "authors": [
+        "Neil Schneiderman",
+        "Gail Ironson",
+        "Scott D. Siegel"
+      ]
+    },
+    {
+      "id": "W2139358896",
+      "title": "Predisplacement and Postdisplacement Factors Associated With Mental Health of Refugees and Internally Displaced Persons",
+      "year": 2005,
+      "venue": "JAMA",
+      "citationCount": 1760,
+      "doi": "https://doi.org/10.1001/jama.294.5.602",
+      "authors": [
+        "Matthew Porter",
+        "Nick Haslam"
+      ]
+    },
+    {
+      "id": "W2167652925",
+      "title": "Common mental health problems in immigrants and refugees: general approach in primary care",
+      "year": 2010,
+      "venue": "Canadian Medical Association Journal",
+      "citationCount": 1459,
+      "doi": "https://doi.org/10.1503/cmaj.090292",
+      "authors": [
+        "Laurence J. Kirmayer",
+        "Lavanya Narasiah",
+        "Maria L. Muñoz",
+        "Meb Rashid"
+      ]
+    },
+    {
+      "id": "W1984065858",
+      "title": "War exposure, daily stressors, and mental health in conflict and post-conflict settings: Bridging the divide between trauma-focused and psychosocial frameworks",
+      "year": 2009,
+      "venue": "Social Science & Medicine",
+      "citationCount": 1442,
+      "doi": "https://doi.org/10.1016/j.socscimed.2009.09.029",
+      "authors": [
+        "Kenneth E. Miller",
+        "Andrew Rasmussen"
+      ]
+    },
+    {
+      "id": "W1994589492",
+      "title": "The University of California at Los Angeles post-traumatic stress disorder reaction index",
+      "year": 2004,
+      "venue": "Current Psychiatry Reports",
+      "citationCount": 1213,
+      "doi": "https://doi.org/10.1007/s11920-004-0048-2",
+      "authors": [
+        "Alan M. Steinberg",
+        "Melissa J. Brymer",
+        "Kelly Decker",
+        "Robert S. Pynoos"
+      ]
+    },
+    {
+      "id": "W2125865087",
+      "title": "The mental health of children affected by armed conflict: Protective processes and pathways to resilience",
+      "year": 2008,
+      "venue": "International Review of Psychiatry",
+      "citationCount": 815,
+      "doi": "https://doi.org/10.1080/09540260802090363",
+      "authors": [
+        "Theresa S. Betancourt",
+        "Kashif Khan"
+      ]
+    },
+    {
+      "id": "W1996656518",
+      "title": "The Environment of Childhood Poverty.",
+      "year": 2004,
+      "venue": "American Psychologist",
+      "citationCount": 2355,
+      "doi": "https://doi.org/10.1037/0003-066x.59.2.77",
+      "authors": [
+        "Gary W. Evans"
+      ]
+    },
+    {
+      "id": "W2101374995",
+      "title": "U.S. Disparities in Health: Descriptions, Causes, and Mechanisms",
+      "year": 2007,
+      "venue": "Annual Review of Public Health",
+      "citationCount": 1224,
+      "doi": "https://doi.org/10.1146/annurev.publhealth.29.020907.090852",
+      "authors": [
+        "Nancy E. Adler",
+        "David H. Rehkopf"
+      ]
+    },
+    {
+      "id": "W1975522492",
+      "title": "The effects of poverty on the mental, emotional, and behavioral health of children and youth: Implications for prevention.",
+      "year": 2012,
+      "venue": "American Psychologist",
+      "citationCount": 1075,
+      "doi": "https://doi.org/10.1037/a0028015",
+      "authors": [
+        "Hirokazu Yoshikawa",
+        "J. Lawrence Aber",
+        "William R. Beardslee"
+      ]
+    },
+    {
+      "id": "W1049068570",
+      "title": "A revised inventory of Adverse Childhood Experiences",
+      "year": 2015,
+      "venue": "Child Abuse & Neglect",
+      "citationCount": 712,
+      "doi": "https://doi.org/10.1016/j.chiabu.2015.07.011",
+      "authors": [
+        "David Finkelhor",
+        "Anne Shattuck",
+        "Heather A. Turner",
+        "Sherry Hamby"
+      ]
+    },
+    {
+      "id": "W2046964286",
+      "title": "Socioeconomic differences in children's health: How and why do these relationships change with age?",
+      "year": 2002,
+      "venue": "Psychological Bulletin",
+      "citationCount": 647,
+      "doi": "https://doi.org/10.1037/0033-2909.128.2.295",
+      "authors": [
+        "Edith Chen",
+        "Karen A. Matthews",
+        "W. Thomas Boyce"
+      ]
+    },
+    {
+      "id": "W2033448635",
+      "title": "Addressing Social Determinants of Health at Well Child Care Visits: A Cluster RCT",
+      "year": 2015,
+      "venue": "PEDIATRICS",
+      "citationCount": 636,
+      "doi": "https://doi.org/10.1542/peds.2014-2888",
+      "authors": [
+        "Arvin Garg",
+        "Sarah Toy",
+        "Yorghos Tripodis",
+        "Michael Silverstein"
+      ]
+    },
+    {
+      "id": "W2254735081",
+      "title": "The Ecology of Human Development",
+      "year": 1979,
+      "venue": "Harvard University Press eBooks",
+      "citationCount": 23360,
+      "doi": "https://doi.org/10.4159/9780674028845",
+      "authors": [
+        "Urie Bronfenbrenner"
+      ]
+    },
+    {
+      "id": "W3000074734",
+      "title": "The Ecology of Human Development",
+      "year": 1981,
+      "venue": "Harvard University Press eBooks",
+      "citationCount": 7473,
+      "doi": "https://doi.org/10.2307/j.ctv26071r6",
+      "authors": [
+        "Urie Bronfenbrenner"
+      ]
+    },
+    {
+      "id": "W1986762259",
+      "title": "Economic Deprivation and Early Childhood Development",
+      "year": 1994,
+      "venue": "Child Development",
+      "citationCount": 1896,
+      "doi": "https://doi.org/10.1111/j.1467-8624.1994.tb00752.x",
+      "authors": [
+        "Gregory Duncan",
+        "Jeanne Brooks‐Gunn",
+        "Pamela Kato Klebanov"
+      ]
+    },
+    {
+      "id": "W1601136252",
+      "title": "Intergenerational Income Mobility in the United States",
+      "year": 2016,
+      "venue": "American Economic Review",
+      "citationCount": 1669,
+      "doi": null,
+      "authors": [
+        "Gary Solon"
+      ]
+    },
+    {
+      "id": "W2147920244",
+      "title": "Experimental Analysis of Neighborhood Effects",
+      "year": 2007,
+      "venue": "Econometrica",
+      "citationCount": 2668,
+      "doi": "https://doi.org/10.1111/j.1468-0262.2007.00733.x",
+      "authors": [
+        "Jeffrey R. Kling",
+        "Jeffrey B. Liebman",
+        "Lawrence F. Katz"
+      ]
+    },
+    {
+      "id": "W1979739280",
+      "title": "Contemporary research on parenting: The case for nature and nurture.",
+      "year": 2000,
+      "venue": "American Psychologist",
+      "citationCount": 1517,
+      "doi": "https://doi.org/10.1037/0003-066x.55.2.218",
+      "authors": [
+        "W. Andrew Collins",
+        "Eleanor E. Maccoby",
+        "Laurence Steinberg",
+        "E. Mavis Hetherington"
+      ]
+    },
+    {
+      "id": "W2144875296",
+      "title": "Gene–environment interplay and psychopathology: multiple varieties but real effects",
+      "year": 2005,
+      "venue": "Journal of Child Psychology and Psychiatry",
+      "citationCount": 1051,
+      "doi": "https://doi.org/10.1111/j.1469-7610.2005.01557.x",
+      "authors": [
+        "Michael Rutter",
+        "Terrie E. Moffitt",
+        "Avshalom Caspi"
+      ]
+    },
+    {
+      "id": "W1965016332",
+      "title": "Does neighborhood matter? Assessing recent evidence",
+      "year": 1997,
+      "venue": "Housing Policy Debate",
+      "citationCount": 863,
+      "doi": "https://doi.org/10.1080/10511482.1997.9521280",
+      "authors": [
+        "Ingrid Gould Ellen",
+        "Margery Austin Turner"
+      ]
+    },
+    {
+      "id": "W2047023442",
+      "title": "Socioeconomic status, neighborhood disadvantage, and poverty-related stress: Prospective effects on psychological syndromes among diverse low-income families",
+      "year": 2009,
+      "venue": "Journal of Economic Psychology",
+      "citationCount": 591,
+      "doi": "https://doi.org/10.1016/j.joep.2009.10.008",
+      "authors": [
+        "Catherine DeCarlo Santiago",
+        "Martha E. Wadsworth",
+        "Jessica Stump"
+      ]
+    },
+    {
+      "id": "W2129227869",
+      "title": "Placing Emotional Self-Regulation in Sociocultural and Socioeconomic Contexts",
+      "year": 2004,
+      "venue": "Child Development",
+      "citationCount": 452,
+      "doi": "https://doi.org/10.1111/j.1467-8624.2004.00676.x",
+      "authors": [
+        "C. Cybele Raver"
+      ]
+    },
+    {
+      "id": "W4211081781",
+      "title": "Executive Functions",
+      "year": 2012,
+      "venue": "Annual Review of Psychology",
+      "citationCount": 11921,
+      "doi": "https://doi.org/10.1146/annurev-psych-113011-143750",
+      "authors": [
+        "Adele Diamond"
+      ]
+    },
+    {
+      "id": "W2091251508",
+      "title": "Executive function in preschoolers: A review using an integrative framework.",
+      "year": 2008,
+      "venue": "Psychological Bulletin",
+      "citationCount": 2610,
+      "doi": "https://doi.org/10.1037/0033-2909.134.1.31",
+      "authors": [
+        "Nancy Garon",
+        "Susan E. Bryson",
+        "Isabel M. Smith"
+      ]
+    },
+    {
+      "id": "W2561241530",
+      "title": "Annual Research Review: On the relations among self‐regulation, self‐control, executive functioning, effortful control, cognitive control, impulsivity, risk‐taking, and inhibition for developmental psychopathology",
+      "year": 2016,
+      "venue": "Journal of Child Psychology and Psychiatry",
+      "citationCount": 1424,
+      "doi": "https://doi.org/10.1111/jcpp.12675",
+      "authors": [
+        "Joel T. Nigg"
+      ]
+    },
+    {
+      "id": "W2098156195",
+      "title": "Bilingual experience and executive functioning in young children",
+      "year": 2008,
+      "venue": "Developmental Science",
+      "citationCount": 1032,
+      "doi": "https://doi.org/10.1111/j.1467-7687.2008.00675.x",
+      "authors": [
+        "Stephanie M. Carlson",
+        "Andrew N. Meltzoff"
+      ]
+    },
+    {
+      "id": "W2131467366",
+      "title": "Effects of physical activity on children’s executive function: Contributions of experimental research on aerobic exercise",
+      "year": 2010,
+      "venue": "Developmental Review",
+      "citationCount": 1022,
+      "doi": "https://doi.org/10.1016/j.dr.2010.08.001",
+      "authors": [
+        "John R. Best"
+      ]
+    },
+    {
+      "id": "W1608468198",
+      "title": "The development of executive function in early childhood.",
+      "year": 2003,
+      "venue": "PubMed",
+      "citationCount": 919,
+      "doi": "https://doi.org/10.1111/j.0037-976x.2003.00260.x",
+      "authors": [
+        "Philip David Zelazo",
+        "Ulrich Müller",
+        "Douglas Frye",
+        "Stuart Marcovitch"
+      ]
+    },
+    {
+      "id": "W1603542031",
+      "title": "Social psychology: handbook of basic principles",
+      "year": 2008,
+      "venue": "Choice Reviews Online",
+      "citationCount": 5528,
+      "doi": "https://doi.org/10.5860/choice.45-3496",
+      "authors": []
+    },
+    {
+      "id": "W4213235949",
+      "title": "Social psychology: handbook of basic principles",
+      "year": 1997,
+      "venue": "Choice Reviews Online",
+      "citationCount": 4931,
+      "doi": "https://doi.org/10.5860/choice.34-3595",
+      "authors": []
+    },
+    {
+      "id": "W2098728364",
+      "title": "A cognitive-affective system theory of personality: Reconceptualizing situations, dispositions, dynamics, and invariance in personality structure.",
+      "year": 1995,
+      "venue": "Psychological Review",
+      "citationCount": 3710,
+      "doi": "https://doi.org/10.1037/0033-295x.102.2.246",
+      "authors": [
+        "Walter Mischel",
+        "Yuichi Shoda"
+      ]
+    },
+    {
+      "id": "W2004704125",
+      "title": "Delay of Gratification in Children",
+      "year": 1989,
+      "venue": "Science",
+      "citationCount": 3384,
+      "doi": "https://doi.org/10.1126/science.2658056",
+      "authors": [
+        "Walter Mischel",
+        "Yuichi Shoda",
+        "Mónica Rodríguez"
+      ]
+    },
+    {
+      "id": "W1991394887",
+      "title": "Social supports from teachers and peers as predictors of academic and social motivation",
+      "year": 2010,
+      "venue": "Contemporary Educational Psychology",
+      "citationCount": 785,
+      "doi": "https://doi.org/10.1016/j.cedpsych.2010.03.002",
+      "authors": [
+        "Kathryn R. Wentzel",
+        "Ann Battle",
+        "Shannon Russell",
+        "Lisa Looney"
+      ]
+    },
+    {
+      "id": "W2588419425",
+      "title": "Impacts of the CARE for Teachers program on teachers’ social and emotional competence and classroom interactions.",
+      "year": 2017,
+      "venue": "Journal of Educational Psychology",
+      "citationCount": 611,
+      "doi": "https://doi.org/10.1037/edu0000187",
+      "authors": [
+        "Patricia A. Jennings",
+        "Joshua L. Brown",
+        "Jennifer Frank",
+        "Sebrina L. Doyle Fosco"
+      ]
+    },
+    {
+      "id": "W2887222263",
+      "title": "Social and Emotional Learning in Schools: From Programs to Strategies and commentaries",
+      "year": 2012,
+      "venue": "Child Policy Nexus",
+      "citationCount": 533,
+      "doi": "https://doi.org/10.1002/j.2379-3988.2012.tb00073.x",
+      "authors": [
+        "Stephanie M. Jones",
+        "Suzanne M. Bouffard"
+      ]
+    },
+    {
+      "id": "W2159599228",
+      "title": "Improving preschool classroom processes: Preliminary findings from a randomized trial implemented in Head Start settings",
+      "year": 2007,
+      "venue": "Early Childhood Research Quarterly",
+      "citationCount": 441,
+      "doi": "https://doi.org/10.1016/j.ecresq.2007.09.001",
+      "authors": [
+        "C. Cybele Raver",
+        "Stephanie M. Jones",
+        "Christine P. Li‐Grining",
+        "Molly W. Metzger"
+      ]
+    },
+    {
+      "id": "W2118999394",
+      "title": "The relationship of school-wide Positive Behavior Support to academic achievement in an urban middle school",
+      "year": 2006,
+      "venue": "Psychology in the Schools",
+      "citationCount": 346,
+      "doi": "https://doi.org/10.1002/pits.20177",
+      "authors": [
+        "Stephen Lassen",
+        "Michael M. Steele",
+        "Wayne Sailor"
+      ]
+    },
+    {
+      "id": "W2103522096",
+      "title": "Two-Year Impacts of a Universal School-Based Social-Emotional and Literacy Intervention: An Experiment in Translational Developmental Research",
+      "year": 2011,
+      "venue": "Child Development",
+      "citationCount": 342,
+      "doi": "https://doi.org/10.1111/j.1467-8624.2010.01560.x",
+      "authors": [
+        "Stephanie M. Jones",
+        "Joshua L. Brown",
+        "J. Lawrence Aber"
+      ]
+    },
+    {
+      "id": "W2324392187",
+      "title": "Hierarchical Linear Models: Applications and Data Analysis Methods.",
+      "year": 1993,
+      "venue": "Contemporary Sociology A Journal of Reviews",
+      "citationCount": 18859,
+      "doi": "https://doi.org/10.2307/2075823",
+      "authors": [
+        "Nicholas T. Longford",
+        "Anthony S. Bryk",
+        "Stephen W. Raudenbush"
+      ]
+    },
+    {
+      "id": "W2105630660",
+      "title": "The ecology of human development : experiments by nature and design",
+      "year": 1979,
+      "venue": null,
+      "citationCount": 12559,
+      "doi": "https://doi.org/10.4159/9780674028845?locatt=mode:legacy",
+      "authors": [
+        "Urie Bronfenbrenner"
+      ]
+    },
+    {
+      "id": "W1542722502",
+      "title": "A Handbook of Child Psychology",
+      "year": 1932,
+      "venue": "Nature",
+      "citationCount": 10151,
+      "doi": "https://doi.org/10.1038/130331a0",
+      "authors": []
+    },
+    {
+      "id": "W2784322274",
+      "title": "The Development and Treatment of Childhood Aggression",
+      "year": 2013,
+      "venue": "Psychology Press eBooks",
+      "citationCount": 2763,
+      "doi": "https://doi.org/10.4324/9780203771693",
+      "authors": [
+        "Kenneth H. Rubin",
+        "Debra J. Pepler"
+      ]
+    },
+    {
+      "id": "W2152876172",
+      "title": "Community violence: A meta-analysis on the effect of exposure and mental health outcomes of children and adolescents",
+      "year": 2009,
+      "venue": "Development and Psychopathology",
+      "citationCount": 1021,
+      "doi": "https://doi.org/10.1017/s0954579409000145",
+      "authors": [
+        "Patrick J. Fowler",
+        "Carolyn J. Tompsett",
+        "Jordan M. Braciszewski",
+        "Angela J. Jacques‐Tiura"
+      ]
+    },
+    {
+      "id": "W1810185139",
+      "title": "Aggression and Antisocial Behavior in Youth",
+      "year": 2007,
+      "venue": null,
+      "citationCount": 630,
+      "doi": "https://doi.org/10.1002/9780470147658.chpsy0312",
+      "authors": [
+        "Kenneth A. Dodge",
+        "John D. Coie",
+        "Donald R. Lynam"
+      ]
+    },
+    {
+      "id": "W2056023114",
+      "title": "Testing an Idealized Dynamic Cascade Model of the Development of Serious Violence in Adolescence",
+      "year": 2008,
+      "venue": "Child Development",
+      "citationCount": 387,
+      "doi": "https://doi.org/10.1111/j.1467-8624.2008.01233.x",
+      "authors": [
+        "Kenneth A. Dodge",
+        "Mark T. Greenberg",
+        "Patrick S. Malone"
+      ]
+    },
+    {
+      "id": "W2162370558",
+      "title": "Collective trauma in northern Sri Lanka: a qualitative psychosocial-ecological study",
+      "year": 2007,
+      "venue": "International Journal of Mental Health Systems",
+      "citationCount": 185,
+      "doi": "https://doi.org/10.1186/1752-4458-1-5",
+      "authors": [
+        "Daya Somasundaram"
+      ]
+    },
+    {
+      "id": "W315748477",
+      "title": "Psychological Resilience after Hurricane Sandy: The Influence of Individual- and Community-Level Factors on Mental Health after a Large-Scale Natural Disaster",
+      "year": 2015,
+      "venue": "PLoS ONE",
+      "citationCount": 184,
+      "doi": "https://doi.org/10.1371/journal.pone.0125761",
+      "authors": [
+        "Sarah R. Lowe",
+        "Laura Sampson",
+        "Oliver Gruebner",
+        "Sandro Galea"
+      ]
+    },
+    {
+      "id": "W1971186513",
+      "title": "Targeting empowerment in community development: a community psychology approach to enhancing local power and well-being",
+      "year": 2012,
+      "venue": "Community Development Journal",
+      "citationCount": 165,
+      "doi": "https://doi.org/10.1093/cdj/bss031",
+      "authors": [
+        "Brian D. Christens"
+      ]
+    },
+    {
+      "id": "W2071666535",
+      "title": "Cutoff criteria for fit indexes in covariance structure analysis: Conventional criteria versus new alternatives",
+      "year": 1999,
+      "venue": "Structural Equation Modeling A Multidisciplinary Journal",
+      "citationCount": 103582,
+      "doi": "https://doi.org/10.1080/10705519909540118",
+      "authors": [
+        "Li‐tze Hu",
+        "Peter M. Bentler"
+      ]
+    },
+    {
+      "id": "W2151297547",
+      "title": "NIMH Diagnostic Interview Schedule for Children Version IV (NIMH DISC-IV): Description, Differences From Previous Versions, and Reliability of Some Common Diagnoses",
+      "year": 2000,
+      "venue": "Journal of the American Academy of Child & Adolescent Psychiatry",
+      "citationCount": 3513,
+      "doi": "https://doi.org/10.1097/00004583-200001000-00014",
+      "authors": [
+        "David Shaffer",
+        "Prudence W. Fisher",
+        "Christopher P. Lucas",
+        "Mina K. Dulcan"
+      ]
+    },
+    {
+      "id": "W1991101715",
+      "title": "Psychological Sequelae of the September 11 Terrorist Attacks in New York City",
+      "year": 2002,
+      "venue": "New England Journal of Medicine",
+      "citationCount": 1883,
+      "doi": "https://doi.org/10.1056/nejmsa013404",
+      "authors": [
+        "Sandro Galea",
+        "Jennifer Ahern",
+        "Heidi S. Resnick",
+        "Dean G. Kilpatrick"
+      ]
+    },
+    {
+      "id": "W643617646",
+      "title": "Building academic success on social and emotional learning: what does the research say?",
+      "year": 2005,
+      "venue": "Choice Reviews Online",
+      "citationCount": 1389,
+      "doi": "https://doi.org/10.5860/choice.42-5390",
+      "authors": []
+    },
+    {
+      "id": "W1988075665",
+      "title": "Socioeconomic Status, Family Processes,and Individual Development",
+      "year": 2010,
+      "venue": "Journal of Marriage and the Family",
+      "citationCount": 2091,
+      "doi": "https://doi.org/10.1111/j.1741-3737.2010.00725.x",
+      "authors": [
+        "Rand D. Conger",
+        "Katherine J. Conger",
+        "Monica J. Martin"
+      ]
+    },
+    {
+      "id": "W4230616807",
+      "title": "PISA 2018 Assessment and Analytical Framework",
+      "year": 2019,
+      "venue": "Programme for international student assessment/Internationale Schulleistungsstudie",
+      "citationCount": 1515,
+      "doi": "https://doi.org/10.1787/b25efab8-en",
+      "authors": [
+        "OECD"
+      ]
+    },
+    {
+      "id": "W1710666949",
+      "title": "Best Practices in Conceptualizing and Measuring Social Class in Psychological Research",
+      "year": 2012,
+      "venue": "Analyses of Social Issues and Public Policy",
+      "citationCount": 584,
+      "doi": "https://doi.org/10.1111/asap.12001",
+      "authors": [
+        "Matthew A. Diemer",
+        "Rashmita S. Mistry",
+        "Martha E. Wadsworth",
+        "Irene López"
+      ]
+    },
+    {
+      "id": "W1767701238",
+      "title": "Salivary Cortisol Mediates Effects of Poverty and Parenting on Executive Functions in Early Childhood",
+      "year": 2011,
+      "venue": "Child Development",
+      "citationCount": 571,
+      "doi": "https://doi.org/10.1111/j.1467-8624.2011.01643.x",
+      "authors": [
+        "Clancy Blair",
+        "Douglas A. Granger",
+        "Michael T. Willoughby",
+        "W. Roger Mills‐Koonce"
+      ]
+    },
+    {
+      "id": "W1565517723",
+      "title": "Panel Analysis of Intimate Relationships and Family Dynamics (pairfam): Conceptual framework and design",
+      "year": 2011,
+      "venue": "Journal of Family Research",
+      "citationCount": 543,
+      "doi": "https://doi.org/10.20377/jfr-235",
+      "authors": [
+        "Johannes Huinink",
+        "Josef Brüderl",
+        "Bernhard Nauck",
+        "Sabine Walper"
+      ]
+    },
+    {
+      "id": "W1484864026",
+      "title": "Using multivariate statistics",
+      "year": 1983,
+      "venue": null,
+      "citationCount": 77487,
+      "doi": null,
+      "authors": [
+        "Barbara G. Tabachnick",
+        "Linda S. Fidell"
+      ]
+    },
+    {
+      "id": "W1971440513",
+      "title": "The moderator-mediator variable distinction in social psychological research: Conceptual, strategic, and statistical considerations.",
+      "year": 1986,
+      "venue": "Journal of Personality and Social Psychology",
+      "citationCount": 72014,
+      "doi": "https://doi.org/10.1037//0022-3514.51.6.1173",
+      "authors": [
+        "Reuben M. Baron",
+        "David A. Kenny"
+      ]
+    },
+    {
+      "id": "W2112778345",
+      "title": "The CES-D Scale",
+      "year": 1977,
+      "venue": "Applied Psychological Measurement",
+      "citationCount": 53062,
+      "doi": "https://doi.org/10.1177/014662167700100306",
+      "authors": [
+        "Lenore Sawyer Radloff"
+      ]
+    },
+    {
+      "id": "W2100958095",
+      "title": "Early Social-Emotional Functioning and Public Health: The Relationship Between Kindergarten Social Competence and Future Wellness",
+      "year": 2015,
+      "venue": "American Journal of Public Health",
+      "citationCount": 1127,
+      "doi": "https://doi.org/10.2105/ajph.2015.302630",
+      "authors": [
+        "Damon Jones",
+        "Mark T. Greenberg",
+        "D. Max Crowley"
+      ]
+    },
+    {
+      "id": "W2273807080",
+      "title": "Teaching through Interactions",
+      "year": 2013,
+      "venue": "The Elementary School Journal",
+      "citationCount": 637,
+      "doi": "https://doi.org/10.1086/669616",
+      "authors": [
+        "Bridget K. Hamre",
+        "Robert C. Pianta",
+        "Jason T. Downer",
+        "Jamie DeCoster"
+      ]
+    },
+    {
+      "id": "W2257040726",
+      "title": "A Meta-Analysis of the Effects of Classroom Management Strategies and Classroom Management Programs on Students’ Academic, Behavioral, Emotional, and Motivational Outcomes",
+      "year": 2016,
+      "venue": "Review of Educational Research",
+      "citationCount": 599,
+      "doi": "https://doi.org/10.3102/0034654315626799",
+      "authors": [
+        "Hanke Korpershoek",
+        "Truus Harms",
+        "Hester de Boer",
+        "Mechteld van Kuijk"
+      ]
+    },
+    {
+      "id": "W2740187414",
+      "title": "Systematic Review of Universal Resilience-Focused Interventions Targeting Child and Adolescent Mental Health in the School Setting",
+      "year": 2017,
+      "venue": "Journal of the American Academy of Child & Adolescent Psychiatry",
+      "citationCount": 559,
+      "doi": "https://doi.org/10.1016/j.jaac.2017.07.780",
+      "authors": [
+        "Julia Dray",
+        "Jenny Bowman",
+        "Elizabeth Campbell",
+        "Megan Freund"
+      ]
+    },
+    {
+      "id": "W2128689084",
+      "title": "The Impact of Enhancing Students’ Social and Emotional Learning: A Meta-Analysis of School-Based Universal Interventions",
+      "year": 2011,
+      "venue": "Child Development",
+      "citationCount": 8218,
+      "doi": "https://doi.org/10.1111/j.1467-8624.2010.01564.x",
+      "authors": [
+        "Joseph A. Durlak",
+        "Roger P. Weissberg",
+        "Allison B. Dymnicki",
+        "Rebecca D. Taylor"
+      ]
+    },
+    {
+      "id": "W1592263067",
+      "title": "Multilevel analysis : an introduction to basic and advanced multilevel modeling",
+      "year": 1999,
+      "venue": null,
+      "citationCount": 6917,
+      "doi": null,
+      "authors": [
+        "Tom A. B. Snijders",
+        "Roel Bosker"
+      ]
+    },
+    {
+      "id": "W2135731612",
+      "title": "School readiness and later achievement.",
+      "year": 2007,
+      "venue": "Developmental Psychology",
+      "citationCount": 5286,
+      "doi": "https://doi.org/10.1037/0012-1649.43.6.1428",
+      "authors": [
+        "Greg J. Duncan",
+        "Chantelle Dowsett",
+        "Amy Claessens",
+        "Katherine Magnuson"
+      ]
+    },
+    {
+      "id": "W1731306270",
+      "title": "From Neurons to Neighborhoods",
+      "year": 2000,
+      "venue": "National Academies Press eBooks",
+      "citationCount": 4376,
+      "doi": "https://doi.org/10.17226/9824",
+      "authors": [
+        "Institute of Medicine and National Research Council"
+      ]
+    },
+    {
+      "id": "W2897623369",
+      "title": "The Lancet Commission on global mental health and sustainable development",
+      "year": 2018,
+      "venue": "The Lancet",
+      "citationCount": 3307,
+      "doi": "https://doi.org/10.1016/s0140-6736(18)31612-x",
+      "authors": [
+        "Vikram Patel",
+        "Shekhar Saxena",
+        "Crick Lund",
+        "Graham Thornicroft"
+      ]
+    },
+    {
+      "id": "W2034122200",
+      "title": "Cumulative risk and child development.",
+      "year": 2013,
+      "venue": "Psychological Bulletin",
+      "citationCount": 1911,
+      "doi": "https://doi.org/10.1037/a0031808",
+      "authors": [
+        "Gary W. Evans",
+        "Dongping Li",
+        "Sara S. Whipple"
+      ]
+    },
+    {
+      "id": "W2792728788",
+      "title": "Social determinants of mental disorders and the Sustainable Development Goals: a systematic review of reviews",
+      "year": 2018,
+      "venue": "The Lancet Psychiatry",
+      "citationCount": 1070,
+      "doi": "https://doi.org/10.1016/s2215-0366(18)30060-9",
+      "authors": [
+        "Crick Lund",
+        "Carrie Brooke‐Sumner",
+        "Florence Baingana",
+        "Emily Baron"
+      ]
+    },
+    {
+      "id": "W2529794099",
+      "title": "Investing in the foundation of sustainable development: pathways to scale up for early childhood development",
+      "year": 2016,
+      "venue": "The Lancet",
+      "citationCount": 895,
+      "doi": "https://doi.org/10.1016/s0140-6736(16)31698-1",
+      "authors": [
+        "Linda Richter",
+        "Bernadette Daelmans",
+        "Joan Lombardi",
+        "Jody Heymann"
+      ]
+    },
+    {
+      "id": "W2128839620",
+      "title": "Annual Research Review: Secular trends in child and adolescent mental health",
+      "year": 2014,
+      "venue": "Journal of Child Psychology and Psychiatry",
+      "citationCount": 787,
+      "doi": "https://doi.org/10.1111/jcpp.12372",
+      "authors": [
+        "Stephan Collishaw"
+      ]
+    },
+    {
+      "id": "W2134744704",
+      "title": "The Effects of Poverty on Childhood Brain Development",
+      "year": 2013,
+      "venue": "JAMA Pediatrics",
+      "citationCount": 744,
+      "doi": "https://doi.org/10.1001/jamapediatrics.2013.3139",
+      "authors": [
+        "Joan L. Luby",
+        "Andy C. Belden",
+        "Kelly N. Botteron",
+        "Natasha Marrus"
+      ]
+    },
+    {
+      "id": "W2157207849",
+      "title": "The three worlds of welfare capitalism",
+      "year": 1990,
+      "venue": "Choice Reviews Online",
+      "citationCount": 16680,
+      "doi": "https://doi.org/10.5860/choice.28-1046",
+      "authors": []
+    },
+    {
+      "id": "W2071937436",
+      "title": "Developmental potential in the first 5 years for children in developing countries",
+      "year": 2007,
+      "venue": "The Lancet",
+      "citationCount": 3592,
+      "doi": "https://doi.org/10.1016/s0140-6736(07)60032-4",
+      "authors": [
+        "Sally Grantham‐McGregor",
+        "Yin Bun Cheung",
+        "Santiago Cueto",
+        "Paul Glewwe"
+      ]
+    },
+    {
+      "id": "W2138630136",
+      "title": "Risky families: Family social environments and the mental and physical health of offspring.",
+      "year": 2002,
+      "venue": "Psychological Bulletin",
+      "citationCount": 2816,
+      "doi": "https://doi.org/10.1037/0033-2909.128.2.330",
+      "authors": [
+        "Rena L. Repetti",
+        "Shelley E. Taylor",
+        "Teresa E. Seeman"
+      ]
+    },
+    {
+      "id": "W2534594311",
+      "title": "Promoting child development through group-based parent support within a cash transfer program: Experimental effects on children’s outcomes.",
+      "year": 2016,
+      "venue": "Developmental Psychology",
+      "citationCount": 77,
+      "doi": "https://doi.org/10.1037/dev0000185",
+      "authors": [
+        "Lia C. H. Fernald",
+        "Rose M. C. Kagawa",
+        "Heather A. Knauer",
+        "Lourdes Schnaas"
+      ]
+    },
+    {
+      "id": "W2885380994",
+      "title": "Children, Youth and Developmental Science in the 2015-2030 Global Sustainable Development Goals",
+      "year": 2017,
+      "venue": "Child Policy Nexus",
+      "citationCount": 71,
+      "doi": "https://doi.org/10.1002/j.2379-3988.2017.tb00088.x",
+      "authors": [
+        "Abbie Raikes",
+        "Hirokazu Yoshikawa",
+        "Pia Rebello Britto",
+        "Iheoma U. Iruka"
+      ]
+    },
+    {
+      "id": "W2909125864",
+      "title": "Financial Incentives for Promoting Participation in a School-Based Parenting Program in Low-Income Communities",
+      "year": 2019,
+      "venue": "Prevention Science",
+      "citationCount": 36,
+      "doi": "https://doi.org/10.1007/s11121-019-0977-y",
+      "authors": [
+        "Deborah Gross",
+        "Amie F. Bettencourt"
+      ]
+    },
+    {
+      "id": "W3130682114",
+      "title": "Community intervention strategies to reduce the impact of financial strain and promote financial well-being: a comprehensive rapid review",
+      "year": 2021,
+      "venue": "Global Health Promotion",
+      "citationCount": 23,
+      "doi": "https://doi.org/10.1177/1757975920984182",
+      "authors": [
+        "Nicole M. Glenn",
+        "Lisa Allen Scott",
+        "Teree Hokanson",
+        "Karla Gustafson"
+      ]
+    },
+    {
+      "id": "W2582567497",
+      "title": "Impacts of Family Rewards on Adolescents’ Mental Health and Problem Behavior: Understanding the Full Range of Effects of a Conditional Cash Transfer Program",
+      "year": 2017,
+      "venue": "Prevention Science",
+      "citationCount": 19,
+      "doi": "https://doi.org/10.1007/s11121-017-0748-6",
+      "authors": [
+        "Pamela Morris",
+        "J. Lawrence Aber",
+        "Sharon Wolf",
+        "Juliette Berg"
+      ]
+    },
+    {
+      "id": "W4385416403",
+      "title": "Unconditional cash transfers for families with children in the U.S.: a scoping review",
+      "year": 2023,
+      "venue": "Review of Economics of the Household",
+      "citationCount": 16,
+      "doi": "https://doi.org/10.1007/s11150-023-09672-8",
+      "authors": [
+        "Hema Shah",
+        "Lisa A. Gennetian"
+      ]
+    },
+    {
+      "id": "W1562208008",
+      "title": "Self-Efficacy: The Exercise of Control",
+      "year": 1999,
+      "venue": "Journal of Cognitive Psychotherapy",
+      "citationCount": 40841,
+      "doi": "https://doi.org/10.1891/0889-8391.13.2.158",
+      "authors": [
+        "Albert Bandura",
+        "Wendy Freeman",
+        "Richard Lightsey"
+      ]
+    },
+    {
+      "id": "W4242883546",
+      "title": "Self-determination theory and the facilitation of intrinsic motivation, social development, and well-being.",
+      "year": 2000,
+      "venue": "American Psychologist",
+      "citationCount": 33751,
+      "doi": "https://doi.org/10.1037/0003-066x.55.1.68",
+      "authors": [
+        "Richard M. Ryan",
+        "Edward L. Deci"
+      ]
+    },
+    {
+      "id": "W2141846678",
+      "title": "Self-determination theory and the facilitation of intrinsic motivation, social development, and well-being.",
+      "year": 2000,
+      "venue": "American Psychologist",
+      "citationCount": 27375,
+      "doi": "https://doi.org/10.1037//0003-066x.55.1.68",
+      "authors": [
+        "Richard M. Ryan",
+        "Edward L. Deci"
+      ]
+    },
+    {
+      "id": "W4293586167",
+      "title": "Self-efficacy: the exercise of control",
+      "year": 1997,
+      "venue": "Choice Reviews Online",
+      "citationCount": 24440,
+      "doi": "https://doi.org/10.5860/choice.35-1826",
+      "authors": []
+    },
+    {
+      "id": "W2921807763",
+      "title": "Improving lives by accelerating progress towards the UN Sustainable Development Goals for adolescents living with HIV: a prospective cohort study",
+      "year": 2019,
+      "venue": "The Lancet Child & Adolescent Health",
+      "citationCount": 147,
+      "doi": "https://doi.org/10.1016/s2352-4642(19)30033-1",
+      "authors": [
+        "Lucie Cluver",
+        "F. Mark Orkin",
+        "Laurence Campeau",
+        "Elona Toska"
+      ]
+    },
+    {
+      "id": "W3046831237",
+      "title": "The Developmental Peacebuilding Model (DPM) of Children’s Prosocial Behaviors in Settings of Intergroup Conflict",
+      "year": 2020,
+      "venue": "Child Development Perspectives",
+      "citationCount": 65,
+      "doi": "https://doi.org/10.1111/cdep.12377",
+      "authors": [
+        "Laura K. Taylor"
+      ]
+    },
+    {
+      "id": "W2944452893",
+      "title": "Improving Primary Education in the Democratic Republic of the Congo: End-Line Results of a Cluster-Randomized Wait-List Controlled Trial of Learning in a Healing Classroom",
+      "year": 2019,
+      "venue": "Journal of Research on Educational Effectiveness",
+      "citationCount": 37,
+      "doi": "https://doi.org/10.1080/19345747.2018.1561963",
+      "authors": [
+        "Catalina Torrente",
+        "J. Lawrence Aber",
+        "Leighann Starkey",
+        "Brian Johnston"
+      ]
+    },
+    {
+      "id": "W3157512097",
+      "title": "SDG progress: Fragility, crisis and leaving no one behind",
+      "year": 2018,
+      "venue": "Econstor (Econstor)",
+      "citationCount": 34,
+      "doi": null,
+      "authors": [
+        "Emma Samman",
+        "Paula Lucci",
+        "Jessica Hagen‐Zanker",
+        "Tanvi Bhatkal"
+      ]
+    },
+    {
+      "id": "W4200185689",
+      "title": "Supporting Syrian Refugee Children’s Academic and Social-Emotional Learning in National Education Systems: A Cluster Randomized Controlled Trial of Nonformal Remedial Support and Mindfulness Programs in Lebanon",
+      "year": 2021,
+      "venue": "American Educational Research Journal",
+      "citationCount": 29,
+      "doi": "https://doi.org/10.3102/00028312211062911",
+      "authors": [
+        "Carly Tubbs Dolan",
+        "Ha Yeon Kim",
+        "Lindsay Brown",
+        "Kalina Gjicali"
+      ]
+    },
+    {
+      "id": "W4224279514",
+      "title": "School-based MHPSS interventions in humanitarian contexts: a realist review",
+      "year": 2022,
+      "venue": "BMJ Open",
+      "citationCount": 26,
+      "doi": "https://doi.org/10.1136/bmjopen-2021-054856",
+      "authors": [
+        "Molly E. Lasater",
+        "Jennifer A. Flemming",
+        "Christine Bourey",
+        "Ashley Nemiro"
+      ]
+    },
+    {
+      "id": "W2025802167",
+      "title": "The Strengths and Difficulties Questionnaire: A Research Note",
+      "year": 1997,
+      "venue": "Journal of Child Psychology and Psychiatry",
+      "citationCount": 14665,
+      "doi": "https://doi.org/10.1111/j.1469-7610.1997.tb01545.x",
+      "authors": [
+        "Robert Goodman"
+      ]
+    },
+    {
+      "id": "W1976876708",
+      "title": "Asymptotic Confidence Intervals for Indirect Effects in Structural Equation Models",
+      "year": 1982,
+      "venue": "Sociological Methodology",
+      "citationCount": 12592,
+      "doi": "https://doi.org/10.2307/270723",
+      "authors": [
+        "Michael E. Sobel"
+      ]
+    },
+    {
+      "id": "W2104057213",
+      "title": "Mediation in experimental and nonexperimental studies: New procedures and recommendations.",
+      "year": 2002,
+      "venue": "Psychological Methods",
+      "citationCount": 10845,
+      "doi": "https://doi.org/10.1037/1082-989x.7.4.422",
+      "authors": [
+        "Patrick E. Shrout",
+        "Niall Bolger"
+      ]
+    },
+    {
+      "id": "W2068719957",
+      "title": "A comparison of methods to test mediation and other intervening variable effects.",
+      "year": 2002,
+      "venue": "Psychological Methods",
+      "citationCount": 9095,
+      "doi": "https://doi.org/10.1037/1082-989x.7.1.83",
+      "authors": [
+        "David P. MacKinnon",
+        "Chondra M. Lockwood",
+        "Jeanne M. Hoffman",
+        "Stephen G. West"
+      ]
+    },
+    {
+      "id": "W4205492202",
+      "title": "Policies and interventions to remove gender‐related barriers to girls' school participation and learning in low‐ and middle‐income countries: A systematic review of the evidence",
+      "year": 2022,
+      "venue": "Campbell Systematic Reviews",
+      "citationCount": 94,
+      "doi": "https://doi.org/10.1002/cl2.1207",
+      "authors": [
+        "Stephanie Psaki",
+        "Nicole Haberland",
+        "Barbara Mensch",
+        "Lauren Woyczynski"
+      ]
+    },
+    {
+      "id": "W3027222713",
+      "title": "Three Principles to Support Teacher Effectiveness During COVID-19",
+      "year": 2020,
+      "venue": "World Bank, Washington, DC eBooks",
+      "citationCount": 49,
+      "doi": "https://doi.org/10.1596/33775",
+      "authors": [
+        "Elaine Ding",
+        "Tara Béteille",
+        "Ezequiel Molina",
+        "Adelle Pushparatnam"
+      ]
+    },
+    {
+      "id": "W3180411645",
+      "title": "Innovations in Social and Emotional Learning Research and Practice: Building from Evidence and Applying Behavioral Insights to the Design of a Social and Emotional Learning Intervention in Northeast Nigeria",
+      "year": 2021,
+      "venue": "International Journal of Environmental Research and Public Health",
+      "citationCount": 22,
+      "doi": "https://doi.org/10.3390/ijerph18147397",
+      "authors": [
+        "Rebecca Bailey",
+        "Natasha Raisch",
+        "Sonya Temko",
+        "Britt Titus"
+      ]
+    },
+    {
+      "id": "W3120084887",
+      "title": "Children's learning and development in conflict- and crisis-affected countries: Building a science for action",
+      "year": 2021,
+      "venue": "Development and Psychopathology",
+      "citationCount": 19,
+      "doi": "https://doi.org/10.1017/s0954579420001789",
+      "authors": [
+        "J. Lawrence Aber",
+        "Carly Tubbs Dolan",
+        "Ha Yeon Kim",
+        "Lindsay Brown"
+      ]
+    },
+    {
+      "id": "W4200209135",
+      "title": "“I can teach what’s in the book”: Understanding the why and how behind teachers’ implementation of a social‐emotional learning (SEL) focused curriculum in rural Malawi",
+      "year": 2021,
+      "venue": "British Journal of Educational Psychology",
+      "citationCount": 13,
+      "doi": "https://doi.org/10.1111/bjep.12483",
+      "authors": [
+        "Jeongmin Lee",
+        "Stephanie Simmons Zuilkowski"
+      ]
+    },
+    {
+      "id": "W1501218279",
+      "title": "Preventing Reading Difficulties in Young Children",
+      "year": 1998,
+      "venue": "National Academies Press eBooks",
+      "citationCount": 5370,
+      "doi": "https://doi.org/10.17226/6023",
+      "authors": [
+        "National Research Council"
+      ]
+    },
+    {
+      "id": "W1528251861",
+      "title": "The Handbook of Research Synthesis and Meta-Analysis",
+      "year": 2019,
+      "venue": "Russell Sage Foundation eBooks",
+      "citationCount": 4535,
+      "doi": "https://doi.org/10.7758/9781610448864",
+      "authors": []
+    },
+    {
+      "id": "W4293410603",
+      "title": "Education at a glance: OECD indicators, 2002",
+      "year": 2003,
+      "venue": "Choice Reviews Online",
+      "citationCount": 2750,
+      "doi": "https://doi.org/10.5860/choice.40-4369",
+      "authors": []
+    },
+    {
+      "id": "W4224065780",
+      "title": "The Cost-Effectiveness of an Accelerated Learning Program on the Literacy, Numeracy and Social-Emotional Learning Outcomes of Out-of-School Children in Northeast Nigeria: Evidence from a Mixed Methods Randomized Controlled Trial",
+      "year": 2022,
+      "venue": "Journal of Research on Educational Effectiveness",
+      "citationCount": 17,
+      "doi": "https://doi.org/10.1080/19345747.2022.2037799",
+      "authors": [
+        "Silvia Díazgranados Ferráns",
+        "Jeongmin Lee",
+        "Chinedu Ohanyido",
+        "Kayla Hoyer"
+      ]
+    },
+    {
+      "id": "W4220774188",
+      "title": "The executive functioning of Burundian refugee youth: Associations with individual, family and community factors",
+      "year": 2022,
+      "venue": "Journal of Applied Developmental Psychology",
+      "citationCount": 11,
+      "doi": "https://doi.org/10.1016/j.appdev.2022.101399",
+      "authors": [
+        "Florian Scharpf",
+        "Sven C. Mueller",
+        "Tobias Hecker"
+      ]
+    },
+    {
+      "id": "W4295197992",
+      "title": "Predictors of Literacy and Attitudes Toward Reading Among Syrian Refugee Children in Jordan",
+      "year": 2022,
+      "venue": "International Journal of Early Childhood",
+      "citationCount": 10,
+      "doi": "https://doi.org/10.1007/s13158-022-00334-x",
+      "authors": [
+        "Kristin Hadfield",
+        "Mays Al-Hamad",
+        "Rinad Bakhti",
+        "Rana Dajani"
+      ]
+    },
+    {
+      "id": "W4312137406",
+      "title": "Remedial Programming and Skill-Targeted SEL in Low-Income and Crisis-Affected Contexts: Experimental Evidence From Niger",
+      "year": 2022,
+      "venue": "Journal of Research on Educational Effectiveness",
+      "citationCount": 9,
+      "doi": "https://doi.org/10.1080/19345747.2022.2139785",
+      "authors": [
+        "Lindsay Brown",
+        "Ha Yeon Kim",
+        "Carly Tubbs Dolan",
+        "Autumn Brown"
+      ]
+    },
+    {
+      "id": "W2085876742",
+      "title": "The weirdest people in the world?",
+      "year": 2010,
+      "venue": "Behavioral and Brain Sciences",
+      "citationCount": 11779,
+      "doi": "https://doi.org/10.1017/s0140525x0999152x",
+      "authors": [
+        "Joseph Henrich",
+        "Steven J. Heine",
+        "Ara Norenzayan"
+      ]
+    },
+    {
+      "id": "W2118919126",
+      "title": "The Construct of Resilience: A Critical Evaluation and Guidelines for Future Work",
+      "year": 2000,
+      "venue": "Child Development",
+      "citationCount": 9090,
+      "doi": "https://doi.org/10.1111/1467-8624.00164",
+      "authors": [
+        "Suniya S. Luthar",
+        "Dante Cicchetti",
+        "Bronwyn E. Becker"
+      ]
+    },
+    {
+      "id": "W4323316099",
+      "title": "Systemic barriers and opportunities for implementing school-based social–emotional learning interventions in low-income and conflict-affected settings",
+      "year": 2023,
+      "venue": "Frontiers in Psychology",
+      "citationCount": 14,
+      "doi": "https://doi.org/10.3389/fpsyg.2023.1011039",
+      "authors": [
+        "Dana Charles McCoy",
+        "Emily C. Hanno"
+      ]
+    },
+    {
+      "id": "W4396957523",
+      "title": "Rethinking peer influence and risk taking: A strengths-based approach to adolescence in a new era",
+      "year": 2024,
+      "venue": "Development and Psychopathology",
+      "citationCount": 10,
+      "doi": "https://doi.org/10.1017/s0954579424000877",
+      "authors": [
+        "Joseph P. Allen"
+      ]
+    },
+    {
+      "id": "W4317911199",
+      "title": "Measuring the dosage of brief and skill-targeted social-emotional learning (SEL) activities in humanitarian settings",
+      "year": 2023,
+      "venue": "Frontiers in Psychology",
+      "citationCount": 8,
+      "doi": "https://doi.org/10.3389/fpsyg.2022.973184",
+      "authors": [
+        "Zezhen Wu",
+        "Lindsay Brown",
+        "Ha Yeon Kim",
+        "Hirokazu Yoshikawa"
+      ]
+    },
+    {
+      "id": "W4285077412",
+      "title": "Medium-term protective effects of quality early childhood education during the COVID-19 pandemic in Ghana",
+      "year": 2022,
+      "venue": "Child Development",
+      "citationCount": 7,
+      "doi": "https://doi.org/10.1111/cdev.13824",
+      "authors": [
+        "Sharon Wolf",
+        "Elisabetta Aurino",
+        "Noelle M. Suntheimer",
+        "Esinam Ami Avornyo"
+      ]
+    },
+    {
+      "id": "W809551758",
+      "title": "WEIRD languages have misled us, too [Comment on Henrich et al.]",
+      "year": 2010,
+      "venue": "Max Planck Digital Library",
+      "citationCount": 4096,
+      "doi": "https://doi.org/10.1017/s0140525x1000018x",
+      "authors": [
+        "Asifa Majid",
+        "Stephen C. Levinson"
+      ]
+    },
+    {
+      "id": "W4398178291",
+      "title": "Psychological and social interventions for the promotion of mental health in people living in low- and middle-income countries affected by humanitarian crises",
+      "year": 2024,
+      "venue": "Cochrane Database of Systematic Reviews",
+      "citationCount": 11,
+      "doi": "https://doi.org/10.1002/14651858.cd014300.pub2",
+      "authors": [
+        "Davide Papola",
+        "Eleonora Prina",
+        "Caterina Ceccarelli",
+        "Camilla Cadorin"
+      ]
+    },
+    {
+      "id": "W4391822628",
+      "title": "Evolution of a Learning Theory: In Praise of Scientific Speculation",
+      "year": 2024,
+      "venue": "Educational Psychology Review",
+      "citationCount": 7,
+      "doi": "https://doi.org/10.1007/s10648-024-09865-2",
+      "authors": [
+        "Patricia A. Alexander",
+        "P. Karen Murphy"
+      ]
+    },
+    {
+      "id": "W4400315051",
+      "title": "The effectiveness of a contextually grounded social emotional learning program in Haiti: A pilot cluster randomized control trial",
+      "year": 2024,
+      "venue": "Journal of School Psychology",
+      "citationCount": 6,
+      "doi": "https://doi.org/10.1016/j.jsp.2024.101349",
+      "authors": [
+        "Laura E. Miller‐Graff",
+        "Catherine Maloney",
+        "Lucka Jouthe Beauvil",
+        "Myrlande Octave Feuille"
+      ]
+    },
+    {
+      "id": "W4406295275",
+      "title": "Refugee Learning Center in Indonesia: A Habitat for Refugee Well‐Being in Transit",
+      "year": 2025,
+      "venue": "European Journal of Education",
+      "citationCount": 3,
+      "doi": "https://doi.org/10.1111/ejed.12926",
+      "authors": [
+        "Gina Karlin",
+        "Hyun‐Sook Kang"
+      ]
+    },
+    {
+      "id": "W4414395969",
+      "title": "The impact of a participatory intervention to improve learning outcomes and reduce school-based discrimination and community stigma in primary rural schools of Afghanistan: A cluster control randomized trial",
+      "year": 2025,
+      "venue": "International Journal of Educational Development",
+      "citationCount": 2,
+      "doi": "https://doi.org/10.1016/j.ijedudev.2025.103409",
+      "authors": [
+        "Jean‐Francois Trani",
+        "Yiqi Zhu",
+        "Saria Bechara",
+        "Parul Bakhshi"
+      ]
+    },
+    {
+      "id": "W4391278160",
+      "title": "Effective Components of Social Emotional Learning Programs: A Meta-analysis",
+      "year": 2024,
+      "venue": "Journal of Youth and Adolescence",
+      "citationCount": 58,
+      "doi": "https://doi.org/10.1007/s10964-024-01942-7",
+      "authors": [
+        "Jieping Shi",
+        "Alan Cheung"
+      ]
+    },
+    {
+      "id": "W4401592724",
+      "title": "Beyond fidelity: unveiling the landscape of teacher adaptation in social and emotional learning programs",
+      "year": 2024,
+      "venue": "Frontiers in Education",
+      "citationCount": 5,
+      "doi": "https://doi.org/10.3389/feduc.2024.1444588",
+      "authors": [
+        "Joshua Lovett",
+        "Kimberly A. Schonert‐Reichl",
+        "Katherine M. Zinsser",
+        "Molly Stewart Lawlor"
+      ]
+    },
+    {
+      "id": "W4387977845",
+      "title": "Responding to the field: Development of and findings from the PSS-SEL Toolbox",
+      "year": 2023,
+      "venue": "Social and Emotional Learning Research Practice and Policy",
+      "citationCount": 2,
+      "doi": "https://doi.org/10.1016/j.sel.2023.100017",
+      "authors": [
+        "Sonya Temko",
+        "Rachel Smith",
+        "Bryan G. Nelson",
+        "Christine Park"
+      ]
+    },
+    {
+      "id": "W4410015837",
+      "title": "Efficacy of Wellbeing Education Involving Long-Term Interventions or Long-Term Assessment of Eudaimonic and Hedonic Wellbeing and Psychological Distress: a Systematic Review",
+      "year": 2025,
+      "venue": "International Journal of Applied Positive Psychology",
+      "citationCount": 2,
+      "doi": "https://doi.org/10.1007/s41042-025-00225-1",
+      "authors": [
+        "Dianne Vella‐Brodrick",
+        "Anneliese Gill",
+        "Gavin Duarte"
+      ]
+    },
+    {
+      "id": "W4389634012",
+      "title": "Impact of Catch-up Clubs in Conflict-Affected Myanmar: A Community-Led Remedial Learning Model",
+      "year": 2023,
+      "venue": "Journal on Education in Emergencies",
+      "citationCount": 1,
+      "doi": "https://doi.org/10.33682/9t2r-vc39",
+      "authors": [
+        "Silvia Mila Arlini",
+        "Nora Charif Chefchaouni",
+        "Jessica Chia",
+        "Mya Gordon"
+      ]
+    },
+    {
+      "id": "W4411977535",
+      "title": "The implementation of the Lions Quest program “Skills for Adolescence” in Slovenia: challenges and opportunities",
+      "year": 2025,
+      "venue": "Journal of Public Health",
+      "citationCount": 1,
+      "doi": "https://doi.org/10.1007/s10389-025-02545-7",
+      "authors": [
+        "Dejana Bouillet",
+        "Žana Glavendekić",
+        "Matthew Kiefer",
+        "Vanessa Jaroski"
+      ]
+    },
+    {
+      "id": "W2163287225",
+      "title": "Implementation Matters: A Review of Research on the Influence of Implementation on Program Outcomes and the Factors Affecting Implementation",
+      "year": 2008,
+      "venue": "American Journal of Community Psychology",
+      "citationCount": 5237,
+      "doi": "https://doi.org/10.1007/s10464-008-9165-0",
+      "authors": [
+        "Joseph A. Durlak",
+        "Emily P. DuPre"
+      ]
+    },
+    {
+      "id": "W2167997731",
+      "title": "A conceptual framework for implementation fidelity",
+      "year": 2007,
+      "venue": "Implementation Science",
+      "citationCount": 2525,
+      "doi": "https://doi.org/10.1186/1748-5908-2-40",
+      "authors": [
+        "Christopher Carroll",
+        "Malcolm Patterson",
+        "Stephen Wood",
+        "Andrew Booth"
+      ]
+    },
+    {
+      "id": "W2064258062",
+      "title": "Enhancing school-based prevention and youth development through coordinated social, emotional, and academic learning.",
+      "year": 2003,
+      "venue": "American Psychologist",
+      "citationCount": 2118,
+      "doi": "https://doi.org/10.1037/0003-066x.58.6-7.466",
+      "authors": [
+        "Mark T. Greenberg",
+        "Roger P. Weissberg",
+        "Mary Utne O’Brien",
+        "Joseph E. Zins"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "sourceExternalId": "W2026080021",
+      "targetWorkId": "abuse-sequelae-1991",
+      "kind": "cited_by",
+      "weight": 0.7543828041800098
+    },
+    {
+      "sourceExternalId": "W1906073690",
+      "targetWorkId": "abuse-sequelae-1991",
+      "kind": "cited_by",
+      "weight": 0.750174270334238
+    },
+    {
+      "sourceExternalId": "W2057299305",
+      "targetWorkId": "abuse-sequelae-1991",
+      "kind": "cited_by",
+      "weight": 0.7410868318995172
+    },
+    {
+      "sourceExternalId": "W2145452721",
+      "targetWorkId": "abuse-sequelae-1991",
+      "kind": "cited_by",
+      "weight": 0.7292032679013793
+    },
+    {
+      "sourceExternalId": "W2001488351",
+      "targetWorkId": "abuse-sequelae-1991",
+      "kind": "cited_by",
+      "weight": 0.6975517038302594
+    },
+    {
+      "sourceExternalId": "W2111401141",
+      "targetWorkId": "abuse-sequelae-1991",
+      "kind": "cited_by",
+      "weight": 0.6804770385019002
+    },
+    {
+      "sourceWorkId": "abuse-sequelae-1991",
+      "targetExternalId": "W3217490374",
+      "kind": "cites",
+      "weight": 0.7953743328572775
+    },
+    {
+      "sourceWorkId": "abuse-sequelae-1991",
+      "targetExternalId": "W1552694256",
+      "kind": "cites",
+      "weight": 0.7746139660623279
+    },
+    {
+      "sourceWorkId": "abuse-sequelae-1991",
+      "targetExternalId": "W1965456513",
+      "kind": "cites",
+      "weight": 0.7728012734933338
+    },
+    {
+      "sourceWorkId": "abuse-sequelae-1991",
+      "targetExternalId": "W1483112721",
+      "kind": "cites",
+      "weight": 0.7615163632257171
+    },
+    {
+      "sourceExternalId": "W2156331665",
+      "targetWorkId": "war-lebanon-1996",
+      "kind": "cited_by",
+      "weight": 0.8011727809467746
+    },
+    {
+      "sourceExternalId": "W2139358896",
+      "targetWorkId": "war-lebanon-1996",
+      "kind": "cited_by",
+      "weight": 0.78423668407411
+    },
+    {
+      "sourceExternalId": "W2167652925",
+      "targetWorkId": "war-lebanon-1996",
+      "kind": "cited_by",
+      "weight": 0.7695835140411986
+    },
+    {
+      "sourceExternalId": "W1984065858",
+      "targetWorkId": "war-lebanon-1996",
+      "kind": "cited_by",
+      "weight": 0.768667939596829
+    },
+    {
+      "sourceExternalId": "W1994589492",
+      "targetWorkId": "war-lebanon-1996",
+      "kind": "cited_by",
+      "weight": 0.7551593636130629
+    },
+    {
+      "sourceExternalId": "W2125865087",
+      "targetWorkId": "war-lebanon-1996",
+      "kind": "cited_by",
+      "weight": 0.7241042285756951
+    },
+    {
+      "sourceExternalId": "W1996656518",
+      "targetWorkId": "poverty-health-1997",
+      "kind": "cited_by",
+      "weight": 0.8069915515007116
+    },
+    {
+      "sourceExternalId": "W2101374995",
+      "targetWorkId": "poverty-health-1997",
+      "kind": "cited_by",
+      "weight": 0.7558644959660992
+    },
+    {
+      "sourceExternalId": "W1975522492",
+      "targetWorkId": "poverty-health-1997",
+      "kind": "cited_by",
+      "weight": 0.7457262088394667
+    },
+    {
+      "sourceExternalId": "W1049068570",
+      "targetWorkId": "poverty-health-1997",
+      "kind": "cited_by",
+      "weight": 0.7135561153733359
+    },
+    {
+      "sourceExternalId": "W2046964286",
+      "targetWorkId": "poverty-health-1997",
+      "kind": "cited_by",
+      "weight": 0.7060835010567068
+    },
+    {
+      "sourceExternalId": "W2033448635",
+      "targetWorkId": "poverty-health-1997",
+      "kind": "cited_by",
+      "weight": 0.7047450978203631
+    },
+    {
+      "sourceWorkId": "poverty-health-1997",
+      "targetExternalId": "W2254735081",
+      "kind": "cites",
+      "weight": 0.85
+    },
+    {
+      "sourceWorkId": "poverty-health-1997",
+      "targetExternalId": "W3000074734",
+      "kind": "cites",
+      "weight": 0.799768494962179
+    },
+    {
+      "sourceWorkId": "poverty-health-1997",
+      "targetExternalId": "W1986762259",
+      "kind": "cites",
+      "weight": 0.7044907729421859
+    },
+    {
+      "sourceWorkId": "poverty-health-1997",
+      "targetExternalId": "W1601136252",
+      "kind": "cites",
+      "weight": 0.6956346353836134
+    },
+    {
+      "sourceExternalId": "W2147920244",
+      "targetWorkId": "neighborhood-poverty-i-1997",
+      "kind": "cited_by",
+      "weight": 0.8167427432817513
+    },
+    {
+      "sourceExternalId": "W1979739280",
+      "targetWorkId": "neighborhood-poverty-i-1997",
+      "kind": "cited_by",
+      "weight": 0.772628918880703
+    },
+    {
+      "sourceExternalId": "W2144875296",
+      "targetWorkId": "neighborhood-poverty-i-1997",
+      "kind": "cited_by",
+      "weight": 0.7439628331671897
+    },
+    {
+      "sourceExternalId": "W1965016332",
+      "targetWorkId": "neighborhood-poverty-i-1997",
+      "kind": "cited_by",
+      "weight": 0.7285724736462007
+    },
+    {
+      "sourceExternalId": "W2047023442",
+      "targetWorkId": "neighborhood-poverty-i-1997",
+      "kind": "cited_by",
+      "weight": 0.6990179072101256
+    },
+    {
+      "sourceExternalId": "W2129227869",
+      "targetWorkId": "neighborhood-poverty-i-1997",
+      "kind": "cited_by",
+      "weight": 0.6780976763623097
+    },
+    {
+      "sourceExternalId": "W4211081781",
+      "targetWorkId": "delay-gratification-2000",
+      "kind": "cited_by",
+      "weight": 0.9
+    },
+    {
+      "sourceExternalId": "W2091251508",
+      "targetWorkId": "delay-gratification-2000",
+      "kind": "cited_by",
+      "weight": 0.8150252369281299
+    },
+    {
+      "sourceExternalId": "W2561241530",
+      "targetWorkId": "delay-gratification-2000",
+      "kind": "cited_by",
+      "weight": 0.7676866755820153
+    },
+    {
+      "sourceExternalId": "W2098156195",
+      "targetWorkId": "delay-gratification-2000",
+      "kind": "cited_by",
+      "weight": 0.7425380578735317
+    },
+    {
+      "sourceExternalId": "W2131467366",
+      "targetWorkId": "delay-gratification-2000",
+      "kind": "cited_by",
+      "weight": 0.7417776140681889
+    },
+    {
+      "sourceExternalId": "W1608468198",
+      "targetWorkId": "delay-gratification-2000",
+      "kind": "cited_by",
+      "weight": 0.7334818089221999
+    },
+    {
+      "sourceWorkId": "delay-gratification-2000",
+      "targetExternalId": "W1603542031",
+      "kind": "cites",
+      "weight": 0.7788234543901977
+    },
+    {
+      "sourceWorkId": "delay-gratification-2000",
+      "targetExternalId": "W4213235949",
+      "kind": "cites",
+      "weight": 0.770883690867791
+    },
+    {
+      "sourceWorkId": "delay-gratification-2000",
+      "targetExternalId": "W2098728364",
+      "kind": "cites",
+      "weight": 0.7511185526958053
+    },
+    {
+      "sourceWorkId": "delay-gratification-2000",
+      "targetExternalId": "W2004704125",
+      "kind": "cites",
+      "weight": 0.744729387683386
+    },
+    {
+      "sourceExternalId": "W1991394887",
+      "targetWorkId": "violence-middle-childhood-2003",
+      "kind": "cited_by",
+      "weight": 0.7211760582870934
+    },
+    {
+      "sourceExternalId": "W2588419425",
+      "targetWorkId": "violence-middle-childhood-2003",
+      "kind": "cited_by",
+      "weight": 0.701615255986201
+    },
+    {
+      "sourceExternalId": "W2887222263",
+      "targetWorkId": "violence-middle-childhood-2003",
+      "kind": "cited_by",
+      "weight": 0.6909574262651401
+    },
+    {
+      "sourceExternalId": "W2159599228",
+      "targetWorkId": "violence-middle-childhood-2003",
+      "kind": "cited_by",
+      "weight": 0.6761760084828365
+    },
+    {
+      "sourceExternalId": "W2118999394",
+      "targetWorkId": "violence-middle-childhood-2003",
+      "kind": "cited_by",
+      "weight": 0.6572593054623572
+    },
+    {
+      "sourceExternalId": "W2103522096",
+      "targetWorkId": "violence-middle-childhood-2003",
+      "kind": "cited_by",
+      "weight": 0.6563529416076986
+    },
+    {
+      "sourceWorkId": "violence-middle-childhood-2003",
+      "targetExternalId": "W2324392187",
+      "kind": "cites",
+      "weight": 0.85
+    },
+    {
+      "sourceWorkId": "violence-middle-childhood-2003",
+      "targetExternalId": "W2105630660",
+      "kind": "cites",
+      "weight": 0.8358383423041884
+    },
+    {
+      "sourceWorkId": "violence-middle-childhood-2003",
+      "targetExternalId": "W1542722502",
+      "kind": "cites",
+      "weight": 0.8210482574538638
+    },
+    {
+      "sourceWorkId": "violence-middle-childhood-2003",
+      "targetExternalId": "W2784322274",
+      "kind": "cites",
+      "weight": 0.7306460861923458
+    },
+    {
+      "sourceExternalId": "W2152876172",
+      "targetWorkId": "sept11-context-2004",
+      "kind": "cited_by",
+      "weight": 0.741701161243765
+    },
+    {
+      "sourceExternalId": "W1810185139",
+      "targetWorkId": "sept11-context-2004",
+      "kind": "cited_by",
+      "weight": 0.7040052846639442
+    },
+    {
+      "sourceExternalId": "W2056023114",
+      "targetWorkId": "sept11-context-2004",
+      "kind": "cited_by",
+      "weight": 0.6659897106069572
+    },
+    {
+      "sourceExternalId": "W2162370558",
+      "targetWorkId": "sept11-context-2004",
+      "kind": "cited_by",
+      "weight": 0.608512329959225
+    },
+    {
+      "sourceExternalId": "W315748477",
+      "targetWorkId": "sept11-context-2004",
+      "kind": "cited_by",
+      "weight": 0.6080909111125425
+    },
+    {
+      "sourceExternalId": "W1971186513",
+      "targetWorkId": "sept11-context-2004",
+      "kind": "cited_by",
+      "weight": 0.5996194558472099
+    },
+    {
+      "sourceWorkId": "sept11-context-2004",
+      "targetExternalId": "W2071666535",
+      "kind": "cites",
+      "weight": 0.85
+    },
+    {
+      "sourceWorkId": "sept11-context-2004",
+      "targetExternalId": "W2151297547",
+      "kind": "cites",
+      "weight": 0.7473282811454842
+    },
+    {
+      "sourceWorkId": "sept11-context-2004",
+      "targetExternalId": "W1991101715",
+      "kind": "cites",
+      "weight": 0.7040129437530973
+    },
+    {
+      "sourceWorkId": "sept11-context-2004",
+      "targetExternalId": "W643617646",
+      "kind": "cites",
+      "weight": 0.6828823680406553
+    },
+    {
+      "sourceExternalId": "W1988075665",
+      "targetWorkId": "income-not-enough-2007",
+      "kind": "cited_by",
+      "weight": 0.7977011024351426
+    },
+    {
+      "sourceExternalId": "W4230616807",
+      "targetWorkId": "income-not-enough-2007",
+      "kind": "cited_by",
+      "weight": 0.7725258562332862
+    },
+    {
+      "sourceExternalId": "W1975522492",
+      "targetWorkId": "income-not-enough-2007",
+      "kind": "cited_by",
+      "weight": 0.7457262088394667
+    },
+    {
+      "sourceExternalId": "W1710666949",
+      "targetWorkId": "income-not-enough-2007",
+      "kind": "cited_by",
+      "weight": 0.6980880558947924
+    },
+    {
+      "sourceExternalId": "W1767701238",
+      "targetWorkId": "income-not-enough-2007",
+      "kind": "cited_by",
+      "weight": 0.6963312851827443
+    },
+    {
+      "sourceExternalId": "W1565517723",
+      "targetWorkId": "income-not-enough-2007",
+      "kind": "cited_by",
+      "weight": 0.6924078019456723
+    },
+    {
+      "sourceWorkId": "income-not-enough-2007",
+      "targetExternalId": "W2071666535",
+      "kind": "cites",
+      "weight": 0.85
+    },
+    {
+      "sourceWorkId": "income-not-enough-2007",
+      "targetExternalId": "W1484864026",
+      "kind": "cites",
+      "weight": 0.85
+    },
+    {
+      "sourceWorkId": "income-not-enough-2007",
+      "targetExternalId": "W1971440513",
+      "kind": "cites",
+      "weight": 0.85
+    },
+    {
+      "sourceWorkId": "income-not-enough-2007",
+      "targetExternalId": "W2112778345",
+      "kind": "cites",
+      "weight": 0.85
+    },
+    {
+      "sourceExternalId": "W2100958095",
+      "targetWorkId": "two-year-impacts-2011",
+      "kind": "cited_by",
+      "weight": 0.7494156379365182
+    },
+    {
+      "sourceExternalId": "W1975522492",
+      "targetWorkId": "two-year-impacts-2011",
+      "kind": "cited_by",
+      "weight": 0.7457262088394667
+    },
+    {
+      "sourceExternalId": "W2273807080",
+      "targetWorkId": "two-year-impacts-2011",
+      "kind": "cited_by",
+      "weight": 0.7048677221698092
+    },
+    {
+      "sourceExternalId": "W2257040726",
+      "targetWorkId": "two-year-impacts-2011",
+      "kind": "cited_by",
+      "weight": 0.7000672250690558
+    },
+    {
+      "sourceExternalId": "W2740187414",
+      "targetWorkId": "two-year-impacts-2011",
+      "kind": "cited_by",
+      "weight": 0.694673844861116
+    },
+    {
+      "sourceExternalId": "W2887222263",
+      "targetWorkId": "two-year-impacts-2011",
+      "kind": "cited_by",
+      "weight": 0.6909574262651401
+    },
+    {
+      "sourceWorkId": "two-year-impacts-2011",
+      "targetExternalId": "W2128689084",
+      "kind": "cites",
+      "weight": 0.8063710368715957
+    },
+    {
+      "sourceWorkId": "two-year-impacts-2011",
+      "targetExternalId": "W1592263067",
+      "kind": "cites",
+      "weight": 0.7943968892285349
+    },
+    {
+      "sourceWorkId": "two-year-impacts-2011",
+      "targetExternalId": "W2135731612",
+      "kind": "cites",
+      "weight": 0.7757134896648179
+    },
+    {
+      "sourceWorkId": "two-year-impacts-2011",
+      "targetExternalId": "W1731306270",
+      "kind": "cites",
+      "weight": 0.7625882474580983
+    },
+    {
+      "sourceExternalId": "W2897623369",
+      "targetWorkId": "poverty-mental-health-2012",
+      "kind": "cited_by",
+      "weight": 0.8335217901584917
+    },
+    {
+      "sourceExternalId": "W2034122200",
+      "targetWorkId": "poverty-mental-health-2012",
+      "kind": "cited_by",
+      "weight": 0.7906678198292145
+    },
+    {
+      "sourceExternalId": "W2792728788",
+      "targetWorkId": "poverty-mental-health-2012",
+      "kind": "cited_by",
+      "weight": 0.7453621047497341
+    },
+    {
+      "sourceExternalId": "W2529794099",
+      "targetWorkId": "poverty-mental-health-2012",
+      "kind": "cited_by",
+      "weight": 0.7314154417391825
+    },
+    {
+      "sourceExternalId": "W2128839620",
+      "targetWorkId": "poverty-mental-health-2012",
+      "kind": "cited_by",
+      "weight": 0.7213747191481199
+    },
+    {
+      "sourceExternalId": "W2134744704",
+      "targetWorkId": "poverty-mental-health-2012",
+      "kind": "cited_by",
+      "weight": 0.7169881290946927
+    },
+    {
+      "sourceWorkId": "poverty-mental-health-2012",
+      "targetExternalId": "W2157207849",
+      "kind": "cites",
+      "weight": 0.85
+    },
+    {
+      "sourceWorkId": "poverty-mental-health-2012",
+      "targetExternalId": "W2128689084",
+      "kind": "cites",
+      "weight": 0.8063710368715957
+    },
+    {
+      "sourceWorkId": "poverty-mental-health-2012",
+      "targetExternalId": "W2071937436",
+      "kind": "cites",
+      "weight": 0.7488731547527439
+    },
+    {
+      "sourceWorkId": "poverty-mental-health-2012",
+      "targetExternalId": "W2138630136",
+      "kind": "cites",
+      "weight": 0.7319658955177237
+    },
+    {
+      "sourceExternalId": "W2534594311",
+      "targetWorkId": "cash-transfer-2016",
+      "kind": "cited_by",
+      "weight": 0.5405770284842865
+    },
+    {
+      "sourceExternalId": "W2885380994",
+      "targetWorkId": "cash-transfer-2016",
+      "kind": "cited_by",
+      "weight": 0.5343198493576283
+    },
+    {
+      "sourceExternalId": "W2909125864",
+      "targetWorkId": "cash-transfer-2016",
+      "kind": "cited_by",
+      "weight": 0.4822763103320591
+    },
+    {
+      "sourceExternalId": "W3130682114",
+      "targetWorkId": "cash-transfer-2016",
+      "kind": "cited_by",
+      "weight": 0.44843802350808903
+    },
+    {
+      "sourceExternalId": "W2582567497",
+      "targetWorkId": "cash-transfer-2016",
+      "kind": "cited_by",
+      "weight": 0.4341853992195166
+    },
+    {
+      "sourceExternalId": "W4385416403",
+      "targetWorkId": "cash-transfer-2016",
+      "kind": "cited_by",
+      "weight": 0.42148080584808933
+    },
+    {
+      "sourceWorkId": "cash-transfer-2016",
+      "targetExternalId": "W1562208008",
+      "kind": "cites",
+      "weight": 0.85
+    },
+    {
+      "sourceWorkId": "cash-transfer-2016",
+      "targetExternalId": "W4242883546",
+      "kind": "cites",
+      "weight": 0.85
+    },
+    {
+      "sourceWorkId": "cash-transfer-2016",
+      "targetExternalId": "W2141846678",
+      "kind": "cites",
+      "weight": 0.85
+    },
+    {
+      "sourceWorkId": "cash-transfer-2016",
+      "targetExternalId": "W4293586167",
+      "kind": "cites",
+      "weight": 0.85
+    },
+    {
+      "sourceExternalId": "W2921807763",
+      "targetWorkId": "change-process-drc-2017",
+      "kind": "cited_by",
+      "weight": 0.5906471087710923
+    },
+    {
+      "sourceExternalId": "W3046831237",
+      "targetWorkId": "change-process-drc-2017",
+      "kind": "cited_by",
+      "weight": 0.5275179083975363
+    },
+    {
+      "sourceExternalId": "W2944452893",
+      "targetWorkId": "change-process-drc-2017",
+      "kind": "cited_by",
+      "weight": 0.4843610473910258
+    },
+    {
+      "sourceExternalId": "W3157512097",
+      "targetWorkId": "change-process-drc-2017",
+      "kind": "cited_by",
+      "weight": 0.4779322479830496
+    },
+    {
+      "sourceExternalId": "W4200185689",
+      "targetWorkId": "change-process-drc-2017",
+      "kind": "cited_by",
+      "weight": 0.46588182584953924
+    },
+    {
+      "sourceExternalId": "W4224279514",
+      "targetWorkId": "change-process-drc-2017",
+      "kind": "cited_by",
+      "weight": 0.45764547754861773
+    },
+    {
+      "sourceWorkId": "change-process-drc-2017",
+      "targetExternalId": "W2025802167",
+      "kind": "cites",
+      "weight": 0.8466098689055348
+    },
+    {
+      "sourceWorkId": "change-process-drc-2017",
+      "targetExternalId": "W1976876708",
+      "kind": "cites",
+      "weight": 0.8360206725375694
+    },
+    {
+      "sourceWorkId": "change-process-drc-2017",
+      "targetExternalId": "W2104057213",
+      "kind": "cites",
+      "weight": 0.8256431360159098
+    },
+    {
+      "sourceWorkId": "change-process-drc-2017",
+      "targetExternalId": "W2068719957",
+      "kind": "cites",
+      "weight": 0.8134160722687487
+    },
+    {
+      "sourceExternalId": "W4205492202",
+      "targetWorkId": "healing-classroom-2017",
+      "kind": "cited_by",
+      "weight": 0.5559902489519926
+    },
+    {
+      "sourceExternalId": "W3027222713",
+      "targetWorkId": "healing-classroom-2017",
+      "kind": "cited_by",
+      "weight": 0.5058146007804833
+    },
+    {
+      "sourceExternalId": "W2944452893",
+      "targetWorkId": "healing-classroom-2017",
+      "kind": "cited_by",
+      "weight": 0.4843610473910258
+    },
+    {
+      "sourceExternalId": "W3180411645",
+      "targetWorkId": "healing-classroom-2017",
+      "kind": "cited_by",
+      "weight": 0.4451110104831667
+    },
+    {
+      "sourceExternalId": "W3120084887",
+      "targetWorkId": "healing-classroom-2017",
+      "kind": "cited_by",
+      "weight": 0.4341853992195166
+    },
+    {
+      "sourceExternalId": "W4200209135",
+      "targetWorkId": "healing-classroom-2017",
+      "kind": "cited_by",
+      "weight": 0.4063030464220828
+    },
+    {
+      "sourceWorkId": "healing-classroom-2017",
+      "targetExternalId": "W2128689084",
+      "kind": "cites",
+      "weight": 0.8063710368715957
+    },
+    {
+      "sourceWorkId": "healing-classroom-2017",
+      "targetExternalId": "W1501218279",
+      "kind": "cites",
+      "weight": 0.7768088243800799
+    },
+    {
+      "sourceWorkId": "healing-classroom-2017",
+      "targetExternalId": "W1528251861",
+      "kind": "cites",
+      "weight": 0.765067687341576
+    },
+    {
+      "sourceWorkId": "healing-classroom-2017",
+      "targetExternalId": "W4293410603",
+      "kind": "cites",
+      "weight": 0.7303184944623493
+    },
+    {
+      "sourceExternalId": "W4200185689",
+      "targetWorkId": "post-migration-risks-2020",
+      "kind": "cited_by",
+      "weight": 0.46588182584953924
+    },
+    {
+      "sourceExternalId": "W3120084887",
+      "targetWorkId": "post-migration-risks-2020",
+      "kind": "cited_by",
+      "weight": 0.4341853992195166
+    },
+    {
+      "sourceExternalId": "W4224065780",
+      "targetWorkId": "post-migration-risks-2020",
+      "kind": "cited_by",
+      "weight": 0.4259490509185951
+    },
+    {
+      "sourceExternalId": "W4220774188",
+      "targetWorkId": "post-migration-risks-2020",
+      "kind": "cited_by",
+      "weight": 0.3942526242885725
+    },
+    {
+      "sourceExternalId": "W4295197992",
+      "targetWorkId": "post-migration-risks-2020",
+      "kind": "cited_by",
+      "weight": 0.3874506833284805
+    },
+    {
+      "sourceExternalId": "W4312137406",
+      "targetWorkId": "post-migration-risks-2020",
+      "kind": "cited_by",
+      "weight": 0.38
+    },
+    {
+      "sourceWorkId": "post-migration-risks-2020",
+      "targetExternalId": "W2071666535",
+      "kind": "cites",
+      "weight": 0.85
+    },
+    {
+      "sourceWorkId": "post-migration-risks-2020",
+      "targetExternalId": "W2085876742",
+      "kind": "cites",
+      "weight": 0.8313832464721733
+    },
+    {
+      "sourceWorkId": "post-migration-risks-2020",
+      "targetExternalId": "W2118919126",
+      "kind": "cites",
+      "weight": 0.8133778652423806
+    },
+    {
+      "sourceWorkId": "post-migration-risks-2020",
+      "targetExternalId": "W2128689084",
+      "kind": "cites",
+      "weight": 0.8063710368715957
+    },
+    {
+      "sourceExternalId": "W4224279514",
+      "targetWorkId": "science-for-action-2021",
+      "kind": "cited_by",
+      "weight": 0.45764547754861773
+    },
+    {
+      "sourceExternalId": "W4323316099",
+      "targetWorkId": "science-for-action-2021",
+      "kind": "cited_by",
+      "weight": 0.41169642663002265
+    },
+    {
+      "sourceExternalId": "W4396957523",
+      "targetWorkId": "science-for-action-2021",
+      "kind": "cited_by",
+      "weight": 0.3874506833284805
+    },
+    {
+      "sourceExternalId": "W4312137406",
+      "targetWorkId": "science-for-action-2021",
+      "kind": "cited_by",
+      "weight": 0.38
+    },
+    {
+      "sourceExternalId": "W4317911199",
+      "targetWorkId": "science-for-action-2021",
+      "kind": "cited_by",
+      "weight": 0.3717636516990785
+    },
+    {
+      "sourceExternalId": "W4285077412",
+      "targetWorkId": "science-for-action-2021",
+      "kind": "cited_by",
+      "weight": 0.36255619765854985
+    },
+    {
+      "sourceWorkId": "science-for-action-2021",
+      "targetExternalId": "W2025802167",
+      "kind": "cites",
+      "weight": 0.8466098689055348
+    },
+    {
+      "sourceWorkId": "science-for-action-2021",
+      "targetExternalId": "W2085876742",
+      "kind": "cites",
+      "weight": 0.8313832464721733
+    },
+    {
+      "sourceWorkId": "science-for-action-2021",
+      "targetExternalId": "W2128689084",
+      "kind": "cites",
+      "weight": 0.8063710368715957
+    },
+    {
+      "sourceWorkId": "science-for-action-2021",
+      "targetExternalId": "W809551758",
+      "kind": "cites",
+      "weight": 0.7579945542325028
+    },
+    {
+      "sourceExternalId": "W4398178291",
+      "targetWorkId": "sel-lebanon-2023",
+      "kind": "cited_by",
+      "weight": 0.3942526242885725
+    },
+    {
+      "sourceExternalId": "W4317911199",
+      "targetWorkId": "sel-lebanon-2023",
+      "kind": "cited_by",
+      "weight": 0.3717636516990785
+    },
+    {
+      "sourceExternalId": "W4391822628",
+      "targetWorkId": "sel-lebanon-2023",
+      "kind": "cited_by",
+      "weight": 0.36255619765854985
+    },
+    {
+      "sourceExternalId": "W4400315051",
+      "targetWorkId": "sel-lebanon-2023",
+      "kind": "cited_by",
+      "weight": 0.3521176472025662
+    },
+    {
+      "sourceExternalId": "W4406295275",
+      "targetWorkId": "sel-lebanon-2023",
+      "kind": "cited_by",
+      "weight": 0.30837079843903326
+    },
+    {
+      "sourceExternalId": "W4414395969",
+      "targetWorkId": "sel-lebanon-2023",
+      "kind": "cited_by",
+      "weight": 0.28588182584953925
+    },
+    {
+      "sourceExternalId": "W4391278160",
+      "targetWorkId": "sel-dosage-2023",
+      "kind": "cited_by",
+      "weight": 0.518753362095586
+    },
+    {
+      "sourceExternalId": "W4401592724",
+      "targetWorkId": "sel-dosage-2023",
+      "kind": "cited_by",
+      "weight": 0.34006722506905585
+    },
+    {
+      "sourceExternalId": "W4387977845",
+      "targetWorkId": "sel-dosage-2023",
+      "kind": "cited_by",
+      "weight": 0.28588182584953925
+    },
+    {
+      "sourceExternalId": "W4410015837",
+      "targetWorkId": "sel-dosage-2023",
+      "kind": "cited_by",
+      "weight": 0.28588182584953925
+    },
+    {
+      "sourceExternalId": "W4389634012",
+      "targetWorkId": "sel-dosage-2023",
+      "kind": "cited_by",
+      "weight": 0.2541853992195166
+    },
+    {
+      "sourceExternalId": "W4411977535",
+      "targetWorkId": "sel-dosage-2023",
+      "kind": "cited_by",
+      "weight": 0.2541853992195166
+    },
+    {
+      "sourceWorkId": "sel-dosage-2023",
+      "targetExternalId": "W2128689084",
+      "kind": "cites",
+      "weight": 0.8063710368715957
+    },
+    {
+      "sourceWorkId": "sel-dosage-2023",
+      "targetExternalId": "W2163287225",
+      "kind": "cites",
+      "weight": 0.7750664790542741
+    },
+    {
+      "sourceWorkId": "sel-dosage-2023",
+      "targetExternalId": "W2167997731",
+      "kind": "cites",
+      "weight": 0.7243893353950899
+    },
+    {
+      "sourceWorkId": "sel-dosage-2023",
+      "targetExternalId": "W2064258062",
+      "kind": "cites",
+      "weight": 0.7121809530737271
+    }
+  ]
+}

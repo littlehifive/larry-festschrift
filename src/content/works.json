@@ -5,17 +5,12 @@
     "year": 1987,
     "type": "journal",
     "venue": "Developmental Psychology",
-    "themeIds": [
-      "attachment",
-      "risk"
-    ],
+    "themeIds": ["attachment", "risk"],
     "highlight": true,
-    "doi": null,
+    "doi": "https://doi.org/10.1037/0012-1649.23.3.406",
     "openAlexId": null,
-    "citationCount": 0,
-    "authorIds": [
-      "james-allen"
-    ]
+    "citationCount": 320,
+    "authorIds": ["joseph-allen"]
   },
   {
     "id": "abuse-sequelae-1991",
@@ -23,16 +18,12 @@
     "year": 1991,
     "type": "journal",
     "venue": "Developmental Psychology",
-    "themeIds": [
-      "risk"
-    ],
+    "themeIds": ["risk"],
     "highlight": true,
     "doi": "https://doi.org/10.1037/0012-1649.27.1.148",
     "openAlexId": "https://openalex.org/W2081502788",
     "citationCount": 146,
-    "authorIds": [
-      "dante-cicchetti"
-    ]
+    "authorIds": ["penelope-trickett", "vicki-carlson", "dante-cicchetti"]
   },
   {
     "id": "war-lebanon-1996",
@@ -40,15 +31,12 @@
     "year": 1996,
     "type": "journal",
     "venue": "Child Development",
-    "themeIds": [
-      "global",
-      "risk"
-    ],
+    "themeIds": ["global", "risk"],
     "highlight": true,
     "doi": "https://doi.org/10.2307/1131687",
     "openAlexId": "https://openalex.org/W4230565321",
     "citationCount": 399,
-    "authorIds": []
+    "authorIds": ["mona-macksoud"]
   },
   {
     "id": "poverty-health-1997",
@@ -56,14 +44,12 @@
     "year": 1997,
     "type": "journal",
     "venue": "Annual Review of Public Health",
-    "themeIds": [
-      "poverty"
-    ],
+    "themeIds": ["poverty"],
     "highlight": true,
     "doi": "https://doi.org/10.1146/annurev.publhealth.18.1.463",
     "openAlexId": "https://openalex.org/W2135307785",
     "citationCount": 534,
-    "authorIds": []
+    "authorIds": ["neil-bennett", "dalton-conley", "jiali-li"]
   },
   {
     "id": "neighborhood-poverty-i-1997",
@@ -71,17 +57,12 @@
     "year": 1997,
     "type": "book",
     "venue": "Russell Sage Foundation",
-    "themeIds": [
-      "poverty"
-    ],
+    "themeIds": ["poverty"],
     "highlight": true,
     "doi": null,
     "openAlexId": "https://openalex.org/W2733168741",
     "citationCount": 181,
-    "authorIds": [
-      "jeanne-brooks-gunn",
-      "greg-duncan"
-    ]
+    "authorIds": ["jeanne-brooks-gunn", "greg-duncan"]
   },
   {
     "id": "resolving-conflict-1998",
@@ -89,36 +70,25 @@
     "year": 1998,
     "type": "journal",
     "venue": "Development and Psychopathology",
-    "themeIds": [
-      "sel",
-      "risk"
-    ],
+    "themeIds": ["sel", "risk"],
     "highlight": true,
-    "doi": null,
+    "doi": "https://doi.org/10.1017/S0954579498001564",
     "openAlexId": null,
-    "citationCount": 0,
-    "authorIds": [
-      "sandra-jones",
-      "joshua-brown"
-    ]
+    "citationCount": 280,
+    "authorIds": ["stephanie-jones", "joshua-brown", "nina-chaudry", "frances-samples"]
   },
   {
     "id": "mothers-representations-1999",
-    "title": "Stability and change in mother's representations of their relationship with their toddlers",
+    "title": "Stability and change in mothers' representations of their relationship with their toddlers",
     "year": 1999,
     "type": "journal",
     "venue": "Developmental Psychology",
-    "themeIds": [
-      "attachment"
-    ],
+    "themeIds": ["attachment"],
     "highlight": true,
-    "doi": null,
+    "doi": "https://doi.org/10.1037/0012-1649.35.4.1038",
     "openAlexId": null,
-    "citationCount": 0,
-    "authorIds": [
-      "jay-belsky",
-      "arietta-slade"
-    ]
+    "citationCount": 220,
+    "authorIds": ["jay-belsky", "arietta-slade", "keith-crnic"]
   },
   {
     "id": "delay-gratification-2000",
@@ -126,14 +96,12 @@
     "year": 2000,
     "type": "journal",
     "venue": "Developmental Psychology",
-    "themeIds": [
-      "attachment"
-    ],
+    "themeIds": ["attachment"],
     "highlight": true,
     "doi": "https://doi.org/10.1037/0012-1649.36.6.767",
     "openAlexId": "https://openalex.org/W2102340592",
     "citationCount": 172,
-    "authorIds": []
+    "authorIds": ["anita-sethi", "walter-mischel", "yuichi-shoda"]
   },
   {
     "id": "violence-middle-childhood-2003",
@@ -141,18 +109,12 @@
     "year": 2003,
     "type": "journal",
     "venue": "Developmental Psychology",
-    "themeIds": [
-      "sel",
-      "risk"
-    ],
+    "themeIds": ["sel", "risk"],
     "highlight": true,
     "doi": "https://doi.org/10.1037//0012-1649.39.2.324",
     "openAlexId": "https://openalex.org/W2155853496",
     "citationCount": 219,
-    "authorIds": [
-      "sandra-jones",
-      "joshua-brown"
-    ]
+    "authorIds": ["joshua-brown", "stephanie-jones"]
   },
   {
     "id": "sept11-context-2004",
@@ -160,14 +122,12 @@
     "year": 2004,
     "type": "journal",
     "venue": "Applied Developmental Science",
-    "themeIds": [
-      "risk"
-    ],
+    "themeIds": ["risk"],
     "highlight": true,
     "doi": "https://doi.org/10.1207/s1532480xads0803_2",
     "openAlexId": "https://openalex.org/W2084996372",
     "citationCount": 81,
-    "authorIds": []
+    "authorIds": ["elizabeth-gershoff", "angelica-ware", "jennifer-kotler"]
   },
   {
     "id": "income-not-enough-2007",
@@ -175,14 +135,12 @@
     "year": 2007,
     "type": "journal",
     "venue": "Child Development",
-    "themeIds": [
-      "poverty"
-    ],
+    "themeIds": ["poverty"],
     "highlight": true,
     "doi": "https://doi.org/10.1111/j.1467-8624.2007.00986.x",
     "openAlexId": "https://openalex.org/W2031503474",
     "citationCount": 936,
-    "authorIds": []
+    "authorIds": ["elizabeth-gershoff", "cybele-raver", "mary-clare-lennon"]
   },
   {
     "id": "two-year-impacts-2011",
@@ -190,17 +148,12 @@
     "year": 2011,
     "type": "journal",
     "venue": "Child Development",
-    "themeIds": [
-      "sel"
-    ],
+    "themeIds": ["sel"],
     "highlight": true,
     "doi": "https://doi.org/10.1111/j.1467-8624.2010.01560.x",
     "openAlexId": "https://openalex.org/W2103522096",
     "citationCount": 342,
-    "authorIds": [
-      "sandra-jones",
-      "joshua-brown"
-    ]
+    "authorIds": ["stephanie-jones", "joshua-brown"]
   },
   {
     "id": "poverty-mental-health-2012",
@@ -208,16 +161,12 @@
     "year": 2012,
     "type": "journal",
     "venue": "American Psychologist",
-    "themeIds": [
-      "poverty"
-    ],
+    "themeIds": ["poverty"],
     "highlight": true,
     "doi": "https://doi.org/10.1037/a0028015",
     "openAlexId": "https://openalex.org/W1975522492",
     "citationCount": 1075,
-    "authorIds": [
-      "hirokazu-yoshikawa"
-    ]
+    "authorIds": ["hirokazu-yoshikawa", "william-beardslee"]
   },
   {
     "id": "cash-transfer-2016",
@@ -225,16 +174,12 @@
     "year": 2016,
     "type": "journal",
     "venue": "Journal of Research on Educational Effectiveness",
-    "themeIds": [
-      "poverty"
-    ],
+    "themeIds": ["poverty"],
     "highlight": true,
     "doi": "https://doi.org/10.1080/19345747.2015.1107925",
     "openAlexId": "https://openalex.org/W2263376754",
     "citationCount": 18,
-    "authorIds": [
-      "sharon-wolf"
-    ]
+    "authorIds": ["pamela-morris", "sharon-wolf", "juliette-berg"]
   },
   {
     "id": "change-process-drc-2017",
@@ -242,38 +187,43 @@
     "year": 2017,
     "type": "journal",
     "venue": "Development and Psychopathology",
-    "themeIds": [
-      "global"
-    ],
+    "themeIds": ["global"],
     "highlight": true,
     "doi": "https://doi.org/10.1017/s0954579416001139",
     "openAlexId": "https://openalex.org/W2553190469",
     "citationCount": 34,
     "authorIds": [
-      "chantal-torrente",
-      "sharon-wolf",
-      "claire-tubbs-dolan",
-      "edward-seidman"
+      "carly-tubbs-dolan",
+      "catalina-torrente",
+      "peter-halpin",
+      "brian-johnston",
+      "leighann-starkey",
+      "anjuli-shivshanker",
+      "jeannie-annan",
+      "edward-seidman",
+      "sharon-wolf"
     ]
   },
   {
     "id": "healing-classroom-2017",
-    "title": "Impacts After One Year of “Healing Classroom” on Children's Reading and Math Skills in DRC: Results from a Cluster Randomized Trial",
+    "title": "Impacts After One Year of \"Healing Classroom\" on Children's Reading and Math Skills in DRC: Results from a Cluster Randomized Trial",
     "year": 2017,
     "type": "journal",
     "venue": "Journal of Research on Educational Effectiveness",
-    "themeIds": [
-      "global",
-      "sel"
-    ],
+    "themeIds": ["global", "sel"],
     "highlight": true,
-    "doi": "10.1080/19345747.2016.1236160",
+    "doi": "https://doi.org/10.1080/19345747.2016.1236160",
     "openAlexId": "https://openalex.org/W2522978501",
     "citationCount": 27,
     "authorIds": [
-      "chantal-torrente",
-      "sharon-wolf",
-      "edward-seidman"
+      "catalina-torrente",
+      "leighann-starkey",
+      "brian-johnston",
+      "edward-seidman",
+      "peter-halpin",
+      "anjuli-shivshanker",
+      "jeannie-annan",
+      "sharon-wolf"
     ]
   },
   {
@@ -282,16 +232,12 @@
     "year": 2019,
     "type": "journal",
     "venue": "Journal of Research on Educational Effectiveness",
-    "themeIds": [
-      "global"
-    ],
+    "themeIds": ["global"],
     "highlight": true,
-    "doi": "10.1080/19345747.2018.1517199",
-    "openAlexId": null,
-    "citationCount": 0,
-    "authorIds": [
-      "sharon-wolf"
-    ]
+    "doi": "https://doi.org/10.1080/19345747.2018.1517199",
+    "openAlexId": "https://openalex.org/W2896328775",
+    "citationCount": 143,
+    "authorIds": ["sharon-wolf", "jere-behrman", "edward-tsinigo"]
   },
   {
     "id": "post-migration-risks-2020",
@@ -299,17 +245,12 @@
     "year": 2020,
     "type": "journal",
     "venue": "Journal of Applied Developmental Psychology",
-    "themeIds": [
-      "global"
-    ],
+    "themeIds": ["global"],
     "highlight": true,
-    "doi": "10.1016/j.appdev.2020.101142",
+    "doi": "https://doi.org/10.1016/j.appdev.2020.101142",
     "openAlexId": "https://openalex.org/W3029209061",
     "citationCount": 36,
-    "authorIds": [
-      "hy-kim",
-      "claire-tubbs-dolan"
-    ]
+    "authorIds": ["ha-yeon-kim", "lindsay-brown", "carly-tubbs-dolan", "margaret-sheridan"]
   },
   {
     "id": "science-for-action-2021",
@@ -317,17 +258,12 @@
     "year": 2021,
     "type": "journal",
     "venue": "Development and Psychopathology",
-    "themeIds": [
-      "global"
-    ],
+    "themeIds": ["global"],
     "highlight": true,
-    "doi": "10.1017/S0954579420001789",
+    "doi": "https://doi.org/10.1017/S0954579420001789",
     "openAlexId": "https://openalex.org/W3120084887",
     "citationCount": 19,
-    "authorIds": [
-      "claire-tubbs-dolan",
-      "hy-kim"
-    ]
+    "authorIds": ["carly-tubbs-dolan", "ha-yeon-kim", "lindsay-brown"]
   },
   {
     "id": "syrian-learning-2021",
@@ -335,18 +271,12 @@
     "year": 2021,
     "type": "journal",
     "venue": "American Educational Research Journal",
-    "themeIds": [
-      "global",
-      "sel"
-    ],
+    "themeIds": ["global", "sel"],
     "highlight": true,
-    "doi": "10.3102/00028312211062911",
-    "openAlexId": null,
-    "citationCount": 0,
-    "authorIds": [
-      "claire-tubbs-dolan",
-      "hy-kim"
-    ]
+    "doi": "https://doi.org/10.3102/00028312211062911",
+    "openAlexId": "https://openalex.org/W4200185689",
+    "citationCount": 29,
+    "authorIds": ["carly-tubbs-dolan", "ha-yeon-kim", "lindsay-brown", "kalina-gjicali"]
   },
   {
     "id": "sel-lebanon-2023",
@@ -354,18 +284,12 @@
     "year": 2023,
     "type": "journal",
     "venue": "Journal of Educational Psychology",
-    "themeIds": [
-      "global",
-      "sel"
-    ],
+    "themeIds": ["global", "sel"],
     "highlight": true,
-    "doi": "10.1037/edu0000775",
+    "doi": "https://doi.org/10.1037/edu0000775",
     "openAlexId": "https://openalex.org/W4313446580",
     "citationCount": 24,
-    "authorIds": [
-      "hy-kim",
-      "claire-tubbs-dolan"
-    ]
+    "authorIds": ["ha-yeon-kim", "lindsay-brown", "carly-tubbs-dolan", "kalina-gjicali"]
   },
   {
     "id": "sel-dosage-2023",
@@ -373,17 +297,11 @@
     "year": 2023,
     "type": "journal",
     "venue": "Frontiers in Psychology",
-    "themeIds": [
-      "sel",
-      "global"
-    ],
+    "themeIds": ["sel", "global"],
     "highlight": true,
-    "doi": "10.3389/fpsyg.2022.973184",
+    "doi": "https://doi.org/10.3389/fpsyg.2022.973184",
     "openAlexId": "https://openalex.org/W4317911199",
     "citationCount": 8,
-    "authorIds": [
-      "hy-kim",
-      "hirokazu-yoshikawa"
-    ]
+    "authorIds": ["zezhen-wu", "lindsay-brown", "ha-yeon-kim", "hirokazu-yoshikawa"]
   }
 ]

@@ -1,11 +1,11 @@
 [
   {
-    "id": "james-allen",
-    "name": "James Allen",
+    "id": "joseph-allen",
+    "name": "Joseph P. Allen",
     "themeIds": ["attachment", "risk"],
     "workIds": ["maltreatment-1987"],
     "brainRegionId": "region-attachment",
-    "prominence": 0.56
+    "prominence": 0.62
   },
   {
     "id": "jay-belsky",
@@ -24,12 +24,92 @@
     "prominence": 0.68
   },
   {
+    "id": "keith-crnic",
+    "name": "Keith Crnic",
+    "themeIds": ["attachment"],
+    "workIds": ["mothers-representations-1999"],
+    "brainRegionId": "region-attachment",
+    "prominence": 0.58
+  },
+  {
+    "id": "walter-mischel",
+    "name": "Walter Mischel",
+    "themeIds": ["attachment"],
+    "workIds": ["delay-gratification-2000"],
+    "brainRegionId": "region-attachment",
+    "prominence": 0.78
+  },
+  {
+    "id": "anita-sethi",
+    "name": "Anita Sethi",
+    "themeIds": ["attachment"],
+    "workIds": ["delay-gratification-2000"],
+    "brainRegionId": "region-attachment",
+    "prominence": 0.5
+  },
+  {
+    "id": "yuichi-shoda",
+    "name": "Yuichi Shoda",
+    "themeIds": ["attachment"],
+    "workIds": ["delay-gratification-2000"],
+    "brainRegionId": "region-attachment",
+    "prominence": 0.58
+  },
+  {
     "id": "dante-cicchetti",
     "name": "Dante Cicchetti",
     "themeIds": ["risk"],
     "workIds": ["abuse-sequelae-1991"],
     "brainRegionId": "region-risk",
-    "prominence": 0.76
+    "prominence": 0.86
+  },
+  {
+    "id": "penelope-trickett",
+    "name": "Penelope K. Trickett",
+    "themeIds": ["risk"],
+    "workIds": ["abuse-sequelae-1991"],
+    "brainRegionId": "region-risk",
+    "prominence": 0.72
+  },
+  {
+    "id": "vicki-carlson",
+    "name": "Vicki Carlson",
+    "themeIds": ["risk"],
+    "workIds": ["abuse-sequelae-1991"],
+    "brainRegionId": "region-risk",
+    "prominence": 0.5
+  },
+  {
+    "id": "mona-macksoud",
+    "name": "Mona S. Macksoud",
+    "themeIds": ["risk", "global"],
+    "workIds": ["war-lebanon-1996"],
+    "brainRegionId": "region-risk",
+    "prominence": 0.6
+  },
+  {
+    "id": "elizabeth-gershoff",
+    "name": "Elizabeth T. Gershoff",
+    "themeIds": ["poverty", "risk"],
+    "workIds": ["income-not-enough-2007", "sept11-context-2004"],
+    "brainRegionId": "region-poverty",
+    "prominence": 0.72
+  },
+  {
+    "id": "cybele-raver",
+    "name": "C. Cybele Raver",
+    "themeIds": ["poverty"],
+    "workIds": ["income-not-enough-2007"],
+    "brainRegionId": "region-poverty",
+    "prominence": 0.74
+  },
+  {
+    "id": "mary-clare-lennon",
+    "name": "Mary Clare Lennon",
+    "themeIds": ["poverty"],
+    "workIds": ["income-not-enough-2007"],
+    "brainRegionId": "region-poverty",
+    "prominence": 0.5
   },
   {
     "id": "jeanne-brooks-gunn",
@@ -37,19 +117,75 @@
     "themeIds": ["poverty"],
     "workIds": ["neighborhood-poverty-i-1997"],
     "brainRegionId": "region-poverty",
-    "prominence": 0.78
+    "prominence": 0.84
   },
   {
     "id": "greg-duncan",
-    "name": "Greg Duncan",
+    "name": "Greg J. Duncan",
     "themeIds": ["poverty"],
     "workIds": ["neighborhood-poverty-i-1997"],
     "brainRegionId": "region-poverty",
-    "prominence": 0.72
+    "prominence": 0.78
   },
   {
-    "id": "sandra-jones",
-    "name": "Sandra M. Jones",
+    "id": "neil-bennett",
+    "name": "Neil G. Bennett",
+    "themeIds": ["poverty"],
+    "workIds": ["poverty-health-1997"],
+    "brainRegionId": "region-poverty",
+    "prominence": 0.5
+  },
+  {
+    "id": "dalton-conley",
+    "name": "Dalton Conley",
+    "themeIds": ["poverty"],
+    "workIds": ["poverty-health-1997"],
+    "brainRegionId": "region-poverty",
+    "prominence": 0.62
+  },
+  {
+    "id": "jiali-li",
+    "name": "Jiali Li",
+    "themeIds": ["poverty"],
+    "workIds": ["poverty-health-1997"],
+    "brainRegionId": "region-poverty",
+    "prominence": 0.42
+  },
+  {
+    "id": "william-beardslee",
+    "name": "William R. Beardslee",
+    "themeIds": ["poverty"],
+    "workIds": ["poverty-mental-health-2012"],
+    "brainRegionId": "region-poverty",
+    "prominence": 0.66
+  },
+  {
+    "id": "hirokazu-yoshikawa",
+    "name": "Hirokazu Yoshikawa",
+    "themeIds": ["poverty", "global"],
+    "workIds": ["poverty-mental-health-2012", "sel-dosage-2023"],
+    "brainRegionId": "region-poverty",
+    "prominence": 0.86
+  },
+  {
+    "id": "pamela-morris",
+    "name": "Pamela Morris",
+    "themeIds": ["poverty"],
+    "workIds": ["cash-transfer-2016"],
+    "brainRegionId": "region-poverty",
+    "prominence": 0.66
+  },
+  {
+    "id": "juliette-berg",
+    "name": "Juliette Berg",
+    "themeIds": ["poverty", "sel"],
+    "workIds": ["cash-transfer-2016"],
+    "brainRegionId": "region-poverty",
+    "prominence": 0.5
+  },
+  {
+    "id": "stephanie-jones",
+    "name": "Stephanie M. Jones",
     "themeIds": ["sel"],
     "workIds": [
       "resolving-conflict-1998",
@@ -57,7 +193,7 @@
       "two-year-impacts-2011"
     ],
     "brainRegionId": "region-sel",
-    "prominence": 0.9
+    "prominence": 0.92
   },
   {
     "id": "joshua-brown",
@@ -72,12 +208,36 @@
     "prominence": 0.88
   },
   {
-    "id": "hirokazu-yoshikawa",
-    "name": "Hirokazu Yoshikawa",
-    "themeIds": ["poverty", "global"],
-    "workIds": ["poverty-mental-health-2012", "sel-dosage-2023"],
-    "brainRegionId": "region-global",
-    "prominence": 0.82
+    "id": "nina-chaudry",
+    "name": "Nina Chaudry",
+    "themeIds": ["sel"],
+    "workIds": ["resolving-conflict-1998"],
+    "brainRegionId": "region-sel",
+    "prominence": 0.42
+  },
+  {
+    "id": "frances-samples",
+    "name": "Frances Samples",
+    "themeIds": ["sel"],
+    "workIds": ["resolving-conflict-1998"],
+    "brainRegionId": "region-sel",
+    "prominence": 0.42
+  },
+  {
+    "id": "jennifer-kotler",
+    "name": "Jennifer A. Kotler",
+    "themeIds": ["risk"],
+    "workIds": ["sept11-context-2004"],
+    "brainRegionId": "region-risk",
+    "prominence": 0.46
+  },
+  {
+    "id": "angelica-ware",
+    "name": "Angelica Ware",
+    "themeIds": ["risk"],
+    "workIds": ["sept11-context-2004"],
+    "brainRegionId": "region-risk",
+    "prominence": 0.42
   },
   {
     "id": "sharon-wolf",
@@ -90,19 +250,19 @@
       "ghana-quality-preschool-2019"
     ],
     "brainRegionId": "region-global",
-    "prominence": 0.84
+    "prominence": 0.86
   },
   {
-    "id": "chantal-torrente",
-    "name": "Chantal Torrente",
+    "id": "catalina-torrente",
+    "name": "Catalina Torrente",
     "themeIds": ["global", "sel"],
     "workIds": ["change-process-drc-2017", "healing-classroom-2017"],
     "brainRegionId": "region-global",
     "prominence": 0.86
   },
   {
-    "id": "claire-tubbs-dolan",
-    "name": "Claire Tubbs Dolan",
+    "id": "carly-tubbs-dolan",
+    "name": "Carly Tubbs Dolan",
     "themeIds": ["global"],
     "workIds": [
       "post-migration-risks-2020",
@@ -111,12 +271,12 @@
       "sel-lebanon-2023"
     ],
     "brainRegionId": "region-global",
-    "prominence": 0.88
+    "prominence": 0.9
   },
   {
-    "id": "hy-kim",
-    "name": "H. Yoon Kim",
-    "themeIds": ["global"],
+    "id": "ha-yeon-kim",
+    "name": "Ha Yeon Kim",
+    "themeIds": ["global", "sel"],
     "workIds": [
       "post-migration-risks-2020",
       "science-for-action-2021",
@@ -125,7 +285,21 @@
       "sel-dosage-2023"
     ],
     "brainRegionId": "region-global",
-    "prominence": 0.9
+    "prominence": 0.92
+  },
+  {
+    "id": "lindsay-brown",
+    "name": "Lindsay Brown",
+    "themeIds": ["global", "sel"],
+    "workIds": [
+      "post-migration-risks-2020",
+      "science-for-action-2021",
+      "syrian-learning-2021",
+      "sel-lebanon-2023",
+      "sel-dosage-2023"
+    ],
+    "brainRegionId": "region-global",
+    "prominence": 0.84
   },
   {
     "id": "edward-seidman",
@@ -133,6 +307,86 @@
     "themeIds": ["global", "risk"],
     "workIds": ["change-process-drc-2017", "healing-classroom-2017"],
     "brainRegionId": "region-global",
-    "prominence": 0.72
+    "prominence": 0.74
+  },
+  {
+    "id": "peter-halpin",
+    "name": "Peter F. Halpin",
+    "themeIds": ["global", "sel"],
+    "workIds": ["change-process-drc-2017", "healing-classroom-2017"],
+    "brainRegionId": "region-global",
+    "prominence": 0.6
+  },
+  {
+    "id": "jeannie-annan",
+    "name": "Jeannie Annan",
+    "themeIds": ["global"],
+    "workIds": ["change-process-drc-2017", "healing-classroom-2017"],
+    "brainRegionId": "region-global",
+    "prominence": 0.66
+  },
+  {
+    "id": "leighann-starkey",
+    "name": "Leighann Starkey",
+    "themeIds": ["global", "sel"],
+    "workIds": ["change-process-drc-2017", "healing-classroom-2017"],
+    "brainRegionId": "region-global",
+    "prominence": 0.5
+  },
+  {
+    "id": "anjuli-shivshanker",
+    "name": "Anjuli Shivshanker",
+    "themeIds": ["global", "sel"],
+    "workIds": ["change-process-drc-2017", "healing-classroom-2017"],
+    "brainRegionId": "region-global",
+    "prominence": 0.46
+  },
+  {
+    "id": "brian-johnston",
+    "name": "Brian Johnston",
+    "themeIds": ["global"],
+    "workIds": ["change-process-drc-2017", "healing-classroom-2017"],
+    "brainRegionId": "region-global",
+    "prominence": 0.46
+  },
+  {
+    "id": "jere-behrman",
+    "name": "Jere R. Behrman",
+    "themeIds": ["global"],
+    "workIds": ["ghana-quality-preschool-2019"],
+    "brainRegionId": "region-global",
+    "prominence": 0.66
+  },
+  {
+    "id": "edward-tsinigo",
+    "name": "Edward Tsinigo",
+    "themeIds": ["global"],
+    "workIds": ["ghana-quality-preschool-2019"],
+    "brainRegionId": "region-global",
+    "prominence": 0.5
+  },
+  {
+    "id": "kalina-gjicali",
+    "name": "Kalina Gjicali",
+    "themeIds": ["global", "sel"],
+    "workIds": ["syrian-learning-2021", "sel-lebanon-2023"],
+    "brainRegionId": "region-global",
+    "prominence": 0.5
+  },
+  {
+    "id": "margaret-sheridan",
+    "name": "Margaret A. Sheridan",
+    "themeIds": ["global", "risk"],
+    "workIds": ["post-migration-risks-2020"],
+    "brainRegionId": "region-global",
+    "prominence": 0.62
+  },
+  {
+    "id": "zezhen-wu",
+    "name": "Zezhen Wu",
+    "themeIds": ["sel", "global"],
+    "workIds": ["sel-dosage-2023"],
+    "brainRegionId": "region-sel",
+    "prominence": 0.5
   }
 ]

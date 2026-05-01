@@ -12,7 +12,15 @@
       "mothers-representations-1999",
       "delay-gratification-2000"
     ],
-    "collaboratorIds": ["james-allen", "jay-belsky", "arietta-slade"]
+    "collaboratorIds": [
+      "joseph-allen",
+      "jay-belsky",
+      "arietta-slade",
+      "keith-crnic",
+      "walter-mischel",
+      "anita-sethi",
+      "yuichi-shoda"
+    ]
   },
   {
     "id": "region-risk",
@@ -26,7 +34,15 @@
       "abuse-sequelae-1991",
       "sept11-context-2004"
     ],
-    "collaboratorIds": ["dante-cicchetti"]
+    "collaboratorIds": [
+      "dante-cicchetti",
+      "penelope-trickett",
+      "vicki-carlson",
+      "mona-macksoud",
+      "elizabeth-gershoff",
+      "jennifer-kotler",
+      "angelica-ware"
+    ]
   },
   {
     "id": "region-poverty",
@@ -46,8 +62,15 @@
     "collaboratorIds": [
       "jeanne-brooks-gunn",
       "greg-duncan",
+      "neil-bennett",
+      "dalton-conley",
+      "jiali-li",
+      "cybele-raver",
+      "mary-clare-lennon",
+      "william-beardslee",
       "hirokazu-yoshikawa",
-      "sharon-wolf"
+      "pamela-morris",
+      "juliette-berg"
     ]
   },
   {
@@ -64,7 +87,13 @@
       "two-year-impacts-2011",
       "sel-dosage-2023"
     ],
-    "collaboratorIds": ["sandra-jones", "joshua-brown"]
+    "collaboratorIds": [
+      "stephanie-jones",
+      "joshua-brown",
+      "nina-chaudry",
+      "frances-samples",
+      "zezhen-wu"
+    ]
   },
   {
     "id": "region-global",
@@ -85,12 +114,21 @@
       "sel-lebanon-2023"
     ],
     "collaboratorIds": [
-      "hirokazu-yoshikawa",
       "sharon-wolf",
-      "chantal-torrente",
-      "claire-tubbs-dolan",
-      "hy-kim",
-      "edward-seidman"
+      "catalina-torrente",
+      "carly-tubbs-dolan",
+      "ha-yeon-kim",
+      "lindsay-brown",
+      "edward-seidman",
+      "peter-halpin",
+      "jeannie-annan",
+      "leighann-starkey",
+      "anjuli-shivshanker",
+      "brian-johnston",
+      "jere-behrman",
+      "edward-tsinigo",
+      "kalina-gjicali",
+      "margaret-sheridan"
     ]
   }
 ]

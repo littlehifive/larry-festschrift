@@ -2,10 +2,16 @@ import type { CSSProperties } from 'react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
+import { externalCitations } from '../content'
 import type {
   BrainRegion,
   CitationLink,
   Collaborator,
+  ExternalEdge,
+  ExternalNode,
   GraphSceneConfig,
   RendererCapability,
   Theme,
@@ -35,7 +41,7 @@ type NetworkSectionProps = {
 
 type GraphNode = {
   id: string
-  kind: 'work' | 'collaborator'
+  kind: 'work' | 'collaborator' | 'external'
   label: string
   themeIds: string[]
   primaryThemeId: string
@@ -43,27 +49,31 @@ type GraphNode = {
   position: [number, number, number]
   size: number
   citationCount?: number
-  year?: number
+  year?: number | null
   venue?: string | null
   doi?: string | null
   workIds?: string[]
   prominence?: number
+  parentWorkId?: string
+  authors?: string[]
 }
 
 type GraphEdge = {
   id: string
   sourceId: string
   targetId: string
-  kind: CitationLink['kind']
+  kind: CitationLink['kind'] | 'external_cites' | 'external_cited_by'
   weight: number
   color: string
   themeIds: string[]
   points: [number, number, number][]
+  isExternal: boolean
 }
 
 type GraphLayout = {
   workNodes: GraphNode[]
   collaboratorNodes: GraphNode[]
+  externalNodes: GraphNode[]
   edges: GraphEdge[]
   nodeMap: Map<string, GraphNode>
 }
@@ -85,7 +95,6 @@ type RegionVisual = {
   themeId: string
   fill: any
   aura: any
-  outline: any
 }
 
 type BrainSceneHandle = {
@@ -100,7 +109,7 @@ type BrainSceneHandle = {
 }
 
 const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5))
-const DEFAULT_CAMERA_POSITION = new THREE.Vector3(0, 0.35, 6.8)
+const DEFAULT_CAMERA_POSITION = new THREE.Vector3(0.4, 0.55, 6.6)
 const DEFAULT_CAMERA_TARGET = new THREE.Vector3(0, 0.18, 0.06)
 
 function hashNumber(value: string) {
@@ -145,21 +154,27 @@ function buildCurvePoints(
   start: [number, number, number],
   end: [number, number, number],
   weight: number,
-  kind: CitationLink['kind'],
+  kind: GraphEdge['kind'],
 ): [number, number, number][] {
   const startVector = toVector3(start)
   const endVector = toVector3(end)
   const mid = startVector.clone().lerp(endVector, 0.5)
   const distance = startVector.distanceTo(endVector)
-  const lift = 0.18 + distance * 0.16 + weight * 0.36
+  const lift = 0.18 + distance * 0.18 + weight * 0.34
 
-  mid.x += (endVector.z - startVector.z) * 0.24
-  mid.y += kind === 'coauthor_bridge' ? lift * 0.64 : lift
-  mid.z += (startVector.x - endVector.x) * 0.18
+  mid.x += (endVector.z - startVector.z) * 0.18
+  mid.y += kind === 'coauthor_bridge' ? lift * 0.6 : lift * 0.85
+  mid.z += (startVector.x - endVector.x) * 0.16
 
   const curve = new THREE.QuadraticBezierCurve3(startVector, mid, endVector)
+  const segments =
+    kind === 'coauthor_bridge'
+      ? 14
+      : kind === 'external_cites' || kind === 'external_cited_by'
+        ? 10
+        : 22
   return curve
-    .getPoints(kind === 'coauthor_bridge' ? 12 : 18)
+    .getPoints(segments)
     .map(
       (point: { x: number; y: number; z: number }) =>
         [point.x, point.y, point.z] as [number, number, number],
@@ -174,13 +189,13 @@ function createWorkPosition(
 ): [number, number, number] {
   const seed = hashNumber(work.id)
   const angle = GOLDEN_ANGLE * index + seed * Math.PI * 0.9
-  const spread = region.radius * (0.28 + ((index % 4) / 4) * 0.3 + seed * 0.08)
-  const vertical = Math.sin(angle * 1.16) * region.radius * 0.32
-  const depth = Math.sin(angle) * region.radius * 0.42
-  const lift = total > 4 ? (index / (total - 1) - 0.5) * 0.14 : 0
+  const spread = region.radius * (0.32 + ((index % 4) / 4) * 0.32 + seed * 0.1)
+  const vertical = Math.sin(angle * 1.16) * region.radius * 0.36
+  const depth = Math.sin(angle) * region.radius * 0.46
+  const lift = total > 4 ? (index / Math.max(1, total - 1) - 0.5) * 0.18 : 0
 
   return [
-    region.anchor3D[0] + Math.cos(angle) * spread * 0.9,
+    region.anchor3D[0] + Math.cos(angle) * spread * 0.95,
     region.anchor3D[1] + vertical + lift,
     region.anchor3D[2] + depth,
   ]
@@ -195,13 +210,29 @@ function createCollaboratorPosition(
   const seed = hashNumber(collaborator.id)
   const direction = region.anchor3D[0] >= 0 ? 1 : -1
   const orbitAngle =
-    (index / Math.max(total, 1)) * Math.PI * 1.54 - Math.PI * 0.77 + seed * 0.46
-  const orbitRadius = region.radius + 0.34 + collaborator.prominence * 0.34
+    (index / Math.max(total, 1)) * Math.PI * 1.7 - Math.PI * 0.85 + seed * 0.5
+  const orbitRadius = region.radius + 0.42 + collaborator.prominence * 0.42
 
   return [
-    region.anchor3D[0] + Math.cos(orbitAngle) * orbitRadius + direction * 0.12,
-    region.anchor3D[1] + Math.sin(orbitAngle * 1.28) * 0.28 + 0.02 * index,
-    region.anchor3D[2] + Math.sin(orbitAngle) * orbitRadius * 0.42,
+    region.anchor3D[0] + Math.cos(orbitAngle) * orbitRadius + direction * 0.16,
+    region.anchor3D[1] + Math.sin(orbitAngle * 1.18) * 0.32 + 0.018 * index,
+    region.anchor3D[2] + Math.sin(orbitAngle) * orbitRadius * 0.5,
+  ]
+}
+
+function createExternalPosition(
+  parent: GraphNode,
+  index: number,
+  externalSeed: string,
+): [number, number, number] {
+  const seed = hashNumber(externalSeed)
+  const angle = GOLDEN_ANGLE * (index + 1) + seed * Math.PI * 2
+  const radius = 0.62 + seed * 0.42
+  const tilt = (seed - 0.5) * 0.7
+  return [
+    parent.position[0] + Math.cos(angle) * radius,
+    parent.position[1] + Math.sin(angle * 1.4) * 0.42 + tilt,
+    parent.position[2] + Math.sin(angle) * radius * 0.7,
   ]
 }
 
@@ -211,12 +242,13 @@ function buildGraphLayout(
   citationLinks: CitationLink[],
   brainRegions: BrainRegion[],
   themes: Theme[],
+  externalNodesData: ExternalNode[],
+  externalEdgesData: ExternalEdge[],
   sceneConfig: GraphSceneConfig,
 ): GraphLayout {
   const workById = new Map(works.map((work) => [work.id, work]))
   const collaboratorById = new Map(collaborators.map((entry) => [entry.id, entry]))
   const themeById = new Map(themes.map((theme) => [theme.id, theme]))
-  const regionById = new Map(brainRegions.map((region) => [region.id, region]))
   const worksByRegion = new Map(brainRegions.map((region) => [region.id, [] as Work[]]))
   const collaboratorsByRegion = new Map(
     brainRegions.map((region) => [region.id, [] as Collaborator[]]),
@@ -316,8 +348,8 @@ function buildGraphLayout(
           regionCollaborators.length,
         ),
         size: THREE.MathUtils.lerp(
-          sceneConfig.nodeScaleRange[0] * 0.88,
-          sceneConfig.nodeScaleRange[1] * 1.16,
+          sceneConfig.nodeScaleRange[0] * 0.78,
+          sceneConfig.nodeScaleRange[1] * 1.15,
           collaborator.prominence,
         ),
         workIds: collaborator.workIds,
@@ -326,11 +358,83 @@ function buildGraphLayout(
     })
   })
 
-  const nodeMap = new Map(
+  const interimNodeMap = new Map(
     [...workNodes, ...collaboratorNodes].map((node) => [node.id, node] as const),
   )
 
-  const edges: GraphEdge[] = citationLinks
+  const externalById = new Map(externalNodesData.map((entry) => [entry.id, entry]))
+  const externalLinkAssignments = new Map<string, GraphNode>()
+  const externalNodes: GraphNode[] = []
+  const externalEdges: GraphEdge[] = []
+  const externalUsageCounter = new Map<string, number>()
+
+  externalEdgesData.forEach((rawEdge, index) => {
+    const isCitedBy = rawEdge.kind === 'cited_by'
+    const externalId = isCitedBy ? rawEdge.sourceExternalId : rawEdge.targetExternalId
+    const aberWorkId = isCitedBy ? rawEdge.targetWorkId : rawEdge.sourceWorkId
+    const externalRaw = externalById.get(externalId)
+    const parent = interimNodeMap.get(aberWorkId)
+    if (!externalRaw || !parent) return
+
+    let placed = externalLinkAssignments.get(externalId)
+    if (!placed) {
+      const used = externalUsageCounter.get(parent.id) ?? 0
+      externalUsageCounter.set(parent.id, used + 1)
+      const position = createExternalPosition(parent, used, externalId)
+      placed = {
+        id: `external:${externalId}`,
+        kind: 'external',
+        label: externalRaw.title,
+        themeIds: parent.themeIds,
+        primaryThemeId: parent.primaryThemeId,
+        color: parent.color,
+        position,
+        size: clamp(
+          0.04 + Math.log10((externalRaw.citationCount || 1) + 1) * 0.012,
+          0.04,
+          0.085,
+        ),
+        citationCount: externalRaw.citationCount,
+        year: externalRaw.year,
+        venue: externalRaw.venue,
+        doi: externalRaw.doi,
+        parentWorkId: parent.id,
+        authors: externalRaw.authors,
+      }
+      externalLinkAssignments.set(externalId, placed)
+      externalNodes.push(placed)
+    }
+
+    const sourceId = isCitedBy ? placed.id : parent.id
+    const targetId = isCitedBy ? parent.id : placed.id
+    const sourcePosition = isCitedBy ? placed.position : parent.position
+    const targetPosition = isCitedBy ? parent.position : placed.position
+
+    externalEdges.push({
+      id: `ext-${index}-${sourceId}-${targetId}`,
+      sourceId,
+      targetId,
+      kind: isCitedBy ? 'external_cited_by' : 'external_cites',
+      weight: rawEdge.weight,
+      color: parent.color,
+      themeIds: parent.themeIds,
+      points: buildCurvePoints(
+        sourcePosition,
+        targetPosition,
+        rawEdge.weight,
+        isCitedBy ? 'external_cited_by' : 'external_cites',
+      ),
+      isExternal: true,
+    })
+  })
+
+  const nodeMap = new Map(
+    [...workNodes, ...collaboratorNodes, ...externalNodes].map(
+      (node) => [node.id, node] as const,
+    ),
+  )
+
+  const internalEdges: GraphEdge[] = citationLinks
     .map((link, index) => {
       const source = nodeMap.get(link.sourceWorkId)
       const target = nodeMap.get(link.targetWorkIdOrExternalId)
@@ -347,11 +451,73 @@ function buildGraphLayout(
         color: source.color,
         themeIds,
         points: buildCurvePoints(source.position, target.position, link.weight, link.kind),
-      }
+        isExternal: false,
+      } as GraphEdge
     })
     .filter((edge): edge is GraphEdge => edge !== null)
 
-  return { workNodes, collaboratorNodes, edges, nodeMap }
+  return {
+    workNodes,
+    collaboratorNodes,
+    externalNodes,
+    edges: [...internalEdges, ...externalEdges],
+    nodeMap,
+  }
+}
+
+function buildBrainGeometry(): any {
+  const geometry = new THREE.IcosahedronGeometry(1.55, 6)
+  const positionAttr = geometry.attributes.position
+  const vertex = new THREE.Vector3()
+
+  for (let index = 0; index < positionAttr.count; index += 1) {
+    vertex.fromBufferAttribute(positionAttr, index)
+    const length = vertex.length()
+    const normalized = vertex.clone().normalize()
+
+    const gyri =
+      Math.sin(normalized.x * 9.4 + normalized.y * 4.6) * 0.06 +
+      Math.cos(normalized.y * 8.2 - normalized.z * 5.1) * 0.05 +
+      Math.sin(normalized.z * 11.0 + normalized.x * 3.1) * 0.04
+
+    let scale = 1 + gyri
+
+    const fissureFalloff = Math.max(0, 0.18 - Math.abs(normalized.x))
+    const fissureDepth = fissureFalloff * 0.34 * Math.max(0, normalized.y + 0.1)
+    scale -= fissureDepth
+
+    const stretchY = 0.96 + normalized.y * 0.04
+    const squashZ = 0.92 + Math.abs(normalized.z) * 0.06
+
+    const radial = length * scale
+    vertex.copy(normalized).multiplyScalar(radial)
+    vertex.y *= stretchY
+    vertex.z *= squashZ
+    vertex.x *= 1.04
+
+    positionAttr.setXYZ(index, vertex.x, vertex.y, vertex.z)
+  }
+
+  geometry.computeVertexNormals()
+  return geometry
+}
+
+function makeRadialTexture(size = 128) {
+  const canvas = document.createElement('canvas')
+  canvas.width = size
+  canvas.height = size
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return new THREE.Texture()
+  const gradient = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2)
+  gradient.addColorStop(0, 'rgba(255,255,255,1)')
+  gradient.addColorStop(0.18, 'rgba(255,255,255,0.78)')
+  gradient.addColorStop(0.5, 'rgba(255,255,255,0.18)')
+  gradient.addColorStop(1, 'rgba(255,255,255,0)')
+  ctx.fillStyle = gradient
+  ctx.fillRect(0, 0, size, size)
+  const texture = new THREE.CanvasTexture(canvas)
+  texture.needsUpdate = true
+  return texture
 }
 
 function createBrainScene(options: {
@@ -388,33 +554,45 @@ function createBrainScene(options: {
   const renderer = new THREE.WebGLRenderer({
     antialias: !reducedMotion,
     alpha: true,
-    powerPreference: 'low-power',
+    powerPreference: 'high-performance',
   })
 
   renderer.outputColorSpace = THREE.SRGBColorSpace
-  renderer.setClearColor(0x000000, 0)
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, reducedMotion ? 1.25 : 1.75))
+  renderer.toneMapping = THREE.ACESFilmicToneMapping
+  renderer.toneMappingExposure = 1.05
+  renderer.setClearColor(0x02080d, 0)
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, reducedMotion ? 1.4 : 1.85))
 
   mount.innerHTML = ''
   mount.appendChild(renderer.domElement)
 
   const scene = new THREE.Scene()
-  scene.fog = new THREE.Fog(0x041018, 5.8, 13)
+  scene.fog = new THREE.FogExp2(0x02080d, 0.078)
 
-  const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100)
+  const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100)
   camera.position.copy(DEFAULT_CAMERA_POSITION)
 
   const controls = new OrbitControls(camera, renderer.domElement)
   controls.enableDamping = true
-  controls.dampingFactor = 0.06
-  controls.minDistance = 4.6
-  controls.maxDistance = 9.2
-  controls.minPolarAngle = Math.PI * 0.28
-  controls.maxPolarAngle = Math.PI * 0.72
+  controls.dampingFactor = 0.07
+  controls.minDistance = 4.2
+  controls.maxDistance = 10.5
+  controls.minPolarAngle = Math.PI * 0.22
+  controls.maxPolarAngle = Math.PI * 0.78
   controls.enablePan = false
   controls.target.copy(DEFAULT_CAMERA_TARGET)
   controls.autoRotate = isAutoRotating && !reducedMotion
   controls.autoRotateSpeed = sceneConfig.autoRotateSpeed
+
+  let composer: any | null = null
+  try {
+    composer = new EffectComposer(renderer)
+    composer.addPass(new RenderPass(scene, camera))
+    const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.85, 0.55, 0.25)
+    composer.addPass(bloom)
+  } catch {
+    composer = null
+  }
 
   const root = new THREE.Group()
   scene.add(root)
@@ -427,170 +605,241 @@ function createBrainScene(options: {
   const edgeVisuals: EdgeVisual[] = []
   const interactiveMeshes: any[] = []
 
-  const ambientLight = new THREE.AmbientLight(0x9fd8ff, 1.8)
-  const keyLight = new THREE.DirectionalLight(0x8fd4ff, 1.9)
-  keyLight.position.set(4.6, 6.2, 5.1)
-  const rimLight = new THREE.PointLight(0x58a6ff, 18, 16, 1.9)
-  rimLight.position.set(-2.6, 0.8, -3.2)
-  scene.add(ambientLight, keyLight, rimLight)
+  scene.add(new THREE.AmbientLight(0xb8e2ff, 0.85))
+  const keyLight = new THREE.DirectionalLight(0xa8d4ff, 1.5)
+  keyLight.position.set(4.2, 6.4, 5.6)
+  scene.add(keyLight)
+  const rimLight = new THREE.PointLight(0x4f9bff, 26, 18, 1.6)
+  rimLight.position.set(-3.6, 1.4, -3.4)
+  scene.add(rimLight)
+  const warmLight = new THREE.PointLight(0xffb85a, 14, 14, 1.8)
+  warmLight.position.set(2.6, -1.6, 3.4)
+  scene.add(warmLight)
 
-  const shellMaterial = new THREE.MeshPhongMaterial({
-    color: '#89dff5',
+  const radialTexture = makeRadialTexture(160)
+  const brainGeometry = buildBrainGeometry()
+
+  const brainShellMaterial = new THREE.MeshPhysicalMaterial({
+    color: '#bce6ff',
     transparent: true,
-    opacity: sceneConfig.brainShellOpacity,
-    shininess: 80,
-    emissive: '#072433',
-    emissiveIntensity: 0.85,
+    opacity: clamp(sceneConfig.brainShellOpacity * 1.4, 0.16, 0.32),
+    roughness: 0.62,
+    metalness: 0.05,
+    transmission: 0.4,
+    thickness: 1.6,
+    ior: 1.18,
+    emissive: '#0a3852',
+    emissiveIntensity: 0.45,
+    clearcoat: 0.28,
+    clearcoatRoughness: 0.6,
     side: THREE.DoubleSide,
   })
 
-  const shellWireMaterial = new THREE.LineBasicMaterial({
+  const brainMesh = new THREE.Mesh(brainGeometry, brainShellMaterial)
+  brainShellGroup.add(brainMesh)
+
+  const brainWireMaterial = new THREE.LineBasicMaterial({
     color: '#7feeff',
     transparent: true,
-    opacity: 0.28,
+    opacity: 0.18,
   })
+  const brainWire = new THREE.LineSegments(
+    new THREE.WireframeGeometry(brainGeometry),
+    brainWireMaterial,
+  )
+  brainShellGroup.add(brainWire)
 
-  const shellGeometry = new THREE.SphereGeometry(1, 28, 24)
-  const shellParts = [
-    { position: [-0.86, 0.4, 0.02], scale: [1.18, 1.45, 1.04] },
-    { position: [0.86, 0.4, 0.02], scale: [1.18, 1.45, 1.04] },
-    { position: [0, 0.18, 0.54], scale: [1.08, 0.92, 0.72] },
-    { position: [0, 0.36, -0.74], scale: [0.88, 0.98, 0.62] },
-    { position: [0, -0.78, -0.5], scale: [0.78, 0.52, 0.42] },
-  ] as const
-
-  shellParts.forEach((part) => {
-    const mesh = new THREE.Mesh(shellGeometry.clone(), shellMaterial.clone())
-    mesh.position.set(part.position[0], part.position[1], part.position[2])
-    mesh.scale.set(part.scale[0], part.scale[1], part.scale[2])
-    brainShellGroup.add(mesh)
-
-    const outline = new THREE.LineSegments(
-      new THREE.EdgesGeometry(mesh.geometry),
-      shellWireMaterial.clone(),
-    )
-    outline.position.copy(mesh.position)
-    outline.scale.copy(mesh.scale)
-    brainShellGroup.add(outline)
-  })
-
-  const ringMaterial = new THREE.MeshBasicMaterial({
-    color: '#5bc7ff',
+  const innerGlowMaterial = new THREE.MeshBasicMaterial({
+    color: '#3aa6ff',
     transparent: true,
-    opacity: 0.16,
-    wireframe: true,
+    opacity: 0.05,
+    side: THREE.BackSide,
+    depthWrite: false,
   })
+  const innerGlow = new THREE.Mesh(brainGeometry.clone().scale(1.08, 1.08, 1.08), innerGlowMaterial)
+  brainShellGroup.add(innerGlow)
 
-  const rings = [
-    { rotation: [Math.PI / 2.6, 0.12, 0], scale: 2.8 },
-    { rotation: [Math.PI / 2, 0.36, Math.PI / 9], scale: 3.15 },
-  ] as const
+  const cerebellumGeometry = new THREE.SphereGeometry(0.55, 32, 24)
+  const cerebellumPositions = cerebellumGeometry.attributes.position
+  const tmp = new THREE.Vector3()
+  for (let index = 0; index < cerebellumPositions.count; index += 1) {
+    tmp.fromBufferAttribute(cerebellumPositions, index)
+    const noise =
+      Math.sin(tmp.x * 16) * 0.025 + Math.cos(tmp.y * 14) * 0.02 + Math.sin(tmp.z * 18) * 0.022
+    tmp.multiplyScalar(1 + noise)
+    cerebellumPositions.setXYZ(index, tmp.x, tmp.y, tmp.z)
+  }
+  cerebellumGeometry.computeVertexNormals()
+  const cerebellum = new THREE.Mesh(cerebellumGeometry, brainShellMaterial.clone())
+  cerebellum.position.set(0, -0.55, -1.05)
+  cerebellum.scale.set(1.1, 0.78, 0.92)
+  brainShellGroup.add(cerebellum)
 
-  rings.forEach((ring) => {
-    const mesh = new THREE.Mesh(
-      new THREE.TorusGeometry(ring.scale, 0.02, 8, 72),
-      ringMaterial.clone(),
-    )
-    mesh.rotation.set(ring.rotation[0], ring.rotation[1], ring.rotation[2])
-    brainShellGroup.add(mesh)
-  })
+  const cerebellumWire = new THREE.LineSegments(
+    new THREE.WireframeGeometry(cerebellumGeometry),
+    brainWireMaterial.clone(),
+  )
+  cerebellumWire.position.copy(cerebellum.position)
+  cerebellumWire.scale.copy(cerebellum.scale)
+  brainShellGroup.add(cerebellumWire)
+
+  const stemGeometry = new THREE.CylinderGeometry(0.16, 0.22, 0.8, 18, 4, true)
+  const stem = new THREE.Mesh(stemGeometry, brainShellMaterial.clone())
+  stem.position.set(0, -1.0, -0.55)
+  stem.rotation.x = -0.18
+  brainShellGroup.add(stem)
 
   brainRegions.forEach((region) => {
     const theme = themeById.get(region.themeId)
     const color = theme?.color ?? region.color
 
     const aura = new THREE.Mesh(
-      new THREE.IcosahedronGeometry(region.radius * 1.22, 3),
+      new THREE.IcosahedronGeometry(region.radius * 1.4, 3),
       new THREE.MeshBasicMaterial({
         color,
         transparent: true,
-        opacity: 0.1,
+        opacity: 0.06,
+        depthWrite: false,
       }),
     )
     aura.position.set(region.anchor3D[0], region.anchor3D[1], region.anchor3D[2])
-    aura.scale.set(1.06, 0.92, 0.9)
+    aura.scale.set(1.1, 0.92, 0.92)
 
     const fill = new THREE.Mesh(
-      new THREE.IcosahedronGeometry(region.radius, 2),
-      new THREE.MeshPhongMaterial({
+      new THREE.IcosahedronGeometry(region.radius * 0.92, 3),
+      new THREE.MeshStandardMaterial({
         color,
         transparent: true,
         opacity: 0.18,
         emissive: color,
-        emissiveIntensity: 0.28,
-        shininess: 64,
+        emissiveIntensity: 0.42,
+        roughness: 0.62,
+        metalness: 0.16,
         flatShading: true,
       }),
     )
     fill.position.copy(aura.position)
-    fill.scale.set(1.02, 0.82, 0.74)
+    fill.scale.set(1.04, 0.84, 0.78)
 
-    const outline = new THREE.LineSegments(
-      new THREE.EdgesGeometry(fill.geometry),
-      new THREE.LineBasicMaterial({
-        color,
-        transparent: true,
-        opacity: 0.42,
-      }),
-    )
-    outline.position.copy(fill.position)
-    outline.scale.copy(fill.scale)
-
-    root.add(aura, fill, outline)
+    root.add(aura, fill)
     regionVisuals.set(region.id, {
       regionId: region.id,
       themeId: region.themeId,
       fill,
       aura,
-      outline,
     })
   })
 
-  const starPositions = new Float32Array(240 * 3)
-  for (let index = 0; index < 240; index += 1) {
+  const neuronCount = reducedMotion ? 320 : 720
+  const neuronPositions = new Float32Array(neuronCount * 3)
+  const neuronColors = new Float32Array(neuronCount * 3)
+  const baseNeuronColor = new THREE.Color('#7feeff')
+  for (let index = 0; index < neuronCount; index += 1) {
+    const seed = hashNumber(`neuron-${index}`)
+    const seed2 = hashNumber(`neuron-y-${index}`)
+    const seed3 = hashNumber(`neuron-z-${index}`)
+    const radius = 0.15 + seed * 1.45
+    const theta = seed2 * Math.PI * 2
+    const phi = Math.acos(1 - 2 * seed3)
+    const offset = index * 3
+    neuronPositions[offset] = Math.cos(theta) * Math.sin(phi) * radius
+    neuronPositions[offset + 1] = (Math.cos(phi) - 0.05) * radius * 1.05
+    neuronPositions[offset + 2] = Math.sin(theta) * Math.sin(phi) * radius * 0.92
+    const tint = 0.7 + seed * 0.3
+    neuronColors[offset] = baseNeuronColor.r * tint
+    neuronColors[offset + 1] = baseNeuronColor.g * tint
+    neuronColors[offset + 2] = baseNeuronColor.b * tint
+  }
+  const neuronGeometry = new THREE.BufferGeometry()
+  neuronGeometry.setAttribute('position', new THREE.BufferAttribute(neuronPositions, 3))
+  neuronGeometry.setAttribute('color', new THREE.BufferAttribute(neuronColors, 3))
+  const neuronMaterial = new THREE.PointsMaterial({
+    map: radialTexture,
+    size: reducedMotion ? 0.04 : 0.055,
+    sizeAttenuation: true,
+    transparent: true,
+    opacity: 0.78,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    vertexColors: true,
+  })
+  const neurons = new THREE.Points(neuronGeometry, neuronMaterial)
+  root.add(neurons)
+
+  const starCount = reducedMotion ? 220 : 420
+  const starPositions = new Float32Array(starCount * 3)
+  for (let index = 0; index < starCount; index += 1) {
     const offset = index * 3
     const seed = hashNumber(`star-${index}`)
-    const radius = 3.8 + seed * 5.2
+    const seed2 = hashNumber(`star-y-${index}`)
+    const radius = 4.6 + seed * 7.2
     const theta = seed * Math.PI * 5.2
-    const phi = (seed * 17.2) % Math.PI
-
+    const phi = (seed2 * 17.2) % Math.PI
     starPositions[offset] = Math.cos(theta) * Math.sin(phi) * radius
-    starPositions[offset + 1] = Math.cos(phi) * radius * 0.54
+    starPositions[offset + 1] = Math.cos(phi) * radius * 0.6
     starPositions[offset + 2] = Math.sin(theta) * Math.sin(phi) * radius
   }
-
   const starGeometry = new THREE.BufferGeometry()
   starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3))
   const stars = new THREE.Points(
     starGeometry,
     new THREE.PointsMaterial({
+      map: radialTexture,
       color: '#9fdcff',
       transparent: true,
-      opacity: reducedMotion ? 0.24 : 0.38,
-      size: reducedMotion ? 0.026 : 0.034,
+      opacity: reducedMotion ? 0.32 : 0.54,
+      size: reducedMotion ? 0.08 : 0.12,
       sizeAttenuation: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
     }),
   )
   scene.add(stars)
 
+  const ringGeometry = new THREE.TorusGeometry(2.85, 0.012, 6, 96)
+  const ringMaterial = new THREE.MeshBasicMaterial({
+    color: '#5bc7ff',
+    transparent: true,
+    opacity: 0.16,
+  })
+  const ringA = new THREE.Mesh(ringGeometry, ringMaterial.clone())
+  ringA.rotation.set(Math.PI / 2.6, 0.18, 0.06)
+  const ringB = new THREE.Mesh(
+    new THREE.TorusGeometry(3.18, 0.008, 6, 96),
+    ringMaterial.clone(),
+  )
+  ringB.rotation.set(Math.PI / 2, 0.42, Math.PI / 9)
+  brainShellGroup.add(ringA, ringB)
+
   layout.edges.forEach((edge) => {
-    const geometry = new THREE.BufferGeometry().setFromPoints(
-      edge.points.map((point) => toVector3(point)),
-    )
-    const material =
-      edge.kind === 'coauthor_bridge'
-        ? new THREE.LineDashedMaterial({
-            color: edge.color,
-            transparent: true,
-            opacity: sceneConfig.edgeOpacity * 0.9,
-            dashSize: 0.12,
-            gapSize: 0.08,
-          })
-        : new THREE.LineBasicMaterial({
-            color: edge.color,
-            transparent: true,
-            opacity: sceneConfig.edgeOpacity,
-          })
+    const points = edge.points.map((point) => toVector3(point))
+    const geometry = new THREE.BufferGeometry().setFromPoints(points)
+
+    const isCoauthor = edge.kind === 'coauthor_bridge'
+    const isExternal = edge.isExternal
+    const baseOpacity = isExternal
+      ? sceneConfig.edgeOpacity * 0.55
+      : isCoauthor
+        ? sceneConfig.edgeOpacity * 1.05
+        : sceneConfig.edgeOpacity * 1.25
+
+    const material = isCoauthor
+      ? new THREE.LineDashedMaterial({
+          color: edge.color,
+          transparent: true,
+          opacity: baseOpacity,
+          dashSize: 0.14,
+          gapSize: 0.08,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending,
+        })
+      : new THREE.LineBasicMaterial({
+          color: edge.color,
+          transparent: true,
+          opacity: baseOpacity,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending,
+        })
 
     const line = new THREE.Line(geometry, material)
     if (line.material instanceof THREE.LineDashedMaterial) {
@@ -600,43 +849,64 @@ function createBrainScene(options: {
     edgeVisuals.push({ datum: edge, line })
   })
 
-  const workGeometry = new THREE.SphereGeometry(1, 18, 18)
+  const workGeometry = new THREE.SphereGeometry(1, 22, 22)
   const collaboratorGeometry = new THREE.OctahedronGeometry(1, 0)
+  const externalGeometry = new THREE.SphereGeometry(1, 12, 12)
 
   const createNodeVisual = (node: GraphNode) => {
-    const geometry = node.kind === 'work' ? workGeometry : collaboratorGeometry
-    const coreMaterial = new THREE.MeshBasicMaterial({
-      color: node.color,
-      transparent: true,
-      opacity: 0.95,
-    })
-    const haloMaterial = new THREE.MeshBasicMaterial({
-      color: node.color,
-      transparent: true,
-      opacity: node.kind === 'work' ? 0.22 : 0.18,
-    })
+    const geometry =
+      node.kind === 'work'
+        ? workGeometry
+        : node.kind === 'collaborator'
+          ? collaboratorGeometry
+          : externalGeometry
 
+    const coreColor = new THREE.Color(node.color)
+    const coreMaterial = new THREE.MeshStandardMaterial({
+      color: coreColor,
+      transparent: true,
+      opacity: node.kind === 'external' ? 0.78 : 0.95,
+      emissive: coreColor,
+      emissiveIntensity: node.kind === 'work' ? 1.4 : node.kind === 'collaborator' ? 1.1 : 0.8,
+      roughness: 0.45,
+      metalness: 0.2,
+    })
     const core = new THREE.Mesh(geometry, coreMaterial)
     core.scale.setScalar(node.size)
     core.position.set(node.position[0], node.position[1], node.position[2])
     core.userData.nodeId = node.id
     core.userData.kind = node.kind
 
-    const halo = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 16), haloMaterial)
-    halo.scale.setScalar(node.size * (node.kind === 'work' ? 2.2 : 1.85))
+    const haloMaterial = new THREE.SpriteMaterial({
+      map: radialTexture,
+      color: coreColor,
+      transparent: true,
+      opacity:
+        node.kind === 'work' ? 0.85 : node.kind === 'collaborator' ? 0.7 : 0.42,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    })
+    const halo = new THREE.Sprite(haloMaterial)
+    const haloScale =
+      node.size *
+      (node.kind === 'work' ? 6.4 : node.kind === 'collaborator' ? 5.0 : 4.0)
+    halo.scale.set(haloScale, haloScale, 1)
     halo.position.copy(core.position)
     halo.userData.highlightScale = 1
+    halo.userData.baseScale = haloScale
 
     root.add(halo, core)
 
     let shell: any | undefined
     if (node.kind === 'collaborator') {
       shell = new THREE.Mesh(
-        new THREE.TorusGeometry(node.size * 1.65, 0.015, 6, 24),
+        new THREE.TorusGeometry(node.size * 1.7, 0.014, 6, 28),
         new THREE.MeshBasicMaterial({
           color: node.color,
           transparent: true,
-          opacity: 0.34,
+          opacity: 0.32,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
         }),
       )
       shell.rotation.set(Math.PI / 2.3, 0.26, 0)
@@ -646,18 +916,22 @@ function createBrainScene(options: {
 
     const visual = { datum: node, core, halo, shell }
     nodeVisuals.set(node.id, visual)
-    interactiveMeshes.push(core)
+    if (node.kind !== 'external') interactiveMeshes.push(core)
   }
 
   layout.workNodes.forEach(createNodeVisual)
   layout.collaboratorNodes.forEach(createNodeVisual)
+  layout.externalNodes.forEach(createNodeVisual)
 
   const raycaster = new THREE.Raycaster()
   const pointer = new THREE.Vector2()
   let pointerDown = { x: 0, y: 0 }
   let disposed = false
   let frame = 0
+  let bootElapsed = 0
   const clock = new THREE.Clock()
+  const initialCameraOffset = camera.position.clone().sub(DEFAULT_CAMERA_TARGET)
+  const dollyStart = initialCameraOffset.clone().multiplyScalar(1.35)
 
   function setSize() {
     const width = Math.max(1, mount.clientWidth)
@@ -665,6 +939,9 @@ function createBrainScene(options: {
     camera.aspect = width / height
     camera.updateProjectionMatrix()
     renderer.setSize(width, height, false)
+    if (composer) {
+      composer.setSize(width, height)
+    }
   }
 
   setSize()
@@ -697,27 +974,48 @@ function createBrainScene(options: {
       const themeMatch = visual.datum.themeIds.includes(nextThemeId)
       const isSelected = visual.datum.id === selectedId
       const isLinked = linkedIds.has(visual.datum.id)
-      const emphasis = isSelected
+      const isExternal = visual.datum.kind === 'external'
+      const baseEmphasis = isSelected
         ? 1
         : isLinked
           ? 0.86
           : selectedId
-            ? 0.18
+            ? isExternal
+              ? 0.06
+              : 0.16
             : themeMatch
-              ? 0.78
-              : 0.36
+              ? isExternal
+                ? 0.5
+                : 0.78
+              : isExternal
+                ? 0.26
+                : 0.36
 
-      visual.core.material.opacity = 0.28 + emphasis * 0.72
+      visual.core.material.opacity =
+        (isExternal ? 0.18 : 0.28) + baseEmphasis * (isExternal ? 0.6 : 0.72)
+      visual.core.material.emissiveIntensity =
+        (visual.datum.kind === 'work' ? 0.7 : visual.datum.kind === 'collaborator' ? 0.5 : 0.32) +
+        baseEmphasis * (visual.datum.kind === 'work' ? 1.1 : 0.7)
       visual.halo.material.opacity =
-        visual.datum.kind === 'work' ? 0.06 + emphasis * 0.24 : 0.05 + emphasis * 0.18
-      const nodeScale = isSelected ? 1.44 : isLinked ? 1.18 : 1
-      const haloScale = isSelected ? 1.2 : isLinked ? 1.08 : 1
+        (visual.datum.kind === 'work'
+          ? 0.18
+          : visual.datum.kind === 'collaborator'
+            ? 0.14
+            : 0.08) + baseEmphasis * (visual.datum.kind === 'work' ? 0.7 : 0.45)
+
+      const nodeScale = isSelected ? 1.55 : isLinked ? 1.22 : 1
       visual.core.scale.setScalar(visual.datum.size * nodeScale)
-      visual.halo.userData.highlightScale = haloScale
+      visual.halo.userData.highlightScale = isSelected ? 1.45 : isLinked ? 1.18 : 1
 
       if (visual.shell) {
-        visual.shell.material.opacity = isSelected ? 0.72 : isLinked ? 0.5 : themeMatch ? 0.28 : 0.16
-        visual.shell.scale.setScalar(isSelected ? 1.15 : 1)
+        visual.shell.material.opacity = isSelected
+          ? 0.78
+          : isLinked
+            ? 0.55
+            : themeMatch
+              ? 0.32
+              : 0.18
+        visual.shell.scale.setScalar(isSelected ? 1.18 : 1)
       }
     })
 
@@ -727,24 +1025,35 @@ function createBrainScene(options: {
         selectedId !== undefined &&
         (edgeVisual.datum.sourceId === selectedId || edgeVisual.datum.targetId === selectedId)
       const themeMatch = edgeVisual.datum.themeIds.includes(nextThemeId)
+      const isExternal = edgeVisual.datum.isExternal
+
       const opacity = connectsSelection
-        ? 0.72
+        ? isExternal
+          ? 0.7
+          : 0.85
         : selectedId
-          ? 0.08
+          ? isExternal
+            ? 0.04
+            : 0.08
           : themeMatch
-            ? 0.34
-            : 0.12
+            ? isExternal
+              ? 0.18
+              : 0.4
+            : isExternal
+              ? 0.07
+              : 0.14
 
       edgeVisual.line.material.opacity = opacity
-      edgeVisual.line.material.color.set(connectsSelection ? '#ffffff' : edgeVisual.datum.color)
+      edgeVisual.line.material.color.set(
+        connectsSelection ? '#ffffff' : edgeVisual.datum.color,
+      )
     })
 
     regionVisuals.forEach((visual) => {
       const emphasized = visual.themeId === nextThemeId
-      visual.fill.material.opacity = emphasized ? 0.26 : 0.12
-      visual.fill.material.emissiveIntensity = emphasized ? 0.42 : 0.18
-      visual.aura.material.opacity = emphasized ? 0.16 : 0.06
-      visual.outline.material.opacity = emphasized ? 0.72 : 0.28
+      visual.fill.material.opacity = emphasized ? 0.28 : 0.12
+      visual.fill.material.emissiveIntensity = emphasized ? 0.62 : 0.26
+      visual.aura.material.opacity = emphasized ? 0.14 : 0.05
     })
   }
 
@@ -782,7 +1091,9 @@ function createBrainScene(options: {
   const handleContextLost = (event: Event) => {
     event.preventDefault()
     if (disposed) return
-    onRuntimeFailure('The browser lost the WebGL context. The site switched to the static graph fallback.')
+    onRuntimeFailure(
+      'The browser lost the WebGL context. The site switched to the static graph fallback.',
+    )
   }
 
   renderer.domElement.addEventListener('pointerdown', handlePointerDown)
@@ -796,32 +1107,40 @@ function createBrainScene(options: {
     if (disposed) return
     frame = window.requestAnimationFrame(animate)
 
+    const delta = clock.getDelta()
     const elapsed = clock.getElapsedTime()
-    brainShellGroup.rotation.y += reducedMotion ? 0.0006 : 0.0012
-    rings.forEach((_, index) => {
-      const ring = brainShellGroup.children[brainShellGroup.children.length - rings.length + index]
-      ring.rotation.z += reducedMotion ? 0.0004 : 0.0009
-    })
+
+    if (bootElapsed < 1.4 && !reducedMotion) {
+      bootElapsed += delta
+      const t = clamp(bootElapsed / 1.4, 0, 1)
+      const eased = 1 - Math.pow(1 - t, 3)
+      const offset = dollyStart.clone().lerp(initialCameraOffset, eased)
+      camera.position.copy(DEFAULT_CAMERA_TARGET.clone().add(offset))
+    }
+
+    brainShellGroup.rotation.y += reducedMotion ? 0.0005 : 0.001
+    ringA.rotation.z += reducedMotion ? 0.0006 : 0.0015
+    ringB.rotation.z -= reducedMotion ? 0.0004 : 0.0012
+    neurons.rotation.y += reducedMotion ? 0.0002 : 0.0006
+    neuronMaterial.opacity = 0.62 + Math.sin(elapsed * 0.6) * 0.08
 
     nodeVisuals.forEach((visual) => {
       const phase = hashNumber(visual.datum.id) * Math.PI * 2
-      const pulse = 1 + Math.sin(elapsed * 1.8 + phase) * (reducedMotion ? 0.03 : 0.08)
-      const highlightScale =
+      const pulse = 1 + Math.sin(elapsed * 1.6 + phase) * (reducedMotion ? 0.025 : 0.07)
+      const highlight =
         typeof visual.halo.userData.highlightScale === 'number'
           ? visual.halo.userData.highlightScale
           : 1
       const baseScale =
-        visual.datum.size *
-        (visual.datum.kind === 'work' ? 2.2 : 1.85) *
-        pulse *
-        highlightScale
-      visual.halo.scale.setScalar(baseScale)
+        (visual.halo.userData.baseScale as number) * pulse * highlight
+      visual.halo.scale.set(baseScale, baseScale, 1)
     })
 
     controls.update()
 
     try {
-      renderer.render(scene, camera)
+      if (composer) composer.render(delta)
+      else renderer.render(scene, camera)
     } catch (error) {
       onRuntimeFailure(
         error instanceof Error
@@ -843,6 +1162,7 @@ function createBrainScene(options: {
     resetView() {
       camera.position.copy(DEFAULT_CAMERA_POSITION)
       controls.target.copy(DEFAULT_CAMERA_TARGET)
+      bootElapsed = 1.4
       controls.update()
     },
     dispose() {
@@ -864,6 +1184,8 @@ function createBrainScene(options: {
         else material?.dispose()
       })
 
+      radialTexture.dispose?.()
+      composer?.dispose?.()
       renderer.dispose()
       if (mount.contains(renderer.domElement)) {
         mount.removeChild(renderer.domElement)
@@ -923,7 +1245,10 @@ function FallbackGraph(props: {
               cy={point.y}
               rx={region.radius * 17}
               ry={region.radius * 11}
-              fill={rgbaFromHex(theme?.color ?? region.color, region.themeId === activeThemeId ? 0.32 : 0.14)}
+              fill={rgbaFromHex(
+                theme?.color ?? region.color,
+                region.themeId === activeThemeId ? 0.32 : 0.14,
+              )}
               filter="url(#brainGlow)"
             />
           )
@@ -942,55 +1267,58 @@ function FallbackGraph(props: {
           return (
             <path
               key={edge.id}
-              d={`M ${start.x} ${start.y} Q ${(start.x + end.x) / 2} ${Math.min(
-                start.y,
-                end.y,
-              ) - 6} ${end.x} ${end.y}`}
+              d={`M ${start.x} ${start.y} Q ${(start.x + end.x) / 2} ${
+                Math.min(start.y, end.y) - 6
+              } ${end.x} ${end.y}`}
               fill="none"
               stroke={highlighted ? '#ffffff' : edge.color}
               strokeDasharray={edge.kind === 'coauthor_bridge' ? '1.4 1.2' : undefined}
-              strokeOpacity={highlighted ? 0.9 : 0.28}
-              strokeWidth={edge.kind === 'coauthor_bridge' ? 0.45 : 0.38}
+              strokeOpacity={highlighted ? 0.9 : edge.isExternal ? 0.16 : 0.28}
+              strokeWidth={edge.kind === 'coauthor_bridge' ? 0.45 : edge.isExternal ? 0.22 : 0.38}
             />
           )
         })}
       </svg>
 
       <div className="brain-fallback__nodes">
-        {[...layout.workNodes, ...layout.collaboratorNodes].map((node) => {
-          const point = project2D(node.position)
-          const isSelected = node.id === selectedId
-          const isThemeActive = node.themeIds.includes(activeThemeId)
+        {[...layout.workNodes, ...layout.collaboratorNodes, ...layout.externalNodes].map(
+          (node) => {
+            const point = project2D(node.position)
+            const isSelected = node.id === selectedId
+            const isThemeActive = node.themeIds.includes(activeThemeId)
 
-          return (
-            <button
-              key={node.id}
-              aria-label={node.label}
-              className={[
-                'brain-fallback__node',
-                node.kind === 'collaborator' ? 'is-collaborator' : 'is-work',
-                isSelected ? 'is-selected' : '',
-                isThemeActive ? 'is-theme-active' : '',
-              ]
-                .filter(Boolean)
-                .join(' ')}
-              onClick={() =>
-                node.kind === 'work'
-                  ? onWorkSelect(node.id)
-                  : onCollaboratorSelect(node.id)
-              }
-              style={
-                {
-                  '--theme-color': node.color,
-                  '--node-size': `${node.size * 54}px`,
-                  left: `${point.x}%`,
-                  top: `${point.y}%`,
-                } as CSSProperties
-              }
-              type="button"
-            />
-          )
-        })}
+            return (
+              <button
+                key={node.id}
+                aria-label={node.label}
+                className={[
+                  'brain-fallback__node',
+                  node.kind === 'collaborator' ? 'is-collaborator' : '',
+                  node.kind === 'external' ? 'is-external' : '',
+                  node.kind === 'work' ? 'is-work' : '',
+                  isSelected ? 'is-selected' : '',
+                  isThemeActive ? 'is-theme-active' : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
+                disabled={node.kind === 'external'}
+                onClick={() => {
+                  if (node.kind === 'work') onWorkSelect(node.id)
+                  if (node.kind === 'collaborator') onCollaboratorSelect(node.id)
+                }}
+                style={
+                  {
+                    '--theme-color': node.color,
+                    '--node-size': `${node.size * (node.kind === 'external' ? 80 : 54)}px`,
+                    left: `${point.x}%`,
+                    top: `${point.y}%`,
+                  } as CSSProperties
+                }
+                type="button"
+              />
+            )
+          },
+        )}
       </div>
     </div>
   )
@@ -1037,6 +1365,8 @@ export function NetworkSection({
         citationLinks,
         brainRegions,
         themes,
+        externalCitations.externalNodes,
+        externalCitations.edges,
         sceneConfig,
       ),
     [brainRegions, citationLinks, collaborators, sceneConfig, themes, works],
@@ -1086,6 +1416,39 @@ export function NetworkSection({
       .map((authorId) => collaboratorById.get(authorId))
       .filter((collaborator): collaborator is Collaborator => Boolean(collaborator))
   }, [collaboratorById, selectedCollaborator, selectedWork])
+
+  const externalCitedBy = useMemo(() => {
+    if (!selectedWork) return []
+    return externalCitations.edges
+      .filter(
+        (edge) =>
+          edge.kind === 'cited_by' && edge.targetWorkId === selectedWork.id,
+      )
+      .map((edge) =>
+        externalCitations.externalNodes.find(
+          (node) => node.id === (edge as { sourceExternalId: string }).sourceExternalId,
+        ),
+      )
+      .filter((node): node is ExternalNode => Boolean(node))
+      .sort((left, right) => right.citationCount - left.citationCount)
+      .slice(0, 5)
+  }, [selectedWork])
+
+  const externalRefs = useMemo(() => {
+    if (!selectedWork) return []
+    return externalCitations.edges
+      .filter(
+        (edge) => edge.kind === 'cites' && edge.sourceWorkId === selectedWork.id,
+      )
+      .map((edge) =>
+        externalCitations.externalNodes.find(
+          (node) => node.id === (edge as { targetExternalId: string }).targetExternalId,
+        ),
+      )
+      .filter((node): node is ExternalNode => Boolean(node))
+      .sort((left, right) => right.citationCount - left.citationCount)
+      .slice(0, 4)
+  }, [selectedWork])
 
   const show3D = rendererCapability.canMount3D && runtimeFailure === null
   const fallbackReason = runtimeFailure ?? rendererCapability.failureReason ?? null
@@ -1159,7 +1522,10 @@ export function NetworkSection({
   }, [activeCollaboratorId, activeThemeId, activeWorkId])
 
   useEffect(() => {
-    sceneHandleRef.current?.setAutoRotate(isAutoRotating && !reducedMotion, sceneConfig.autoRotateSpeed)
+    sceneHandleRef.current?.setAutoRotate(
+      isAutoRotating && !reducedMotion,
+      sceneConfig.autoRotateSpeed,
+    )
   }, [isAutoRotating, reducedMotion, sceneConfig.autoRotateSpeed])
 
   useEffect(() => {
@@ -1193,11 +1559,11 @@ export function NetworkSection({
 
           <header className="brain-graph-stage__intro panel">
             <p className="brain-graph-stage__eyebrow">Larry Aber Festschrift</p>
-            <h1>3D brain citation graph</h1>
+            <h1>Inside the citation cortex</h1>
             <p className="brain-graph-stage__lede">
-              An abstract scholarly brain built from Larry Aber&apos;s major papers,
-              collaborator anchors, and citation pathways. Select nodes directly in the
-              scene to inspect the network.
+              An interactive 3D map of Larry Aber&apos;s scholarship — major papers as luminous
+              cores, co-authors orbiting their region, and a halo of {externalCitations.externalNodes.length} real
+              citing and referenced papers from OpenAlex.
             </p>
             <div className="brain-graph-stage__metrics">
               <div>
@@ -1205,11 +1571,11 @@ export function NetworkSection({
                 <strong>{works.length}</strong>
               </div>
               <div>
-                <span>Collaborators</span>
+                <span>Co-authors</span>
                 <strong>{collaborators.length}</strong>
               </div>
               <div>
-                <span>Network links</span>
+                <span>Network edges</span>
                 <strong>{layout.edges.length}</strong>
               </div>
             </div>
@@ -1220,7 +1586,11 @@ export function NetworkSection({
               <span className={show3D ? 'is-live' : 'is-fallback'}>
                 {show3D ? '3D live' : 'Fallback'}
               </span>
-              {fallbackReason ? <p>{fallbackReason}</p> : <p>Click any node to inspect the graph.</p>}
+              {fallbackReason ? (
+                <p>{fallbackReason}</p>
+              ) : (
+                <p>Click a paper or co-author. Drag to orbit, scroll to zoom.</p>
+              )}
             </div>
 
             <div className="brain-graph-stage__button-row">
@@ -1278,7 +1648,7 @@ export function NetworkSection({
           <div className="panel brain-graph-sidebar__selection">
             {selectedCollaborator ? (
               <>
-                <p className="brain-graph-sidebar__label">Selected collaborator</p>
+                <p className="brain-graph-sidebar__label">Selected co-author</p>
                 <h2>{selectedCollaborator.name}</h2>
                 <p className="brain-graph-sidebar__meta">
                   Prominence {Math.round(selectedCollaborator.prominence * 100)}% ·{' '}
@@ -1293,6 +1663,14 @@ export function NetworkSection({
                   {selectedWork.year} · {selectedWork.venue ?? 'Scholarly publication'} ·{' '}
                   {selectedWork.citationCount.toLocaleString()} citations
                 </p>
+                {selectedWork.authorIds.length > 0 ? (
+                  <p className="brain-graph-sidebar__authors">
+                    With {selectedWork.authorIds
+                      .map((authorId) => collaboratorById.get(authorId)?.name)
+                      .filter(Boolean)
+                      .join(', ')}
+                  </p>
+                ) : null}
               </>
             ) : null}
 
@@ -1311,7 +1689,7 @@ export function NetworkSection({
             {selectedWork?.doi ? (
               <a
                 className="brain-graph-sidebar__link"
-                href={selectedWork.doi}
+                href={selectedWork.doi.startsWith('http') ? selectedWork.doi : `https://doi.org/${selectedWork.doi}`}
                 rel="noreferrer"
                 target="_blank"
               >
@@ -1335,7 +1713,7 @@ export function NetworkSection({
               <>
                 {linkedCollaborators.length > 0 ? (
                   <div className="brain-graph-sidebar__linked">
-                    <p className="brain-graph-sidebar__subhead">Collaborator anchors</p>
+                    <p className="brain-graph-sidebar__subhead">Co-authors on this paper</p>
                     <div className="brain-graph-sidebar__list">
                       {linkedCollaborators.map((collaborator) => (
                         <button
@@ -1353,13 +1731,53 @@ export function NetworkSection({
 
                 {linkedWorks.length > 0 ? (
                   <div className="brain-graph-sidebar__linked">
-                    <p className="brain-graph-sidebar__subhead">Citation neighbors</p>
+                    <p className="brain-graph-sidebar__subhead">Internal citation neighbors</p>
                     <div className="brain-graph-sidebar__list">
                       {linkedWorks.map((work) => (
                         <button key={work.id} onClick={() => onWorkSelect(work.id)} type="button">
                           <strong>{work.year}</strong>
                           <span>{work.title}</span>
                         </button>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+
+                {externalCitedBy.length > 0 ? (
+                  <div className="brain-graph-sidebar__linked">
+                    <p className="brain-graph-sidebar__subhead">Most-cited papers citing this</p>
+                    <div className="brain-graph-sidebar__list">
+                      {externalCitedBy.map((node) => (
+                        <a
+                          key={node.id}
+                          href={node.doi ?? `https://openalex.org/${node.id}`}
+                          rel="noreferrer"
+                          target="_blank"
+                          className="brain-graph-sidebar__external"
+                        >
+                          <strong>{node.year ?? '—'}</strong>
+                          <span>{node.title}</span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+
+                {externalRefs.length > 0 ? (
+                  <div className="brain-graph-sidebar__linked">
+                    <p className="brain-graph-sidebar__subhead">Key references</p>
+                    <div className="brain-graph-sidebar__list">
+                      {externalRefs.map((node) => (
+                        <a
+                          key={node.id}
+                          href={node.doi ?? `https://openalex.org/${node.id}`}
+                          rel="noreferrer"
+                          target="_blank"
+                          className="brain-graph-sidebar__external"
+                        >
+                          <strong>{node.year ?? '—'}</strong>
+                          <span>{node.title}</span>
+                        </a>
                       ))}
                     </div>
                   </div>

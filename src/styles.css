@@ -486,6 +486,57 @@ button {
   opacity: 0.42;
 }
 
+.brain-fallback__node.is-external {
+  width: calc(var(--node-size) * 0.4);
+  height: calc(var(--node-size) * 0.4);
+  border-radius: 999px;
+  opacity: 0.32;
+  cursor: default;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.55), var(--theme-color));
+  box-shadow: 0 0 12px color-mix(in srgb, var(--theme-color), white 14%);
+}
+
+.brain-graph-sidebar__authors {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.brain-graph-sidebar__external {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(4, 15, 22, 0.5);
+  color: var(--text);
+  padding: 12px;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.brain-graph-sidebar__external:hover {
+  transform: translateY(-1px);
+  border-color: var(--line-strong);
+}
+
+.brain-graph-sidebar__external strong {
+  font-size: 0.86rem;
+  color: var(--accent);
+}
+
+.brain-graph-sidebar__external span {
+  display: block;
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
 @media (max-width: 1180px) {
   .brain-graph-stage {
     grid-template-columns: 1fr;

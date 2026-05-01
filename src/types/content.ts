@@ -60,6 +60,36 @@ export type CitationLink = {
   weight: number
 }
 
+export type ExternalNode = {
+  id: string
+  title: string
+  year: number | null
+  venue: string | null
+  citationCount: number
+  doi: string | null
+  authors: string[]
+}
+
+export type ExternalEdge =
+  | {
+      sourceExternalId: string
+      targetWorkId: string
+      kind: 'cited_by'
+      weight: number
+    }
+  | {
+      sourceWorkId: string
+      targetExternalId: string
+      kind: 'cites'
+      weight: number
+    }
+
+export type ExternalCitationData = {
+  generatedAt: string
+  externalNodes: ExternalNode[]
+  edges: ExternalEdge[]
+}
+
 export type BrainRegion = {
   id: string
   label: string

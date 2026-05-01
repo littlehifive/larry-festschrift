@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "validate": "node scripts/validate-data.mjs",
     "extract:cv": "node scripts/extract-cv.mjs",
-    "enrich:openalex": "node scripts/enrich-openalex.mjs"
+    "enrich:openalex": "node scripts/enrich-openalex.mjs",
+    "fetch:network": "node scripts/fetch-network.mjs"
   },
   "dependencies": {
     "@fontsource/space-grotesk": "^5.1.0",

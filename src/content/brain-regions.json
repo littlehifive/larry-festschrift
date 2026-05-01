@@ -1,0 +1,96 @@
+[
+  {
+    "id": "region-attachment",
+    "label": "Attachment Core",
+    "themeId": "attachment",
+    "color": "#f4b942",
+    "anchor3D": [-0.95, 0.6, 0.18],
+    "radius": 0.48,
+    "intensityRange": [0.45, 0.82],
+    "workIds": [
+      "maltreatment-1987",
+      "mothers-representations-1999",
+      "delay-gratification-2000"
+    ],
+    "collaboratorIds": ["james-allen", "jay-belsky", "arietta-slade"]
+  },
+  {
+    "id": "region-risk",
+    "label": "Risk Pathways",
+    "themeId": "risk",
+    "color": "#ef6c43",
+    "anchor3D": [0.98, 0.64, 0.1],
+    "radius": 0.44,
+    "intensityRange": [0.52, 0.88],
+    "workIds": [
+      "abuse-sequelae-1991",
+      "sept11-context-2004"
+    ],
+    "collaboratorIds": ["dante-cicchetti"]
+  },
+  {
+    "id": "region-poverty",
+    "label": "Policy Cortex",
+    "themeId": "poverty",
+    "color": "#d2e05b",
+    "anchor3D": [-0.38, 0.12, 0.26],
+    "radius": 0.56,
+    "intensityRange": [0.48, 0.86],
+    "workIds": [
+      "poverty-health-1997",
+      "neighborhood-poverty-i-1997",
+      "income-not-enough-2007",
+      "poverty-mental-health-2012",
+      "cash-transfer-2016"
+    ],
+    "collaboratorIds": [
+      "jeanne-brooks-gunn",
+      "greg-duncan",
+      "hirokazu-yoshikawa",
+      "sharon-wolf"
+    ]
+  },
+  {
+    "id": "region-sel",
+    "label": "Intervention Engine",
+    "themeId": "sel",
+    "color": "#39c6b4",
+    "anchor3D": [0.24, 0.18, 0.35],
+    "radius": 0.54,
+    "intensityRange": [0.55, 0.92],
+    "workIds": [
+      "resolving-conflict-1998",
+      "violence-middle-childhood-2003",
+      "two-year-impacts-2011",
+      "sel-dosage-2023"
+    ],
+    "collaboratorIds": ["sandra-jones", "joshua-brown"]
+  },
+  {
+    "id": "region-global",
+    "label": "Global Learning Network",
+    "themeId": "global",
+    "color": "#58a6ff",
+    "anchor3D": [0.0, 0.9, -0.18],
+    "radius": 0.62,
+    "intensityRange": [0.58, 1.0],
+    "workIds": [
+      "war-lebanon-1996",
+      "change-process-drc-2017",
+      "healing-classroom-2017",
+      "ghana-quality-preschool-2019",
+      "post-migration-risks-2020",
+      "science-for-action-2021",
+      "syrian-learning-2021",
+      "sel-lebanon-2023"
+    ],
+    "collaboratorIds": [
+      "hirokazu-yoshikawa",
+      "sharon-wolf",
+      "chantal-torrente",
+      "claire-tubbs-dolan",
+      "hy-kim",
+      "edward-seidman"
+    ]
+  }
+]

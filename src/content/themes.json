@@ -1,0 +1,42 @@
+[
+  {
+    "id": "attachment",
+    "label": "Attachment & Early Socio-Emotional Development",
+    "color": "#f4b942",
+    "description": "Early work on attachment, parental representation, self-regulation, and the socio-emotional worlds of toddlers and young children.",
+    "brainRegionId": "region-attachment",
+    "sortOrder": 1
+  },
+  {
+    "id": "risk",
+    "label": "Maltreatment, Risk & Psychopathology",
+    "color": "#ef6c43",
+    "description": "Developmental psychopathology, child maltreatment, trauma exposure, violence, and pathways into or away from harm.",
+    "brainRegionId": "region-risk",
+    "sortOrder": 2
+  },
+  {
+    "id": "poverty",
+    "label": "Poverty, Families & Social Policy",
+    "color": "#d2e05b",
+    "description": "Neighborhood poverty, material hardship, cash transfer policy, welfare reform, and the public conditions shaping child development.",
+    "brainRegionId": "region-poverty",
+    "sortOrder": 3
+  },
+  {
+    "id": "sel",
+    "label": "School Climate, SEL & Intervention Design",
+    "color": "#39c6b4",
+    "description": "School-based intervention, social-emotional learning, classroom climate, translational research, and scale.",
+    "brainRegionId": "region-sel",
+    "sortOrder": 4
+  },
+  {
+    "id": "global",
+    "label": "Conflict, Crisis, Refugees & Global Development",
+    "color": "#58a6ff",
+    "description": "Learning, resilience, and development in conflict-affected, crisis-affected, and low-resource settings across the globe.",
+    "brainRegionId": "region-global",
+    "sortOrder": 5
+  }
+]

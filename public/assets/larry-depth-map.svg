@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="head" cx="50%" cy="40%" r="52%">
+      <stop offset="0%" stop-color="#f4f4f4" />
+      <stop offset="55%" stop-color="#b8b8b8" />
+      <stop offset="100%" stop-color="#313131" />
+    </radialGradient>
+    <linearGradient id="torso" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#bdbdbd" />
+      <stop offset="100%" stop-color="#1c1c1c" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="#181818" />
+  <ellipse cx="256" cy="182" rx="138" ry="146" fill="url(#head)" />
+  <ellipse cx="256" cy="204" rx="76" ry="58" fill="#f0f0f0" opacity="0.35" />
+  <path
+    d="M104 276c36-28 84-42 152-42s116 14 152 42v146H104Z"
+    fill="url(#torso)"
+  />
+</svg>

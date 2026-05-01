@@ -1,0 +1,138 @@
+[
+  {
+    "id": "james-allen",
+    "name": "James Allen",
+    "themeIds": ["attachment", "risk"],
+    "workIds": ["maltreatment-1987"],
+    "brainRegionId": "region-attachment",
+    "prominence": 0.56
+  },
+  {
+    "id": "jay-belsky",
+    "name": "Jay Belsky",
+    "themeIds": ["attachment"],
+    "workIds": ["mothers-representations-1999"],
+    "brainRegionId": "region-attachment",
+    "prominence": 0.7
+  },
+  {
+    "id": "arietta-slade",
+    "name": "Arietta Slade",
+    "themeIds": ["attachment"],
+    "workIds": ["mothers-representations-1999"],
+    "brainRegionId": "region-attachment",
+    "prominence": 0.68
+  },
+  {
+    "id": "dante-cicchetti",
+    "name": "Dante Cicchetti",
+    "themeIds": ["risk"],
+    "workIds": ["abuse-sequelae-1991"],
+    "brainRegionId": "region-risk",
+    "prominence": 0.76
+  },
+  {
+    "id": "jeanne-brooks-gunn",
+    "name": "Jeanne Brooks-Gunn",
+    "themeIds": ["poverty"],
+    "workIds": ["neighborhood-poverty-i-1997"],
+    "brainRegionId": "region-poverty",
+    "prominence": 0.78
+  },
+  {
+    "id": "greg-duncan",
+    "name": "Greg Duncan",
+    "themeIds": ["poverty"],
+    "workIds": ["neighborhood-poverty-i-1997"],
+    "brainRegionId": "region-poverty",
+    "prominence": 0.72
+  },
+  {
+    "id": "sandra-jones",
+    "name": "Sandra M. Jones",
+    "themeIds": ["sel"],
+    "workIds": [
+      "resolving-conflict-1998",
+      "violence-middle-childhood-2003",
+      "two-year-impacts-2011"
+    ],
+    "brainRegionId": "region-sel",
+    "prominence": 0.9
+  },
+  {
+    "id": "joshua-brown",
+    "name": "Joshua L. Brown",
+    "themeIds": ["sel"],
+    "workIds": [
+      "resolving-conflict-1998",
+      "violence-middle-childhood-2003",
+      "two-year-impacts-2011"
+    ],
+    "brainRegionId": "region-sel",
+    "prominence": 0.88
+  },
+  {
+    "id": "hirokazu-yoshikawa",
+    "name": "Hirokazu Yoshikawa",
+    "themeIds": ["poverty", "global"],
+    "workIds": ["poverty-mental-health-2012", "sel-dosage-2023"],
+    "brainRegionId": "region-global",
+    "prominence": 0.82
+  },
+  {
+    "id": "sharon-wolf",
+    "name": "Sharon Wolf",
+    "themeIds": ["poverty", "global"],
+    "workIds": [
+      "cash-transfer-2016",
+      "change-process-drc-2017",
+      "healing-classroom-2017",
+      "ghana-quality-preschool-2019"
+    ],
+    "brainRegionId": "region-global",
+    "prominence": 0.84
+  },
+  {
+    "id": "chantal-torrente",
+    "name": "Chantal Torrente",
+    "themeIds": ["global", "sel"],
+    "workIds": ["change-process-drc-2017", "healing-classroom-2017"],
+    "brainRegionId": "region-global",
+    "prominence": 0.86
+  },
+  {
+    "id": "claire-tubbs-dolan",
+    "name": "Claire Tubbs Dolan",
+    "themeIds": ["global"],
+    "workIds": [
+      "post-migration-risks-2020",
+      "science-for-action-2021",
+      "syrian-learning-2021",
+      "sel-lebanon-2023"
+    ],
+    "brainRegionId": "region-global",
+    "prominence": 0.88
+  },
+  {
+    "id": "hy-kim",
+    "name": "H. Yoon Kim",
+    "themeIds": ["global"],
+    "workIds": [
+      "post-migration-risks-2020",
+      "science-for-action-2021",
+      "syrian-learning-2021",
+      "sel-lebanon-2023",
+      "sel-dosage-2023"
+    ],
+    "brainRegionId": "region-global",
+    "prominence": 0.9
+  },
+  {
+    "id": "edward-seidman",
+    "name": "Edward Seidman",
+    "themeIds": ["global", "risk"],
+    "workIds": ["change-process-drc-2017", "healing-classroom-2017"],
+    "brainRegionId": "region-global",
+    "prominence": 0.72
+  }
+]

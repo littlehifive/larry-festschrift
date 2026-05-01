@@ -1,0 +1,28 @@
+{
+  "name": "larry-festschrift",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run validate && vite build",
+    "preview": "vite preview",
+    "validate": "node scripts/validate-data.mjs",
+    "extract:cv": "node scripts/extract-cv.mjs",
+    "enrich:openalex": "node scripts/enrich-openalex.mjs"
+  },
+  "dependencies": {
+    "@fontsource/space-grotesk": "^5.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "three": "^0.175.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.1"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "portraitImage": "/assets/larry-headshot.jpg",
+  "alphaMask": "/assets/larry-alpha-mask.svg",
+  "depthMap": "/assets/larry-depth-map.svg",
+  "regionMask": "/assets/larry-region-mask.svg",
+  "silhouetteMesh": "/assets/larry-silhouette-mesh.json",
+  "cameraConstraints": {
+    "minAzimuth": -0.32,
+    "maxAzimuth": 0.32,
+    "minPolar": 1.08,
+    "maxPolar": 2.02,
+    "distance": 4.6
+  },
+  "postFxProfile": {
+    "bloomStrength": 1.2,
+    "bloomRadius": 0.5,
+    "noise": 0.08,
+    "scanlines": 0.03
+  }
+}

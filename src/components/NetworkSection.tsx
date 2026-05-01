@@ -1,0 +1,1374 @@
+import type { CSSProperties } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import type {
+  BrainRegion,
+  CitationLink,
+  Collaborator,
+  GraphSceneConfig,
+  RendererCapability,
+  Theme,
+  Work,
+} from '../types/content'
+
+type NetworkSectionProps = {
+  works: Work[]
+  collaborators: Collaborator[]
+  citationLinks: CitationLink[]
+  brainRegions: BrainRegion[]
+  themes: Theme[]
+  rendererCapability: RendererCapability
+  sceneConfig: GraphSceneConfig
+  activeThemeId: string
+  activeWorkId: string | null
+  activeCollaboratorId: string | null
+  isAutoRotating: boolean
+  reducedMotion: boolean
+  resetNonce: number
+  onThemeSelect: (themeId: string) => void
+  onWorkSelect: (workId: string) => void
+  onCollaboratorSelect: (collaboratorId: string) => void
+  onToggleAutoRotate: () => void
+  onResetView: () => void
+}
+
+type GraphNode = {
+  id: string
+  kind: 'work' | 'collaborator'
+  label: string
+  themeIds: string[]
+  primaryThemeId: string
+  color: string
+  position: [number, number, number]
+  size: number
+  citationCount?: number
+  year?: number
+  venue?: string | null
+  doi?: string | null
+  workIds?: string[]
+  prominence?: number
+}
+
+type GraphEdge = {
+  id: string
+  sourceId: string
+  targetId: string
+  kind: CitationLink['kind']
+  weight: number
+  color: string
+  themeIds: string[]
+  points: [number, number, number][]
+}
+
+type GraphLayout = {
+  workNodes: GraphNode[]
+  collaboratorNodes: GraphNode[]
+  edges: GraphEdge[]
+  nodeMap: Map<string, GraphNode>
+}
+
+type NodeVisual = {
+  datum: GraphNode
+  core: any
+  halo: any
+  shell?: any
+}
+
+type EdgeVisual = {
+  datum: GraphEdge
+  line: any
+}
+
+type RegionVisual = {
+  regionId: string
+  themeId: string
+  fill: any
+  aura: any
+  outline: any
+}
+
+type BrainSceneHandle = {
+  applyState: (nextState: {
+    activeThemeId: string
+    activeWorkId: string | null
+    activeCollaboratorId: string | null
+  }) => void
+  setAutoRotate: (enabled: boolean, speed: number) => void
+  resetView: () => void
+  dispose: () => void
+}
+
+const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5))
+const DEFAULT_CAMERA_POSITION = new THREE.Vector3(0, 0.35, 6.8)
+const DEFAULT_CAMERA_TARGET = new THREE.Vector3(0, 0.18, 0.06)
+
+function hashNumber(value: string) {
+  let hash = 0
+  for (let index = 0; index < value.length; index += 1) {
+    hash = (hash * 33 + value.charCodeAt(index)) >>> 0
+  }
+  return (hash % 1000) / 1000
+}
+
+function clamp(value: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, value))
+}
+
+function toVector3(point: [number, number, number]) {
+  return new THREE.Vector3(point[0], point[1], point[2])
+}
+
+function rgbaFromHex(hex: string, opacity: number) {
+  const color = new THREE.Color(hex)
+  return `rgba(${Math.round(color.r * 255)}, ${Math.round(color.g * 255)}, ${Math.round(
+    color.b * 255,
+  )}, ${opacity})`
+}
+
+function project2D(position: [number, number, number]) {
+  const x = clamp(50 + position[0] * 15 + position[2] * 8, 8, 92)
+  const y = clamp(58 - position[1] * 14 - position[2] * 4, 10, 90)
+  return { x, y }
+}
+
+function dedupeById<T extends { id: string }>(items: T[]) {
+  const seen = new Set<string>()
+  return items.filter((item) => {
+    if (seen.has(item.id)) return false
+    seen.add(item.id)
+    return true
+  })
+}
+
+function buildCurvePoints(
+  start: [number, number, number],
+  end: [number, number, number],
+  weight: number,
+  kind: CitationLink['kind'],
+): [number, number, number][] {
+  const startVector = toVector3(start)
+  const endVector = toVector3(end)
+  const mid = startVector.clone().lerp(endVector, 0.5)
+  const distance = startVector.distanceTo(endVector)
+  const lift = 0.18 + distance * 0.16 + weight * 0.36
+
+  mid.x += (endVector.z - startVector.z) * 0.24
+  mid.y += kind === 'coauthor_bridge' ? lift * 0.64 : lift
+  mid.z += (startVector.x - endVector.x) * 0.18
+
+  const curve = new THREE.QuadraticBezierCurve3(startVector, mid, endVector)
+  return curve
+    .getPoints(kind === 'coauthor_bridge' ? 12 : 18)
+    .map(
+      (point: { x: number; y: number; z: number }) =>
+        [point.x, point.y, point.z] as [number, number, number],
+    )
+}
+
+function createWorkPosition(
+  region: BrainRegion,
+  work: Work,
+  index: number,
+  total: number,
+): [number, number, number] {
+  const seed = hashNumber(work.id)
+  const angle = GOLDEN_ANGLE * index + seed * Math.PI * 0.9
+  const spread = region.radius * (0.28 + ((index % 4) / 4) * 0.3 + seed * 0.08)
+  const vertical = Math.sin(angle * 1.16) * region.radius * 0.32
+  const depth = Math.sin(angle) * region.radius * 0.42
+  const lift = total > 4 ? (index / (total - 1) - 0.5) * 0.14 : 0
+
+  return [
+    region.anchor3D[0] + Math.cos(angle) * spread * 0.9,
+    region.anchor3D[1] + vertical + lift,
+    region.anchor3D[2] + depth,
+  ]
+}
+
+function createCollaboratorPosition(
+  region: BrainRegion,
+  collaborator: Collaborator,
+  index: number,
+  total: number,
+): [number, number, number] {
+  const seed = hashNumber(collaborator.id)
+  const direction = region.anchor3D[0] >= 0 ? 1 : -1
+  const orbitAngle =
+    (index / Math.max(total, 1)) * Math.PI * 1.54 - Math.PI * 0.77 + seed * 0.46
+  const orbitRadius = region.radius + 0.34 + collaborator.prominence * 0.34
+
+  return [
+    region.anchor3D[0] + Math.cos(orbitAngle) * orbitRadius + direction * 0.12,
+    region.anchor3D[1] + Math.sin(orbitAngle * 1.28) * 0.28 + 0.02 * index,
+    region.anchor3D[2] + Math.sin(orbitAngle) * orbitRadius * 0.42,
+  ]
+}
+
+function buildGraphLayout(
+  works: Work[],
+  collaborators: Collaborator[],
+  citationLinks: CitationLink[],
+  brainRegions: BrainRegion[],
+  themes: Theme[],
+  sceneConfig: GraphSceneConfig,
+): GraphLayout {
+  const workById = new Map(works.map((work) => [work.id, work]))
+  const collaboratorById = new Map(collaborators.map((entry) => [entry.id, entry]))
+  const themeById = new Map(themes.map((theme) => [theme.id, theme]))
+  const regionById = new Map(brainRegions.map((region) => [region.id, region]))
+  const worksByRegion = new Map(brainRegions.map((region) => [region.id, [] as Work[]]))
+  const collaboratorsByRegion = new Map(
+    brainRegions.map((region) => [region.id, [] as Collaborator[]]),
+  )
+  const assignedWorkIds = new Set<string>()
+
+  brainRegions.forEach((region) => {
+    region.workIds.forEach((workId) => {
+      const work = workById.get(workId)
+      if (!work) return
+      worksByRegion.get(region.id)?.push(work)
+      assignedWorkIds.add(work.id)
+    })
+  })
+
+  works.forEach((work) => {
+    if (assignedWorkIds.has(work.id)) return
+    const theme = themeById.get(work.themeIds[0])
+    if (!theme) return
+    worksByRegion.get(theme.brainRegionId)?.push(work)
+  })
+
+  brainRegions.forEach((region) => {
+    region.collaboratorIds.forEach((collaboratorId) => {
+      const collaborator = collaboratorById.get(collaboratorId)
+      if (!collaborator) return
+      collaboratorsByRegion.get(region.id)?.push(collaborator)
+    })
+  })
+
+  collaborators.forEach((collaborator) => {
+    if (brainRegions.some((region) => region.collaboratorIds.includes(collaborator.id))) {
+      return
+    }
+    collaboratorsByRegion.get(collaborator.brainRegionId)?.push(collaborator)
+  })
+
+  const citationCounts = works.map((work) => work.citationCount)
+  const minCitation = Math.min(...citationCounts)
+  const maxCitation = Math.max(...citationCounts)
+  const citationSpan = Math.max(1, maxCitation - minCitation)
+
+  const workNodes: GraphNode[] = []
+  const collaboratorNodes: GraphNode[] = []
+
+  brainRegions.forEach((region) => {
+    const regionTheme = themeById.get(region.themeId)
+    const regionColor = regionTheme?.color ?? region.color
+    const regionWorks = dedupeById(
+      [...(worksByRegion.get(region.id) ?? [])].sort((left, right) => left.year - right.year),
+    )
+    const regionCollaborators = dedupeById(
+      [...(collaboratorsByRegion.get(region.id) ?? [])].sort(
+        (left, right) => right.prominence - left.prominence,
+      ),
+    )
+
+    regionWorks.forEach((work, index) => {
+      const normalizedCitation = clamp(
+        Math.sqrt((work.citationCount - minCitation) / citationSpan || 0.08),
+        0.08,
+        1,
+      )
+
+      workNodes.push({
+        id: work.id,
+        kind: 'work',
+        label: work.title,
+        themeIds: work.themeIds,
+        primaryThemeId: work.themeIds[0],
+        color: themeById.get(work.themeIds[0])?.color ?? regionColor,
+        position: createWorkPosition(region, work, index, regionWorks.length),
+        size: THREE.MathUtils.lerp(
+          sceneConfig.nodeScaleRange[0],
+          sceneConfig.nodeScaleRange[1],
+          normalizedCitation,
+        ),
+        citationCount: work.citationCount,
+        year: work.year,
+        venue: work.venue,
+        doi: work.doi,
+      })
+    })
+
+    regionCollaborators.forEach((collaborator, index) => {
+      collaboratorNodes.push({
+        id: collaborator.id,
+        kind: 'collaborator',
+        label: collaborator.name,
+        themeIds: collaborator.themeIds,
+        primaryThemeId: collaborator.themeIds[0],
+        color: themeById.get(collaborator.themeIds[0])?.color ?? regionColor,
+        position: createCollaboratorPosition(
+          region,
+          collaborator,
+          index,
+          regionCollaborators.length,
+        ),
+        size: THREE.MathUtils.lerp(
+          sceneConfig.nodeScaleRange[0] * 0.88,
+          sceneConfig.nodeScaleRange[1] * 1.16,
+          collaborator.prominence,
+        ),
+        workIds: collaborator.workIds,
+        prominence: collaborator.prominence,
+      })
+    })
+  })
+
+  const nodeMap = new Map(
+    [...workNodes, ...collaboratorNodes].map((node) => [node.id, node] as const),
+  )
+
+  const edges: GraphEdge[] = citationLinks
+    .map((link, index) => {
+      const source = nodeMap.get(link.sourceWorkId)
+      const target = nodeMap.get(link.targetWorkIdOrExternalId)
+      if (!source || !target) return null
+
+      const themeIds = [...new Set([...source.themeIds, ...target.themeIds])]
+
+      return {
+        id: `${link.kind}-${index}-${source.id}-${target.id}`,
+        sourceId: source.id,
+        targetId: target.id,
+        kind: link.kind,
+        weight: link.weight,
+        color: source.color,
+        themeIds,
+        points: buildCurvePoints(source.position, target.position, link.weight, link.kind),
+      }
+    })
+    .filter((edge): edge is GraphEdge => edge !== null)
+
+  return { workNodes, collaboratorNodes, edges, nodeMap }
+}
+
+function createBrainScene(options: {
+  mount: HTMLDivElement
+  layout: GraphLayout
+  brainRegions: BrainRegion[]
+  themeById: Map<string, Theme>
+  sceneConfig: GraphSceneConfig
+  activeThemeId: string
+  activeWorkId: string | null
+  activeCollaboratorId: string | null
+  isAutoRotating: boolean
+  reducedMotion: boolean
+  onWorkSelect: (workId: string) => void
+  onCollaboratorSelect: (collaboratorId: string) => void
+  onRuntimeFailure: (reason: string) => void
+}): BrainSceneHandle {
+  const {
+    mount,
+    layout,
+    brainRegions,
+    themeById,
+    sceneConfig,
+    activeThemeId,
+    activeWorkId,
+    activeCollaboratorId,
+    isAutoRotating,
+    reducedMotion,
+    onWorkSelect,
+    onCollaboratorSelect,
+    onRuntimeFailure,
+  } = options
+
+  const renderer = new THREE.WebGLRenderer({
+    antialias: !reducedMotion,
+    alpha: true,
+    powerPreference: 'low-power',
+  })
+
+  renderer.outputColorSpace = THREE.SRGBColorSpace
+  renderer.setClearColor(0x000000, 0)
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, reducedMotion ? 1.25 : 1.75))
+
+  mount.innerHTML = ''
+  mount.appendChild(renderer.domElement)
+
+  const scene = new THREE.Scene()
+  scene.fog = new THREE.Fog(0x041018, 5.8, 13)
+
+  const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100)
+  camera.position.copy(DEFAULT_CAMERA_POSITION)
+
+  const controls = new OrbitControls(camera, renderer.domElement)
+  controls.enableDamping = true
+  controls.dampingFactor = 0.06
+  controls.minDistance = 4.6
+  controls.maxDistance = 9.2
+  controls.minPolarAngle = Math.PI * 0.28
+  controls.maxPolarAngle = Math.PI * 0.72
+  controls.enablePan = false
+  controls.target.copy(DEFAULT_CAMERA_TARGET)
+  controls.autoRotate = isAutoRotating && !reducedMotion
+  controls.autoRotateSpeed = sceneConfig.autoRotateSpeed
+
+  const root = new THREE.Group()
+  scene.add(root)
+
+  const brainShellGroup = new THREE.Group()
+  root.add(brainShellGroup)
+
+  const regionVisuals = new Map<string, RegionVisual>()
+  const nodeVisuals = new Map<string, NodeVisual>()
+  const edgeVisuals: EdgeVisual[] = []
+  const interactiveMeshes: any[] = []
+
+  const ambientLight = new THREE.AmbientLight(0x9fd8ff, 1.8)
+  const keyLight = new THREE.DirectionalLight(0x8fd4ff, 1.9)
+  keyLight.position.set(4.6, 6.2, 5.1)
+  const rimLight = new THREE.PointLight(0x58a6ff, 18, 16, 1.9)
+  rimLight.position.set(-2.6, 0.8, -3.2)
+  scene.add(ambientLight, keyLight, rimLight)
+
+  const shellMaterial = new THREE.MeshPhongMaterial({
+    color: '#89dff5',
+    transparent: true,
+    opacity: sceneConfig.brainShellOpacity,
+    shininess: 80,
+    emissive: '#072433',
+    emissiveIntensity: 0.85,
+    side: THREE.DoubleSide,
+  })
+
+  const shellWireMaterial = new THREE.LineBasicMaterial({
+    color: '#7feeff',
+    transparent: true,
+    opacity: 0.28,
+  })
+
+  const shellGeometry = new THREE.SphereGeometry(1, 28, 24)
+  const shellParts = [
+    { position: [-0.86, 0.4, 0.02], scale: [1.18, 1.45, 1.04] },
+    { position: [0.86, 0.4, 0.02], scale: [1.18, 1.45, 1.04] },
+    { position: [0, 0.18, 0.54], scale: [1.08, 0.92, 0.72] },
+    { position: [0, 0.36, -0.74], scale: [0.88, 0.98, 0.62] },
+    { position: [0, -0.78, -0.5], scale: [0.78, 0.52, 0.42] },
+  ] as const
+
+  shellParts.forEach((part) => {
+    const mesh = new THREE.Mesh(shellGeometry.clone(), shellMaterial.clone())
+    mesh.position.set(part.position[0], part.position[1], part.position[2])
+    mesh.scale.set(part.scale[0], part.scale[1], part.scale[2])
+    brainShellGroup.add(mesh)
+
+    const outline = new THREE.LineSegments(
+      new THREE.EdgesGeometry(mesh.geometry),
+      shellWireMaterial.clone(),
+    )
+    outline.position.copy(mesh.position)
+    outline.scale.copy(mesh.scale)
+    brainShellGroup.add(outline)
+  })
+
+  const ringMaterial = new THREE.MeshBasicMaterial({
+    color: '#5bc7ff',
+    transparent: true,
+    opacity: 0.16,
+    wireframe: true,
+  })
+
+  const rings = [
+    { rotation: [Math.PI / 2.6, 0.12, 0], scale: 2.8 },
+    { rotation: [Math.PI / 2, 0.36, Math.PI / 9], scale: 3.15 },
+  ] as const
+
+  rings.forEach((ring) => {
+    const mesh = new THREE.Mesh(
+      new THREE.TorusGeometry(ring.scale, 0.02, 8, 72),
+      ringMaterial.clone(),
+    )
+    mesh.rotation.set(ring.rotation[0], ring.rotation[1], ring.rotation[2])
+    brainShellGroup.add(mesh)
+  })
+
+  brainRegions.forEach((region) => {
+    const theme = themeById.get(region.themeId)
+    const color = theme?.color ?? region.color
+
+    const aura = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(region.radius * 1.22, 3),
+      new THREE.MeshBasicMaterial({
+        color,
+        transparent: true,
+        opacity: 0.1,
+      }),
+    )
+    aura.position.set(region.anchor3D[0], region.anchor3D[1], region.anchor3D[2])
+    aura.scale.set(1.06, 0.92, 0.9)
+
+    const fill = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(region.radius, 2),
+      new THREE.MeshPhongMaterial({
+        color,
+        transparent: true,
+        opacity: 0.18,
+        emissive: color,
+        emissiveIntensity: 0.28,
+        shininess: 64,
+        flatShading: true,
+      }),
+    )
+    fill.position.copy(aura.position)
+    fill.scale.set(1.02, 0.82, 0.74)
+
+    const outline = new THREE.LineSegments(
+      new THREE.EdgesGeometry(fill.geometry),
+      new THREE.LineBasicMaterial({
+        color,
+        transparent: true,
+        opacity: 0.42,
+      }),
+    )
+    outline.position.copy(fill.position)
+    outline.scale.copy(fill.scale)
+
+    root.add(aura, fill, outline)
+    regionVisuals.set(region.id, {
+      regionId: region.id,
+      themeId: region.themeId,
+      fill,
+      aura,
+      outline,
+    })
+  })
+
+  const starPositions = new Float32Array(240 * 3)
+  for (let index = 0; index < 240; index += 1) {
+    const offset = index * 3
+    const seed = hashNumber(`star-${index}`)
+    const radius = 3.8 + seed * 5.2
+    const theta = seed * Math.PI * 5.2
+    const phi = (seed * 17.2) % Math.PI
+
+    starPositions[offset] = Math.cos(theta) * Math.sin(phi) * radius
+    starPositions[offset + 1] = Math.cos(phi) * radius * 0.54
+    starPositions[offset + 2] = Math.sin(theta) * Math.sin(phi) * radius
+  }
+
+  const starGeometry = new THREE.BufferGeometry()
+  starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3))
+  const stars = new THREE.Points(
+    starGeometry,
+    new THREE.PointsMaterial({
+      color: '#9fdcff',
+      transparent: true,
+      opacity: reducedMotion ? 0.24 : 0.38,
+      size: reducedMotion ? 0.026 : 0.034,
+      sizeAttenuation: true,
+    }),
+  )
+  scene.add(stars)
+
+  layout.edges.forEach((edge) => {
+    const geometry = new THREE.BufferGeometry().setFromPoints(
+      edge.points.map((point) => toVector3(point)),
+    )
+    const material =
+      edge.kind === 'coauthor_bridge'
+        ? new THREE.LineDashedMaterial({
+            color: edge.color,
+            transparent: true,
+            opacity: sceneConfig.edgeOpacity * 0.9,
+            dashSize: 0.12,
+            gapSize: 0.08,
+          })
+        : new THREE.LineBasicMaterial({
+            color: edge.color,
+            transparent: true,
+            opacity: sceneConfig.edgeOpacity,
+          })
+
+    const line = new THREE.Line(geometry, material)
+    if (line.material instanceof THREE.LineDashedMaterial) {
+      line.computeLineDistances()
+    }
+    root.add(line)
+    edgeVisuals.push({ datum: edge, line })
+  })
+
+  const workGeometry = new THREE.SphereGeometry(1, 18, 18)
+  const collaboratorGeometry = new THREE.OctahedronGeometry(1, 0)
+
+  const createNodeVisual = (node: GraphNode) => {
+    const geometry = node.kind === 'work' ? workGeometry : collaboratorGeometry
+    const coreMaterial = new THREE.MeshBasicMaterial({
+      color: node.color,
+      transparent: true,
+      opacity: 0.95,
+    })
+    const haloMaterial = new THREE.MeshBasicMaterial({
+      color: node.color,
+      transparent: true,
+      opacity: node.kind === 'work' ? 0.22 : 0.18,
+    })
+
+    const core = new THREE.Mesh(geometry, coreMaterial)
+    core.scale.setScalar(node.size)
+    core.position.set(node.position[0], node.position[1], node.position[2])
+    core.userData.nodeId = node.id
+    core.userData.kind = node.kind
+
+    const halo = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 16), haloMaterial)
+    halo.scale.setScalar(node.size * (node.kind === 'work' ? 2.2 : 1.85))
+    halo.position.copy(core.position)
+    halo.userData.highlightScale = 1
+
+    root.add(halo, core)
+
+    let shell: any | undefined
+    if (node.kind === 'collaborator') {
+      shell = new THREE.Mesh(
+        new THREE.TorusGeometry(node.size * 1.65, 0.015, 6, 24),
+        new THREE.MeshBasicMaterial({
+          color: node.color,
+          transparent: true,
+          opacity: 0.34,
+        }),
+      )
+      shell.rotation.set(Math.PI / 2.3, 0.26, 0)
+      shell.position.copy(core.position)
+      root.add(shell)
+    }
+
+    const visual = { datum: node, core, halo, shell }
+    nodeVisuals.set(node.id, visual)
+    interactiveMeshes.push(core)
+  }
+
+  layout.workNodes.forEach(createNodeVisual)
+  layout.collaboratorNodes.forEach(createNodeVisual)
+
+  const raycaster = new THREE.Raycaster()
+  const pointer = new THREE.Vector2()
+  let pointerDown = { x: 0, y: 0 }
+  let disposed = false
+  let frame = 0
+  const clock = new THREE.Clock()
+
+  function setSize() {
+    const width = Math.max(1, mount.clientWidth)
+    const height = Math.max(1, mount.clientHeight)
+    camera.aspect = width / height
+    camera.updateProjectionMatrix()
+    renderer.setSize(width, height, false)
+  }
+
+  setSize()
+
+  const resizeObserver = new ResizeObserver(() => setSize())
+  resizeObserver.observe(mount)
+
+  const applyState: BrainSceneHandle['applyState'] = ({
+    activeThemeId: nextThemeId,
+    activeWorkId: nextWorkId,
+    activeCollaboratorId: nextCollaboratorId,
+  }) => {
+    const selectedId = nextCollaboratorId ?? nextWorkId
+    const linkedIds = new Set<string>()
+
+    if (selectedId) {
+      linkedIds.add(selectedId)
+      layout.edges.forEach((edge) => {
+        if (edge.sourceId === selectedId || edge.targetId === selectedId) {
+          linkedIds.add(edge.sourceId)
+          linkedIds.add(edge.targetId)
+        }
+      })
+
+      const selectedNode = layout.nodeMap.get(selectedId)
+      selectedNode?.workIds?.forEach((workId) => linkedIds.add(workId))
+    }
+
+    nodeVisuals.forEach((visual) => {
+      const themeMatch = visual.datum.themeIds.includes(nextThemeId)
+      const isSelected = visual.datum.id === selectedId
+      const isLinked = linkedIds.has(visual.datum.id)
+      const emphasis = isSelected
+        ? 1
+        : isLinked
+          ? 0.86
+          : selectedId
+            ? 0.18
+            : themeMatch
+              ? 0.78
+              : 0.36
+
+      visual.core.material.opacity = 0.28 + emphasis * 0.72
+      visual.halo.material.opacity =
+        visual.datum.kind === 'work' ? 0.06 + emphasis * 0.24 : 0.05 + emphasis * 0.18
+      const nodeScale = isSelected ? 1.44 : isLinked ? 1.18 : 1
+      const haloScale = isSelected ? 1.2 : isLinked ? 1.08 : 1
+      visual.core.scale.setScalar(visual.datum.size * nodeScale)
+      visual.halo.userData.highlightScale = haloScale
+
+      if (visual.shell) {
+        visual.shell.material.opacity = isSelected ? 0.72 : isLinked ? 0.5 : themeMatch ? 0.28 : 0.16
+        visual.shell.scale.setScalar(isSelected ? 1.15 : 1)
+      }
+    })
+
+    edgeVisuals.forEach((edgeVisual) => {
+      const connectsSelection =
+        selectedId !== null &&
+        selectedId !== undefined &&
+        (edgeVisual.datum.sourceId === selectedId || edgeVisual.datum.targetId === selectedId)
+      const themeMatch = edgeVisual.datum.themeIds.includes(nextThemeId)
+      const opacity = connectsSelection
+        ? 0.72
+        : selectedId
+          ? 0.08
+          : themeMatch
+            ? 0.34
+            : 0.12
+
+      edgeVisual.line.material.opacity = opacity
+      edgeVisual.line.material.color.set(connectsSelection ? '#ffffff' : edgeVisual.datum.color)
+    })
+
+    regionVisuals.forEach((visual) => {
+      const emphasized = visual.themeId === nextThemeId
+      visual.fill.material.opacity = emphasized ? 0.26 : 0.12
+      visual.fill.material.emissiveIntensity = emphasized ? 0.42 : 0.18
+      visual.aura.material.opacity = emphasized ? 0.16 : 0.06
+      visual.outline.material.opacity = emphasized ? 0.72 : 0.28
+    })
+  }
+
+  const handlePointerDown = (event: PointerEvent) => {
+    pointerDown = { x: event.clientX, y: event.clientY }
+  }
+
+  const handlePointerMove = (event: PointerEvent) => {
+    if (disposed) return
+    const bounds = renderer.domElement.getBoundingClientRect()
+    pointer.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1
+    pointer.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1
+    raycaster.setFromCamera(pointer, camera)
+    const intersects = raycaster.intersectObjects(interactiveMeshes, false)
+    renderer.domElement.style.cursor = intersects.length > 0 ? 'pointer' : 'grab'
+  }
+
+  const handlePointerUp = (event: PointerEvent) => {
+    if (Math.hypot(event.clientX - pointerDown.x, event.clientY - pointerDown.y) > 6) return
+
+    const bounds = renderer.domElement.getBoundingClientRect()
+    pointer.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1
+    pointer.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1
+
+    raycaster.setFromCamera(pointer, camera)
+    const intersects = raycaster.intersectObjects(interactiveMeshes, false)
+    const hit = intersects[0]
+    if (!hit?.object?.userData?.nodeId) return
+
+    const { nodeId, kind } = hit.object.userData as { nodeId: string; kind: GraphNode['kind'] }
+    if (kind === 'work') onWorkSelect(nodeId)
+    if (kind === 'collaborator') onCollaboratorSelect(nodeId)
+  }
+
+  const handleContextLost = (event: Event) => {
+    event.preventDefault()
+    if (disposed) return
+    onRuntimeFailure('The browser lost the WebGL context. The site switched to the static graph fallback.')
+  }
+
+  renderer.domElement.addEventListener('pointerdown', handlePointerDown)
+  renderer.domElement.addEventListener('pointermove', handlePointerMove)
+  renderer.domElement.addEventListener('pointerup', handlePointerUp)
+  renderer.domElement.addEventListener('webglcontextlost', handleContextLost, false)
+
+  renderer.domElement.style.cursor = 'grab'
+
+  const animate = () => {
+    if (disposed) return
+    frame = window.requestAnimationFrame(animate)
+
+    const elapsed = clock.getElapsedTime()
+    brainShellGroup.rotation.y += reducedMotion ? 0.0006 : 0.0012
+    rings.forEach((_, index) => {
+      const ring = brainShellGroup.children[brainShellGroup.children.length - rings.length + index]
+      ring.rotation.z += reducedMotion ? 0.0004 : 0.0009
+    })
+
+    nodeVisuals.forEach((visual) => {
+      const phase = hashNumber(visual.datum.id) * Math.PI * 2
+      const pulse = 1 + Math.sin(elapsed * 1.8 + phase) * (reducedMotion ? 0.03 : 0.08)
+      const highlightScale =
+        typeof visual.halo.userData.highlightScale === 'number'
+          ? visual.halo.userData.highlightScale
+          : 1
+      const baseScale =
+        visual.datum.size *
+        (visual.datum.kind === 'work' ? 2.2 : 1.85) *
+        pulse *
+        highlightScale
+      visual.halo.scale.setScalar(baseScale)
+    })
+
+    controls.update()
+
+    try {
+      renderer.render(scene, camera)
+    } catch (error) {
+      onRuntimeFailure(
+        error instanceof Error
+          ? error.message
+          : 'The 3D renderer failed at draw time and was disabled.',
+      )
+    }
+  }
+
+  applyState({ activeThemeId, activeWorkId, activeCollaboratorId })
+  animate()
+
+  return {
+    applyState,
+    setAutoRotate(enabled, speed) {
+      controls.autoRotate = enabled
+      controls.autoRotateSpeed = speed
+    },
+    resetView() {
+      camera.position.copy(DEFAULT_CAMERA_POSITION)
+      controls.target.copy(DEFAULT_CAMERA_TARGET)
+      controls.update()
+    },
+    dispose() {
+      disposed = true
+      window.cancelAnimationFrame(frame)
+      resizeObserver.disconnect()
+      renderer.domElement.removeEventListener('pointerdown', handlePointerDown)
+      renderer.domElement.removeEventListener('pointermove', handlePointerMove)
+      renderer.domElement.removeEventListener('pointerup', handlePointerUp)
+      renderer.domElement.removeEventListener('webglcontextlost', handleContextLost)
+      controls.dispose()
+
+      scene.traverse((object: { geometry?: { dispose: () => void }; material?: unknown }) => {
+        const mesh = object as any
+        if (mesh.geometry) mesh.geometry.dispose()
+
+        const material = (mesh as { material?: any | any[] }).material
+        if (Array.isArray(material)) material.forEach((entry) => entry.dispose())
+        else material?.dispose()
+      })
+
+      renderer.dispose()
+      if (mount.contains(renderer.domElement)) {
+        mount.removeChild(renderer.domElement)
+      }
+    },
+  }
+}
+
+function FallbackGraph(props: {
+  layout: GraphLayout
+  brainRegions: BrainRegion[]
+  themeById: Map<string, Theme>
+  activeThemeId: string
+  activeWorkId: string | null
+  activeCollaboratorId: string | null
+  onWorkSelect: (workId: string) => void
+  onCollaboratorSelect: (collaboratorId: string) => void
+}) {
+  const {
+    layout,
+    brainRegions,
+    themeById,
+    activeThemeId,
+    activeWorkId,
+    activeCollaboratorId,
+    onWorkSelect,
+    onCollaboratorSelect,
+  } = props
+
+  const selectedId = activeCollaboratorId ?? activeWorkId
+
+  return (
+    <div className="brain-fallback">
+      <svg className="brain-fallback__shell" viewBox="0 0 100 100" aria-hidden="true">
+        <defs>
+          <filter id="brainGlow">
+            <feGaussianBlur stdDeviation="1.6" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <path
+          className="brain-fallback__outline"
+          d="M 17 55 C 13 28, 28 12, 47 13 C 58 8, 81 18, 85 41 C 89 55, 84 77, 67 86 C 57 92, 46 91, 38 86 C 21 81, 13 68, 17 55 Z"
+        />
+
+        {brainRegions.map((region) => {
+          const theme = themeById.get(region.themeId)
+          const point = project2D(region.anchor3D)
+          return (
+            <ellipse
+              key={region.id}
+              cx={point.x}
+              cy={point.y}
+              rx={region.radius * 17}
+              ry={region.radius * 11}
+              fill={rgbaFromHex(theme?.color ?? region.color, region.themeId === activeThemeId ? 0.32 : 0.14)}
+              filter="url(#brainGlow)"
+            />
+          )
+        })}
+
+        {layout.edges.map((edge) => {
+          const source = layout.nodeMap.get(edge.sourceId)
+          const target = layout.nodeMap.get(edge.targetId)
+          if (!source || !target) return null
+          const start = project2D(source.position)
+          const end = project2D(target.position)
+          const highlighted = selectedId
+            ? edge.sourceId === selectedId || edge.targetId === selectedId
+            : edge.themeIds.includes(activeThemeId)
+
+          return (
+            <path
+              key={edge.id}
+              d={`M ${start.x} ${start.y} Q ${(start.x + end.x) / 2} ${Math.min(
+                start.y,
+                end.y,
+              ) - 6} ${end.x} ${end.y}`}
+              fill="none"
+              stroke={highlighted ? '#ffffff' : edge.color}
+              strokeDasharray={edge.kind === 'coauthor_bridge' ? '1.4 1.2' : undefined}
+              strokeOpacity={highlighted ? 0.9 : 0.28}
+              strokeWidth={edge.kind === 'coauthor_bridge' ? 0.45 : 0.38}
+            />
+          )
+        })}
+      </svg>
+
+      <div className="brain-fallback__nodes">
+        {[...layout.workNodes, ...layout.collaboratorNodes].map((node) => {
+          const point = project2D(node.position)
+          const isSelected = node.id === selectedId
+          const isThemeActive = node.themeIds.includes(activeThemeId)
+
+          return (
+            <button
+              key={node.id}
+              aria-label={node.label}
+              className={[
+                'brain-fallback__node',
+                node.kind === 'collaborator' ? 'is-collaborator' : 'is-work',
+                isSelected ? 'is-selected' : '',
+                isThemeActive ? 'is-theme-active' : '',
+              ]
+                .filter(Boolean)
+                .join(' ')}
+              onClick={() =>
+                node.kind === 'work'
+                  ? onWorkSelect(node.id)
+                  : onCollaboratorSelect(node.id)
+              }
+              style={
+                {
+                  '--theme-color': node.color,
+                  '--node-size': `${node.size * 54}px`,
+                  left: `${point.x}%`,
+                  top: `${point.y}%`,
+                } as CSSProperties
+              }
+              type="button"
+            />
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+export function NetworkSection({
+  works,
+  collaborators,
+  citationLinks,
+  brainRegions,
+  themes,
+  rendererCapability,
+  sceneConfig,
+  activeThemeId,
+  activeWorkId,
+  activeCollaboratorId,
+  isAutoRotating,
+  reducedMotion,
+  resetNonce,
+  onThemeSelect,
+  onWorkSelect,
+  onCollaboratorSelect,
+  onToggleAutoRotate,
+  onResetView,
+}: NetworkSectionProps) {
+  const stageRef = useRef<HTMLDivElement | null>(null)
+  const sceneHandleRef = useRef<BrainSceneHandle | null>(null)
+  const onWorkSelectRef = useRef(onWorkSelect)
+  const onCollaboratorSelectRef = useRef(onCollaboratorSelect)
+  const [runtimeFailure, setRuntimeFailure] = useState<string | null>(null)
+
+  const themeById = useMemo(() => new Map(themes.map((theme) => [theme.id, theme])), [themes])
+  const workById = useMemo(() => new Map(works.map((work) => [work.id, work])), [works])
+  const collaboratorById = useMemo(
+    () => new Map(collaborators.map((collaborator) => [collaborator.id, collaborator])),
+    [collaborators],
+  )
+
+  const layout = useMemo(
+    () =>
+      buildGraphLayout(
+        works,
+        collaborators,
+        citationLinks,
+        brainRegions,
+        themes,
+        sceneConfig,
+      ),
+    [brainRegions, citationLinks, collaborators, sceneConfig, themes, works],
+  )
+
+  const selectedWork =
+    (activeWorkId ? workById.get(activeWorkId) : undefined) ??
+    works.find((work) => work.themeIds.includes(activeThemeId)) ??
+    works[0]
+
+  const selectedCollaborator = activeCollaboratorId
+    ? collaboratorById.get(activeCollaboratorId) ?? null
+    : null
+
+  const selectedThemes = (
+    selectedCollaborator ? selectedCollaborator.themeIds : selectedWork?.themeIds ?? []
+  )
+    .map((themeId) => themeById.get(themeId))
+    .filter((theme): theme is Theme => Boolean(theme))
+
+  const linkedWorks = useMemo(() => {
+    if (selectedCollaborator) {
+      return selectedCollaborator.workIds
+        .map((workId) => workById.get(workId))
+        .filter((work): work is Work => Boolean(work))
+    }
+
+    if (!selectedWork) return []
+
+    const relatedIds = new Set<string>()
+    citationLinks.forEach((link) => {
+      if (link.sourceWorkId === selectedWork.id) relatedIds.add(link.targetWorkIdOrExternalId)
+      if (link.targetWorkIdOrExternalId === selectedWork.id) relatedIds.add(link.sourceWorkId)
+    })
+
+    return [...relatedIds]
+      .map((workId) => workById.get(workId))
+      .filter((work): work is Work => Boolean(work))
+      .slice(0, 6)
+  }, [citationLinks, selectedCollaborator, selectedWork, workById])
+
+  const linkedCollaborators = useMemo(() => {
+    if (selectedCollaborator) return []
+    if (!selectedWork) return []
+
+    return selectedWork.authorIds
+      .map((authorId) => collaboratorById.get(authorId))
+      .filter((collaborator): collaborator is Collaborator => Boolean(collaborator))
+  }, [collaboratorById, selectedCollaborator, selectedWork])
+
+  const show3D = rendererCapability.canMount3D && runtimeFailure === null
+  const fallbackReason = runtimeFailure ?? rendererCapability.failureReason ?? null
+
+  useEffect(() => {
+    onWorkSelectRef.current = onWorkSelect
+    onCollaboratorSelectRef.current = onCollaboratorSelect
+  }, [onCollaboratorSelect, onWorkSelect])
+
+  useEffect(() => {
+    if (!show3D || !stageRef.current) return
+
+    let cancelled = false
+
+    try {
+      const sceneHandle = createBrainScene({
+        mount: stageRef.current,
+        layout,
+        brainRegions,
+        themeById,
+        sceneConfig,
+        activeThemeId,
+        activeWorkId,
+        activeCollaboratorId,
+        isAutoRotating,
+        reducedMotion,
+        onWorkSelect: (workId) => onWorkSelectRef.current(workId),
+        onCollaboratorSelect: (collaboratorId) =>
+          onCollaboratorSelectRef.current(collaboratorId),
+        onRuntimeFailure: (reason) => {
+          if (!cancelled) setRuntimeFailure(reason)
+        },
+      })
+
+      if (cancelled) {
+        sceneHandle.dispose()
+        return
+      }
+
+      sceneHandleRef.current = sceneHandle
+    } catch (error) {
+      if (!cancelled) {
+        setRuntimeFailure(
+          error instanceof Error
+            ? error.message
+            : 'The 3D scene failed to initialize, so the static graph fallback was rendered instead.',
+        )
+      }
+    }
+
+    return () => {
+      cancelled = true
+      sceneHandleRef.current?.dispose()
+      sceneHandleRef.current = null
+    }
+  }, [
+    brainRegions,
+    layout,
+    reducedMotion,
+    sceneConfig,
+    show3D,
+    themeById,
+  ])
+
+  useEffect(() => {
+    sceneHandleRef.current?.applyState({
+      activeThemeId,
+      activeWorkId,
+      activeCollaboratorId,
+    })
+  }, [activeCollaboratorId, activeThemeId, activeWorkId])
+
+  useEffect(() => {
+    sceneHandleRef.current?.setAutoRotate(isAutoRotating && !reducedMotion, sceneConfig.autoRotateSpeed)
+  }, [isAutoRotating, reducedMotion, sceneConfig.autoRotateSpeed])
+
+  useEffect(() => {
+    sceneHandleRef.current?.resetView()
+  }, [resetNonce])
+
+  return (
+    <section className="brain-graph-page">
+      <div className="brain-graph-page__chrome" aria-hidden="true">
+        <span className="brain-graph-page__halo brain-graph-page__halo--amber" />
+        <span className="brain-graph-page__halo brain-graph-page__halo--blue" />
+        <span className="brain-graph-page__grid" />
+      </div>
+
+      <div className="brain-graph-stage">
+        <div className="brain-graph-stage__viewport">
+          {show3D ? (
+            <div className="brain-graph-stage__canvas" ref={stageRef} />
+          ) : (
+            <FallbackGraph
+              layout={layout}
+              brainRegions={brainRegions}
+              themeById={themeById}
+              activeThemeId={activeThemeId}
+              activeWorkId={activeWorkId}
+              activeCollaboratorId={activeCollaboratorId}
+              onWorkSelect={onWorkSelect}
+              onCollaboratorSelect={onCollaboratorSelect}
+            />
+          )}
+
+          <header className="brain-graph-stage__intro panel">
+            <p className="brain-graph-stage__eyebrow">Larry Aber Festschrift</p>
+            <h1>3D brain citation graph</h1>
+            <p className="brain-graph-stage__lede">
+              An abstract scholarly brain built from Larry Aber&apos;s major papers,
+              collaborator anchors, and citation pathways. Select nodes directly in the
+              scene to inspect the network.
+            </p>
+            <div className="brain-graph-stage__metrics">
+              <div>
+                <span>Highlighted papers</span>
+                <strong>{works.length}</strong>
+              </div>
+              <div>
+                <span>Collaborators</span>
+                <strong>{collaborators.length}</strong>
+              </div>
+              <div>
+                <span>Network links</span>
+                <strong>{layout.edges.length}</strong>
+              </div>
+            </div>
+          </header>
+
+          <div className="brain-graph-stage__controls panel">
+            <div className="brain-graph-stage__mode">
+              <span className={show3D ? 'is-live' : 'is-fallback'}>
+                {show3D ? '3D live' : 'Fallback'}
+              </span>
+              {fallbackReason ? <p>{fallbackReason}</p> : <p>Click any node to inspect the graph.</p>}
+            </div>
+
+            <div className="brain-graph-stage__button-row">
+              <button
+                className="button button--primary"
+                disabled={!show3D || reducedMotion}
+                onClick={onToggleAutoRotate}
+                type="button"
+              >
+                {isAutoRotating && !reducedMotion ? 'Pause rotation' : 'Play rotation'}
+              </button>
+              <button
+                className="button button--ghost"
+                disabled={!show3D}
+                onClick={onResetView}
+                type="button"
+              >
+                Reset view
+              </button>
+            </div>
+
+            {reducedMotion ? (
+              <p className="brain-graph-stage__microcopy">
+                Motion is reduced by browser preference, so cinematic autorotation is disabled.
+              </p>
+            ) : null}
+          </div>
+        </div>
+
+        <aside className="brain-graph-sidebar">
+          <div className="panel brain-graph-sidebar__themes">
+            <p className="brain-graph-sidebar__label">Theme regions</p>
+            <div className="brain-graph-sidebar__theme-list">
+              {themes.map((theme) => (
+                <button
+                  key={theme.id}
+                  aria-pressed={theme.id === activeThemeId}
+                  className={[
+                    'theme-chip',
+                    theme.id === activeThemeId ? 'is-selected' : '',
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                  onClick={() => onThemeSelect(theme.id)}
+                  style={{ '--theme-color': theme.color } as CSSProperties}
+                  type="button"
+                >
+                  <span className="theme-chip__dot" />
+                  <span>{theme.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="panel brain-graph-sidebar__selection">
+            {selectedCollaborator ? (
+              <>
+                <p className="brain-graph-sidebar__label">Selected collaborator</p>
+                <h2>{selectedCollaborator.name}</h2>
+                <p className="brain-graph-sidebar__meta">
+                  Prominence {Math.round(selectedCollaborator.prominence * 100)}% ·{' '}
+                  {selectedCollaborator.workIds.length} linked works
+                </p>
+              </>
+            ) : selectedWork ? (
+              <>
+                <p className="brain-graph-sidebar__label">Selected paper</p>
+                <h2>{selectedWork.title}</h2>
+                <p className="brain-graph-sidebar__meta">
+                  {selectedWork.year} · {selectedWork.venue ?? 'Scholarly publication'} ·{' '}
+                  {selectedWork.citationCount.toLocaleString()} citations
+                </p>
+              </>
+            ) : null}
+
+            <div className="brain-graph-sidebar__theme-badges">
+              {selectedThemes.map((theme) => (
+                <span
+                  key={theme.id}
+                  className="brain-graph-sidebar__theme-badge"
+                  style={{ '--theme-color': theme.color } as CSSProperties}
+                >
+                  {theme.label}
+                </span>
+              ))}
+            </div>
+
+            {selectedWork?.doi ? (
+              <a
+                className="brain-graph-sidebar__link"
+                href={selectedWork.doi}
+                rel="noreferrer"
+                target="_blank"
+              >
+                Open DOI
+              </a>
+            ) : null}
+
+            {selectedCollaborator ? (
+              <div className="brain-graph-sidebar__linked">
+                <p className="brain-graph-sidebar__subhead">Linked papers</p>
+                <div className="brain-graph-sidebar__list">
+                  {linkedWorks.slice(0, 6).map((work) => (
+                    <button key={work.id} onClick={() => onWorkSelect(work.id)} type="button">
+                      <strong>{work.year}</strong>
+                      <span>{work.title}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <>
+                {linkedCollaborators.length > 0 ? (
+                  <div className="brain-graph-sidebar__linked">
+                    <p className="brain-graph-sidebar__subhead">Collaborator anchors</p>
+                    <div className="brain-graph-sidebar__list">
+                      {linkedCollaborators.map((collaborator) => (
+                        <button
+                          key={collaborator.id}
+                          onClick={() => onCollaboratorSelect(collaborator.id)}
+                          type="button"
+                        >
+                          <strong>{Math.round(collaborator.prominence * 100)}%</strong>
+                          <span>{collaborator.name}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+
+                {linkedWorks.length > 0 ? (
+                  <div className="brain-graph-sidebar__linked">
+                    <p className="brain-graph-sidebar__subhead">Citation neighbors</p>
+                    <div className="brain-graph-sidebar__list">
+                      {linkedWorks.map((work) => (
+                        <button key={work.id} onClick={() => onWorkSelect(work.id)} type="button">
+                          <strong>{work.year}</strong>
+                          <span>{work.title}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+              </>
+            )}
+          </div>
+        </aside>
+      </div>
+    </section>
+  )
+}

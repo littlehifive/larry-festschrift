@@ -1,0 +1,16 @@
+{
+  "heroCopy": {
+    "eyebrow": "Larry Aber Festschrift",
+    "headline": "A career mapped as developmental science, public policy, and a living network of collaborators.",
+    "lede": "This prototype turns Larry Aber's CV into a cinematic field of milestones, ideas, interventions, and scholarly ties. Scroll from institutional history into an abstract brain portrait where themes, papers, and colleagues glow as connected regions.",
+    "stats": [
+      { "label": "Career span", "value": "1972 to present" },
+      { "label": "h-index", "value": "64" },
+      { "label": "Peer-reviewed articles", "value": "109" }
+    ]
+  },
+  "timelineIntro": "The timeline is organized as a layered academic life: formation, institutions, themes, and impact. Each point is color-linked to the larger intellectual regions that recur in the networked portrait.",
+  "networkIntro": "Inside the holographic bust, color-coded brain regions stand in for major research themes. Papers pulse with citation intensity, while collaborators anchor recurring constellations of work.",
+  "quote": "Program and policy implications of developmental research with high-risk children, youth and families.",
+  "credits": "CV source: J. Lawrence Aber, Ph.D. CV (October 2024). Citation indices reported in the CV. Scholarly metadata is designed for static enrichment via OpenAlex."
+}

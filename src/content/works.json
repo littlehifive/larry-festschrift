@@ -1,0 +1,389 @@
+[
+  {
+    "id": "maltreatment-1987",
+    "title": "Effects of maltreatment on young children's socio-emotional development: An attachment theory perspective",
+    "year": 1987,
+    "type": "journal",
+    "venue": "Developmental Psychology",
+    "themeIds": [
+      "attachment",
+      "risk"
+    ],
+    "highlight": true,
+    "doi": null,
+    "openAlexId": null,
+    "citationCount": 0,
+    "authorIds": [
+      "james-allen"
+    ]
+  },
+  {
+    "id": "abuse-sequelae-1991",
+    "title": "The relationship of socioeconomic status to the etiology and developmental sequelae of physical child abuse",
+    "year": 1991,
+    "type": "journal",
+    "venue": "Developmental Psychology",
+    "themeIds": [
+      "risk"
+    ],
+    "highlight": true,
+    "doi": "https://doi.org/10.1037/0012-1649.27.1.148",
+    "openAlexId": "https://openalex.org/W2081502788",
+    "citationCount": 146,
+    "authorIds": [
+      "dante-cicchetti"
+    ]
+  },
+  {
+    "id": "war-lebanon-1996",
+    "title": "The war experiences and psychosocial development of children in Lebanon",
+    "year": 1996,
+    "type": "journal",
+    "venue": "Child Development",
+    "themeIds": [
+      "global",
+      "risk"
+    ],
+    "highlight": true,
+    "doi": "https://doi.org/10.2307/1131687",
+    "openAlexId": "https://openalex.org/W4230565321",
+    "citationCount": 399,
+    "authorIds": []
+  },
+  {
+    "id": "poverty-health-1997",
+    "title": "The effects of poverty on child health and development",
+    "year": 1997,
+    "type": "journal",
+    "venue": "Annual Review of Public Health",
+    "themeIds": [
+      "poverty"
+    ],
+    "highlight": true,
+    "doi": "https://doi.org/10.1146/annurev.publhealth.18.1.463",
+    "openAlexId": "https://openalex.org/W2135307785",
+    "citationCount": 534,
+    "authorIds": []
+  },
+  {
+    "id": "neighborhood-poverty-i-1997",
+    "title": "Neighborhood poverty I: Context and consequences for children",
+    "year": 1997,
+    "type": "book",
+    "venue": "Russell Sage Foundation",
+    "themeIds": [
+      "poverty"
+    ],
+    "highlight": true,
+    "doi": null,
+    "openAlexId": "https://openalex.org/W2733168741",
+    "citationCount": 181,
+    "authorIds": [
+      "jeanne-brooks-gunn",
+      "greg-duncan"
+    ]
+  },
+  {
+    "id": "resolving-conflict-1998",
+    "title": "Resolving conflict creatively: Evaluating the developmental effects of a school-based violence prevention program in neighborhood and classroom context",
+    "year": 1998,
+    "type": "journal",
+    "venue": "Development and Psychopathology",
+    "themeIds": [
+      "sel",
+      "risk"
+    ],
+    "highlight": true,
+    "doi": null,
+    "openAlexId": null,
+    "citationCount": 0,
+    "authorIds": [
+      "sandra-jones",
+      "joshua-brown"
+    ]
+  },
+  {
+    "id": "mothers-representations-1999",
+    "title": "Stability and change in mother's representations of their relationship with their toddlers",
+    "year": 1999,
+    "type": "journal",
+    "venue": "Developmental Psychology",
+    "themeIds": [
+      "attachment"
+    ],
+    "highlight": true,
+    "doi": null,
+    "openAlexId": null,
+    "citationCount": 0,
+    "authorIds": [
+      "jay-belsky",
+      "arietta-slade"
+    ]
+  },
+  {
+    "id": "delay-gratification-2000",
+    "title": "The role of strategic attention deployment in development of self-regulation: Predicting preschoolers' delay of gratification from mother-toddler interactions",
+    "year": 2000,
+    "type": "journal",
+    "venue": "Developmental Psychology",
+    "themeIds": [
+      "attachment"
+    ],
+    "highlight": true,
+    "doi": "https://doi.org/10.1037/0012-1649.36.6.767",
+    "openAlexId": "https://openalex.org/W2102340592",
+    "citationCount": 172,
+    "authorIds": []
+  },
+  {
+    "id": "violence-middle-childhood-2003",
+    "title": "Developmental trajectories toward violence in middle childhood: Course, demographic differences, and response to school-based intervention",
+    "year": 2003,
+    "type": "journal",
+    "venue": "Developmental Psychology",
+    "themeIds": [
+      "sel",
+      "risk"
+    ],
+    "highlight": true,
+    "doi": "https://doi.org/10.1037//0012-1649.39.2.324",
+    "openAlexId": "https://openalex.org/W2155853496",
+    "citationCount": 219,
+    "authorIds": [
+      "sandra-jones",
+      "joshua-brown"
+    ]
+  },
+  {
+    "id": "sept11-context-2004",
+    "title": "Estimating the effects of September 11th and other forms of violence on the mental health and social development of New York City's youth: A matter of context",
+    "year": 2004,
+    "type": "journal",
+    "venue": "Applied Developmental Science",
+    "themeIds": [
+      "risk"
+    ],
+    "highlight": true,
+    "doi": "https://doi.org/10.1207/s1532480xads0803_2",
+    "openAlexId": "https://openalex.org/W2084996372",
+    "citationCount": 81,
+    "authorIds": []
+  },
+  {
+    "id": "income-not-enough-2007",
+    "title": "Income is not enough: Incorporating material hardship into models of income associations with parenting and child development",
+    "year": 2007,
+    "type": "journal",
+    "venue": "Child Development",
+    "themeIds": [
+      "poverty"
+    ],
+    "highlight": true,
+    "doi": "https://doi.org/10.1111/j.1467-8624.2007.00986.x",
+    "openAlexId": "https://openalex.org/W2031503474",
+    "citationCount": 936,
+    "authorIds": []
+  },
+  {
+    "id": "two-year-impacts-2011",
+    "title": "Two-Year Impacts of a Universal School-Based Social-Emotional and Literacy Intervention: An Experiment in Translational Developmental Research",
+    "year": 2011,
+    "type": "journal",
+    "venue": "Child Development",
+    "themeIds": [
+      "sel"
+    ],
+    "highlight": true,
+    "doi": "https://doi.org/10.1111/j.1467-8624.2010.01560.x",
+    "openAlexId": "https://openalex.org/W2103522096",
+    "citationCount": 342,
+    "authorIds": [
+      "sandra-jones",
+      "joshua-brown"
+    ]
+  },
+  {
+    "id": "poverty-mental-health-2012",
+    "title": "The effects of poverty on children's mental, emotional and behavioral health: Implications for prevention",
+    "year": 2012,
+    "type": "journal",
+    "venue": "American Psychologist",
+    "themeIds": [
+      "poverty"
+    ],
+    "highlight": true,
+    "doi": "https://doi.org/10.1037/a0028015",
+    "openAlexId": "https://openalex.org/W1975522492",
+    "citationCount": 1075,
+    "authorIds": [
+      "hirokazu-yoshikawa"
+    ]
+  },
+  {
+    "id": "cash-transfer-2016",
+    "title": "The Impact of a Holistic Conditional Cash Transfer Program in New York City on Parental Financial Investment, Student Time Use and Educational Processes and Outcomes",
+    "year": 2016,
+    "type": "journal",
+    "venue": "Journal of Research on Educational Effectiveness",
+    "themeIds": [
+      "poverty"
+    ],
+    "highlight": true,
+    "doi": "https://doi.org/10.1080/19345747.2015.1107925",
+    "openAlexId": "https://openalex.org/W2263376754",
+    "citationCount": 18,
+    "authorIds": [
+      "sharon-wolf"
+    ]
+  },
+  {
+    "id": "change-process-drc-2017",
+    "title": "Promoting Children's Learning and Development in Conflict-Affected Countries: Testing Change Process in the Democratic Republic of the Congo",
+    "year": 2017,
+    "type": "journal",
+    "venue": "Development and Psychopathology",
+    "themeIds": [
+      "global"
+    ],
+    "highlight": true,
+    "doi": "https://doi.org/10.1017/s0954579416001139",
+    "openAlexId": "https://openalex.org/W2553190469",
+    "citationCount": 34,
+    "authorIds": [
+      "chantal-torrente",
+      "sharon-wolf",
+      "claire-tubbs-dolan",
+      "edward-seidman"
+    ]
+  },
+  {
+    "id": "healing-classroom-2017",
+    "title": "Impacts After One Year of “Healing Classroom” on Children's Reading and Math Skills in DRC: Results from a Cluster Randomized Trial",
+    "year": 2017,
+    "type": "journal",
+    "venue": "Journal of Research on Educational Effectiveness",
+    "themeIds": [
+      "global",
+      "sel"
+    ],
+    "highlight": true,
+    "doi": "10.1080/19345747.2016.1236160",
+    "openAlexId": "https://openalex.org/W2522978501",
+    "citationCount": 27,
+    "authorIds": [
+      "chantal-torrente",
+      "sharon-wolf",
+      "edward-seidman"
+    ]
+  },
+  {
+    "id": "ghana-quality-preschool-2019",
+    "title": "Experimental Impacts of the 'Quality Preschool for Ghana' Interventions on Teacher Professional Well-Being, Classroom Quality and Children's School Readiness",
+    "year": 2019,
+    "type": "journal",
+    "venue": "Journal of Research on Educational Effectiveness",
+    "themeIds": [
+      "global"
+    ],
+    "highlight": true,
+    "doi": "10.1080/19345747.2018.1517199",
+    "openAlexId": null,
+    "citationCount": 0,
+    "authorIds": [
+      "sharon-wolf"
+    ]
+  },
+  {
+    "id": "post-migration-risks-2020",
+    "title": "Post-Migration Risks, Developmental Processes, and Learning among Syrian Refugee Children in Lebanon",
+    "year": 2020,
+    "type": "journal",
+    "venue": "Journal of Applied Developmental Psychology",
+    "themeIds": [
+      "global"
+    ],
+    "highlight": true,
+    "doi": "10.1016/j.appdev.2020.101142",
+    "openAlexId": "https://openalex.org/W3029209061",
+    "citationCount": 36,
+    "authorIds": [
+      "hy-kim",
+      "claire-tubbs-dolan"
+    ]
+  },
+  {
+    "id": "science-for-action-2021",
+    "title": "Children's Learning and Development in Conflict- and Crisis-Affected Countries: Building a Science for Action",
+    "year": 2021,
+    "type": "journal",
+    "venue": "Development and Psychopathology",
+    "themeIds": [
+      "global"
+    ],
+    "highlight": true,
+    "doi": "10.1017/S0954579420001789",
+    "openAlexId": "https://openalex.org/W3120084887",
+    "citationCount": 19,
+    "authorIds": [
+      "claire-tubbs-dolan",
+      "hy-kim"
+    ]
+  },
+  {
+    "id": "syrian-learning-2021",
+    "title": "Supporting Syrian Refugee Children's Academic and Social-Emotional Learning in National Education Systems: A Cluster Randomized Controlled Trial of Nonformal Remedial Support and Mindfulness Programs in Lebanon",
+    "year": 2021,
+    "type": "journal",
+    "venue": "American Educational Research Journal",
+    "themeIds": [
+      "global",
+      "sel"
+    ],
+    "highlight": true,
+    "doi": "10.3102/00028312211062911",
+    "openAlexId": null,
+    "citationCount": 0,
+    "authorIds": [
+      "claire-tubbs-dolan",
+      "hy-kim"
+    ]
+  },
+  {
+    "id": "sel-lebanon-2023",
+    "title": "Testing the impact of a skill-targeted social and emotional learning curriculum and its variation by pre- and postmigration conflict experiences: A cluster randomized trial with Syrian refugee children in Lebanon",
+    "year": 2023,
+    "type": "journal",
+    "venue": "Journal of Educational Psychology",
+    "themeIds": [
+      "global",
+      "sel"
+    ],
+    "highlight": true,
+    "doi": "10.1037/edu0000775",
+    "openAlexId": "https://openalex.org/W4313446580",
+    "citationCount": 24,
+    "authorIds": [
+      "hy-kim",
+      "claire-tubbs-dolan"
+    ]
+  },
+  {
+    "id": "sel-dosage-2023",
+    "title": "Measuring the dosage of brief and skill-targeted social-emotional learning (SEL) activities in humanitarian settings",
+    "year": 2023,
+    "type": "journal",
+    "venue": "Frontiers in Psychology",
+    "themeIds": [
+      "sel",
+      "global"
+    ],
+    "highlight": true,
+    "doi": "10.3389/fpsyg.2022.973184",
+    "openAlexId": "https://openalex.org/W4317911199",
+    "citationCount": 8,
+    "authorIds": [
+      "hy-kim",
+      "hirokazu-yoshikawa"
+    ]
+  }
+]
